@@ -1,0 +1,197 @@
+{
+  "common": {
+    "appName": "SableFit",
+    "tagline": "The visual workout planner that actually feels like an app.",
+    "install": "Install",
+    "openApp": "Open app",
+    "viewAll": "View all",
+    "signIn": "Sign in",
+    "today": "Today",
+    "save": "Save",
+    "cancel": "Cancel",
+    "loading": "Loading",
+    "logout": "Log out"
+  },
+  "pwaPrompt": {
+    "title": "Install SableFit",
+    "subtitle": "Keep your plan, reminders, and today workout one tap away.",
+    "closeAria": "Close install prompt",
+    "iosTitle": "Install on iPhone or iPad",
+    "iosStep1": "Open the browser share sheet.",
+    "iosStep2": "Tap Share",
+    "iosStep3": "Choose Add to Home Screen.",
+    "androidTitle": "Install on Android",
+    "androidReady": "Your browser is ready to install the app now.",
+    "androidManual": "Use the browser menu and choose Install App or Add to Home Screen.",
+    "iosButton": "Show iPhone steps",
+    "androidButton": "How to install",
+    "installButton": "Install now",
+    "installing": "Opening",
+    "skipButton": "Maybe later",
+    "iosShareOpenedHint": "The share sheet is open. Use Add to Home Screen to finish setup.",
+    "iosShareFallbackHint": "Use the browser share menu and choose Add to Home Screen."
+  },
+  "shell": {
+    "nav": {
+      "today": "Today",
+      "sessions": "Sessions",
+      "plans": "Plans",
+      "library": "Library",
+      "inbox": "Inbox",
+      "settings": "Settings"
+    },
+    "marketingLink": "Landing",
+    "signedInAs": "Signed in as"
+  },
+  "landing": {
+    "eyebrow": "Mobile-first workout planner",
+    "title": "Build a training rhythm that fits real life, not spreadsheets.",
+    "body": "SableFit turns exercises, workout sessions, weekly plans, and reminders into a focused mobile PWA with bilingual content and visual exercise matching.",
+    "primaryCta": "Start with phone login",
+    "secondaryCta": "Browse sample plans",
+    "stat1": "185 visual exercises",
+    "stat2": "12 system plans",
+    "stat3": "Install + push ready",
+    "feature1Title": "Visual exercise library",
+    "feature1Body": "Every approved exercise includes a built-in visual card so users do not choose the wrong movement.",
+    "feature2Title": "Weekly plan builder",
+    "feature2Body": "Group many workout sessions into repeatable plans with weekday scheduling and reminder windows.",
+    "feature3Title": "Today-first flow",
+    "feature3Body": "Open the app and see only what matters for the current day: next workout, session details, and reminder state."
+  },
+  "authPhone": {
+    "title": "Phone login",
+    "subtitle": "Use Firebase OTP to unlock your private training workspace.",
+    "phoneLabel": "Phone number",
+    "nameLabel": "Display name",
+    "submit": "Send OTP",
+    "codeLabel": "Verification code",
+    "verify": "Verify and continue",
+    "signingIn": "Signing in",
+    "helper": "Use full international format, for example +84...",
+    "missingConfig": "Firebase phone auth is not configured yet. Add the Firebase web env vars to enable OTP."
+  },
+  "marketingPlans": {
+    "title": "Sample workout plans",
+    "subtitle": "System templates across beginner, hypertrophy, strength, fat loss, and home training."
+  },
+  "marketingExercises": {
+    "title": "Exercise library preview",
+    "subtitle": "Search anatomy-style exercise media by equipment, level, and body focus before you sign in."
+  },
+  "installPage": {
+    "title": "Install SableFit",
+    "body": "Add SableFit to your home screen to unlock the best reminder and push-notification experience."
+  },
+  "todayPage": {
+    "title": "Today",
+    "subtitle": "Your next workout, active plan, and reminder status.",
+    "empty": "No workout scheduled for today. Activate a sample plan or build your own."
+  },
+  "sessionsPage": {
+    "title": "Workout sessions",
+    "subtitle": "Create reusable training sessions with many exercises and per-set prescriptions."
+  },
+  "plansPage": {
+    "title": "Workout plans",
+    "subtitle": "Arrange weekly training rhythm with weekday-based repetition."
+  },
+  "libraryPage": {
+    "title": "Exercise library",
+    "subtitle": "Find the right movement with anatomy visuals, muscle filters, and quick how-to steps."
+  },
+  "exerciseCatalog": {
+    "searchPlaceholder": "Search exercises",
+    "anyMuscle": "Any Muscle",
+    "anyEquipment": "Any Equipment",
+    "anyLevel": "Any Level",
+    "apply": "Apply filters",
+    "emptyTitle": "No exercises found",
+    "emptyBody": "Try a broader search or clear one of the filters to reveal more movements.",
+    "openDetail": "How-to",
+    "resultLabel": "movements",
+    "backToLibrary": "Library",
+    "backToExercises": "Exercises",
+    "chart": "Chart",
+    "history": "History",
+    "howTo": "How-to",
+    "focus": "Focus",
+    "equipment": "Equipment",
+    "goals": "Goals",
+    "categories": "Categories",
+    "level": "Level",
+    "source": "Source",
+    "movementFrames": "Movement frames",
+    "slowMotion": "Slow motion"
+  },
+  "inboxPage": {
+    "title": "Inbox",
+    "subtitle": "Reminder history and in-app notices live here."
+  },
+  "settingsPage": {
+    "title": "Settings",
+    "subtitle": "Control language, reminder time, push permissions, and account state.",
+    "reviewTitle": "Data review",
+    "reviewBody": "Inspect live Mongo data for exercises, muscles, equipments, goals, and categories before you scale further.",
+    "reviewAction": "Open review dashboard"
+  },
+  "reviewPage": {
+    "title": "Catalog review",
+    "subtitle": "Review live data coming from Mongo and Cloudinary-backed URLs before approving the next content pass.",
+    "auditAction": "AI UI audit",
+    "searchPlaceholder": "Search by slug, English, or Vietnamese name",
+    "noResultsTitle": "No matching records",
+    "noResultsBody": "Try a broader keyword or switch to a different collection.",
+    "linkedExercises": "Linked exercises",
+    "imageReady": "Image ready",
+    "videoReady": "Video ready",
+    "source": "Source",
+    "reviewStatus": "Review status",
+    "level": "Level",
+    "focus": "Focus",
+    "equipment": "Equipment",
+    "goals": "Goals",
+    "categories": "Categories",
+    "category": "Category",
+    "slugLabel": "Slug",
+    "records": "records",
+    "page": "Page",
+    "previous": "Previous",
+    "next": "Next",
+    "openExercise": "Open exercise",
+    "showing": "Showing",
+    "item": "Item",
+    "media": "Media",
+    "details": "Details",
+    "sections": {
+      "exercises": "Exercises",
+      "muscles": "Muscles",
+      "equipments": "Equipments",
+      "goals": "Exercise goals",
+      "categories": "Exercise categories"
+    }
+  },
+  "uiAuditPage": {
+    "title": "AI UI audit",
+    "subtitle": "Upload screenshots and let a vision model review hierarchy, clipping, overlap, spacing, and overall polish before you iterate again.",
+    "helper": "This runs only in local/dev and calls the OpenAI Responses API from the server. It is meant for fast design QA, not for replacing manual product judgment.",
+    "pageUrl": "Page URL",
+    "viewport": "Viewport",
+    "notes": "Extra notes",
+    "screenshots": "Screenshots",
+    "desktop": "Desktop",
+    "mobile": "Mobile",
+    "runAudit": "Run AI audit",
+    "running": "Reviewing",
+    "emptyState": "Add one or more screenshots to review this UI.",
+    "configHint": "Requires OPENAI_API_KEY and optionally OPENAI_UI_REVIEW_MODEL in local env.",
+    "score": "Score",
+    "summary": "Summary",
+    "positives": "What works",
+    "issues": "Findings",
+    "nextActions": "Next actions",
+    "uploadHint": "Upload up to 4 screenshots. Include the broken state, not only the ideal state.",
+    "openReview": "Back to data review",
+    "errorTitle": "Could not run the AI audit."
+  }
+}

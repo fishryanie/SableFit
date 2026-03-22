@@ -1,0 +1,157 @@
+{
+  "totalMuscles": 25,
+  "providedCount": 18,
+  "derivedCount": 7,
+  "entries": [
+    {
+      "slug": "pectoralis-major",
+      "status": "PROVIDED",
+      "sourcePath": "chest.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/pectoralis-major"
+    },
+    {
+      "slug": "pectoralis-minor",
+      "status": "DERIVED",
+      "sourcePath": "chest.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/pectoralis-minor"
+    },
+    {
+      "slug": "serratus-anterior",
+      "status": "PROVIDED",
+      "sourcePath": "020-muscles-4.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/serratus-anterior"
+    },
+    {
+      "slug": "latissimus-dorsi",
+      "status": "PROVIDED",
+      "sourcePath": "lat.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/latissimus-dorsi"
+    },
+    {
+      "slug": "rhomboids",
+      "status": "DERIVED",
+      "sourcePath": "trap1.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/rhomboids"
+    },
+    {
+      "slug": "trapezius",
+      "status": "PROVIDED",
+      "sourcePath": "trap1.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/trapezius"
+    },
+    {
+      "slug": "erector-spinae",
+      "status": "PROVIDED",
+      "sourcePath": "trap3.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/erector-spinae"
+    },
+    {
+      "slug": "teres-major",
+      "status": "DERIVED",
+      "sourcePath": "lat.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/teres-major"
+    },
+    {
+      "slug": "deltoids",
+      "status": "PROVIDED",
+      "sourcePath": "shoulder.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/deltoids"
+    },
+    {
+      "slug": "rear-deltoids",
+      "status": "PROVIDED",
+      "sourcePath": "deltoy.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/rear-deltoids"
+    },
+    {
+      "slug": "rotator-cuff",
+      "status": "DERIVED",
+      "sourcePath": "shoulder.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/rotator-cuff"
+    },
+    {
+      "slug": "biceps",
+      "status": "PROVIDED",
+      "sourcePath": "biceps.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/biceps"
+    },
+    {
+      "slug": "triceps",
+      "status": "PROVIDED",
+      "sourcePath": "009-muscles.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/triceps"
+    },
+    {
+      "slug": "forearms",
+      "status": "PROVIDED",
+      "sourcePath": "021-bodybuilding.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/forearms"
+    },
+    {
+      "slug": "brachialis",
+      "status": "DERIVED",
+      "sourcePath": "021-bodybuilding.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/brachialis"
+    },
+    {
+      "slug": "rectus-abdominis",
+      "status": "PROVIDED",
+      "sourcePath": "abs.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/rectus-abdominis"
+    },
+    {
+      "slug": "obliques",
+      "status": "PROVIDED",
+      "sourcePath": "017-training.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/obliques"
+    },
+    {
+      "slug": "hip-flexors",
+      "status": "PROVIDED",
+      "sourcePath": "018-exercise.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/hip-flexors"
+    },
+    {
+      "slug": "glutes",
+      "status": "PROVIDED",
+      "sourcePath": "011-muscles-1.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/glutes"
+    },
+    {
+      "slug": "quadriceps",
+      "status": "PROVIDED",
+      "sourcePath": "005-front.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/quadriceps"
+    },
+    {
+      "slug": "hamstrings",
+      "status": "PROVIDED",
+      "sourcePath": "008-back-2.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/hamstrings"
+    },
+    {
+      "slug": "adductors",
+      "status": "PROVIDED",
+      "sourcePath": "013-front-1.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/adductors"
+    },
+    {
+      "slug": "calves",
+      "status": "PROVIDED",
+      "sourcePath": "015-muscles-3.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/calves"
+    },
+    {
+      "slug": "soleus",
+      "status": "DERIVED",
+      "sourcePath": "015-muscles-3.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/soleus"
+    },
+    {
+      "slug": "rectus-femoris",
+      "status": "DERIVED",
+      "sourcePath": "013-front-1.png",
+      "cloudinaryFolder": "sablefit/workout/muscle/rectus-femoris"
+    }
+  ]
+}

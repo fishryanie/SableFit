@@ -1,0 +1,197 @@
+{
+  "common": {
+    "appName": "SableFit",
+    "tagline": "App quản lý lịch tập trực quan, đúng chất mobile.",
+    "install": "Cài app",
+    "openApp": "Mở app",
+    "viewAll": "Xem tất cả",
+    "signIn": "Đăng nhập",
+    "today": "Hôm nay",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "loading": "Đang tải",
+    "logout": "Đăng xuất"
+  },
+  "pwaPrompt": {
+    "title": "Cài SableFit",
+    "subtitle": "Giữ lịch tập, nhắc lịch và buổi tập hôm nay chỉ cách một lần chạm.",
+    "closeAria": "Đóng gợi ý cài đặt",
+    "iosTitle": "Cài trên iPhone hoặc iPad",
+    "iosStep1": "Mở bảng chia sẻ của trình duyệt.",
+    "iosStep2": "Nhấn Share",
+    "iosStep3": "Chọn Add to Home Screen.",
+    "androidTitle": "Cài trên Android",
+    "androidReady": "Trình duyệt của bạn đã sẵn sàng để cài app.",
+    "androidManual": "Mở menu trình duyệt và chọn Install App hoặc Add to Home Screen.",
+    "iosButton": "Xem cách cài iPhone",
+    "androidButton": "Cách cài đặt",
+    "installButton": "Cài ngay",
+    "installing": "Đang mở",
+    "skipButton": "Để sau",
+    "iosShareOpenedHint": "Bảng chia sẻ đã mở. Hãy chọn Add to Home Screen để hoàn tất.",
+    "iosShareFallbackHint": "Dùng menu chia sẻ của trình duyệt và chọn Add to Home Screen."
+  },
+  "shell": {
+    "nav": {
+      "today": "Hôm nay",
+      "sessions": "Buổi tập",
+      "plans": "Giáo án",
+      "library": "Thư viện",
+      "inbox": "Hộp thư",
+      "settings": "Cài đặt"
+    },
+    "marketingLink": "Landing",
+    "signedInAs": "Đang đăng nhập"
+  },
+  "landing": {
+    "eyebrow": "Workout planner mobile-first",
+    "title": "Xây nhịp tập bền vững, không còn phải vật lộn với bảng tính.",
+    "body": "SableFit biến thư viện bài tập, buổi tập, giáo án tuần và nhắc lịch thành một PWA gọn, đẹp, song ngữ và dễ dùng ngay trong lúc tập.",
+    "primaryCta": "Bắt đầu với đăng nhập số điện thoại",
+    "secondaryCta": "Xem plan mẫu",
+    "stat1": "185 bài tập trực quan",
+    "stat2": "12 plan hệ thống",
+    "stat3": "Sẵn sàng cài app + push",
+    "feature1Title": "Thư viện bài tập trực quan",
+    "feature1Body": "Mỗi bài tập đã duyệt đều có ảnh minh họa nội bộ để người dùng không chọn nhầm động tác.",
+    "feature2Title": "Trình tạo giáo án tuần",
+    "feature2Body": "Gom nhiều buổi tập thành plan lặp theo thứ trong tuần và thời gian nhắc cụ thể.",
+    "feature3Title": "Luồng ưu tiên hôm nay",
+    "feature3Body": "Mở app là thấy ngay buổi tập hôm nay, plan đang chạy và trạng thái nhắc lịch."
+  },
+  "authPhone": {
+    "title": "Đăng nhập bằng điện thoại",
+    "subtitle": "Dùng OTP Firebase để vào không gian luyện tập riêng của bạn.",
+    "phoneLabel": "Số điện thoại",
+    "nameLabel": "Tên hiển thị",
+    "submit": "Gửi OTP",
+    "codeLabel": "Mã xác thực",
+    "verify": "Xác thực và tiếp tục",
+    "signingIn": "Đang đăng nhập",
+    "helper": "Dùng định dạng quốc tế đầy đủ, ví dụ +84...",
+    "missingConfig": "Firebase Phone Auth chưa được cấu hình. Hãy thêm các biến môi trường Firebase web để bật OTP."
+  },
+  "marketingPlans": {
+    "title": "Plan tập mẫu",
+    "subtitle": "Plan hệ thống cho beginner, hypertrophy, strength, fat loss và home workout."
+  },
+  "marketingExercises": {
+    "title": "Xem trước thư viện bài tập",
+    "subtitle": "Lọc thư viện bài tập theo kiểu anatomy bằng dụng cụ, cấp độ và nhóm cơ trước khi đăng nhập."
+  },
+  "installPage": {
+    "title": "Cài SableFit",
+    "body": "Thêm SableFit vào màn hình chính để có trải nghiệm nhắc lịch và push notification tốt nhất."
+  },
+  "todayPage": {
+    "title": "Hôm nay",
+    "subtitle": "Buổi tập tiếp theo, plan đang dùng và trạng thái nhắc lịch của bạn.",
+    "empty": "Hôm nay chưa có buổi nào. Hãy kích hoạt plan mẫu hoặc tự tạo plan."
+  },
+  "sessionsPage": {
+    "title": "Buổi tập",
+    "subtitle": "Tạo buổi tập có nhiều bài và từng set có prescription riêng."
+  },
+  "plansPage": {
+    "title": "Giáo án tập",
+    "subtitle": "Sắp lịch tập theo tuần với cơ chế lặp theo thứ."
+  },
+  "libraryPage": {
+    "title": "Thư viện bài tập",
+    "subtitle": "Tìm đúng động tác bằng ảnh anatomy, filter nhóm cơ và hướng dẫn nhanh từng bước."
+  },
+  "exerciseCatalog": {
+    "searchPlaceholder": "Tìm bài tập",
+    "anyMuscle": "Mọi nhóm cơ",
+    "anyEquipment": "Mọi dụng cụ",
+    "anyLevel": "Mọi cấp độ",
+    "apply": "Lọc kết quả",
+    "emptyTitle": "Chưa tìm thấy bài tập phù hợp",
+    "emptyBody": "Thử tìm rộng hơn hoặc bỏ bớt một bộ lọc để thấy thêm bài tập.",
+    "openDetail": "Cách tập",
+    "resultLabel": "bài tập",
+    "backToLibrary": "Thư viện",
+    "backToExercises": "Bài tập",
+    "chart": "Biểu đồ",
+    "history": "Lịch sử",
+    "howTo": "Cách tập",
+    "focus": "Nhóm cơ chính",
+    "equipment": "Dụng cụ",
+    "goals": "Mục tiêu",
+    "categories": "Phân loại",
+    "level": "Cấp độ",
+    "source": "Nguồn",
+    "movementFrames": "Các pha chuyển động",
+    "slowMotion": "GIF chuyển động chậm"
+  },
+  "inboxPage": {
+    "title": "Hộp thư",
+    "subtitle": "Lịch sử nhắc lịch và thông báo trong app ở đây."
+  },
+  "settingsPage": {
+    "title": "Cài đặt",
+    "subtitle": "Điều chỉnh ngôn ngữ, giờ nhắc, quyền push và trạng thái tài khoản.",
+    "reviewTitle": "Review dữ liệu",
+    "reviewBody": "Kiểm tra dữ liệu thật từ Mongo cho bài tập, nhóm cơ, dụng cụ, mục tiêu và danh mục trước khi scale tiếp.",
+    "reviewAction": "Mở dashboard review"
+  },
+  "reviewPage": {
+    "title": "Review catalog",
+    "subtitle": "Kiểm tra dữ liệu live từ Mongo và URL đã gắn Cloudinary trước khi duyệt vòng content tiếp theo.",
+    "auditAction": "AI review UI",
+    "searchPlaceholder": "Tìm theo slug, tên tiếng Anh hoặc tiếng Việt",
+    "noResultsTitle": "Không có dữ liệu khớp",
+    "noResultsBody": "Thử từ khóa rộng hơn hoặc chuyển sang collection khác.",
+    "linkedExercises": "Số bài tập đang ref",
+    "imageReady": "Có ảnh",
+    "videoReady": "Có video",
+    "source": "Nguồn",
+    "reviewStatus": "Trạng thái duyệt",
+    "level": "Cấp độ",
+    "focus": "Nhóm cơ chính",
+    "equipment": "Dụng cụ",
+    "goals": "Mục tiêu",
+    "categories": "Phân loại",
+    "category": "Nhóm",
+    "slugLabel": "Slug",
+    "records": "bản ghi",
+    "page": "Trang",
+    "previous": "Trước",
+    "next": "Sau",
+    "openExercise": "Mở bài tập",
+    "showing": "Đang xem",
+    "item": "Mục dữ liệu",
+    "media": "Media",
+    "details": "Chi tiết",
+    "sections": {
+      "exercises": "Bài tập",
+      "muscles": "Nhóm cơ",
+      "equipments": "Dụng cụ",
+      "goals": "Mục tiêu bài tập",
+      "categories": "Danh mục bài tập"
+    }
+  },
+  "uiAuditPage": {
+    "title": "AI review UI",
+    "subtitle": "Upload screenshot để vision model soi bố cục, chồng lớp, cắt nội dung, khoảng trắng và độ hoàn thiện trước khi mình sửa tiếp.",
+    "helper": "Tool này chỉ chạy ở local/dev và gọi OpenAI Responses API từ server. Nó dùng để QA thiết kế nhanh, không thay thế việc review sản phẩm bằng mắt người.",
+    "pageUrl": "URL trang",
+    "viewport": "Viewport",
+    "notes": "Ghi chú thêm",
+    "screenshots": "Screenshot",
+    "desktop": "Desktop",
+    "mobile": "Mobile",
+    "runAudit": "Chạy AI audit",
+    "running": "Đang review",
+    "emptyState": "Thêm ít nhất một screenshot để review UI này.",
+    "configHint": "Cần OPENAI_API_KEY và có thể thêm OPENAI_UI_REVIEW_MODEL trong env local.",
+    "score": "Điểm",
+    "summary": "Tóm tắt",
+    "positives": "Điểm ổn",
+    "issues": "Phát hiện",
+    "nextActions": "Việc nên làm tiếp",
+    "uploadHint": "Upload tối đa 4 screenshot. Nên đưa cả trạng thái bị lỗi, không chỉ ảnh đẹp.",
+    "openReview": "Quay lại review dữ liệu",
+    "errorTitle": "Không chạy được AI audit."
+  }
+}

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="860" viewBox="0 0 420 860" fill="none">
+      <rect x="18" y="18" width="384" height="824" rx="58" fill="#111111"/>
+      <rect x="34" y="34" width="352" height="792" rx="44" fill="#F7F6F3"/>
+      <rect x="154" y="52" width="112" height="12" rx="6" fill="rgba(17, 17, 17, 0.16)"/>
+      <rect x="56" y="92" width="308" height="688" rx="34" fill="url(#screen-bg)"/>
+      <g transform="translate(70 112)">
+        
+    <text x="0" y="16" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="rgba(17, 17, 17, 0.42)" letter-spacing="2.4">PLANS</text>
+    <text x="0" y="50" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="800" fill="#111111" letter-spacing="-0.8">Weekly split</text>
+    <rect x="0" y="76" width="280" height="144" rx="32" fill="#FFFFFF" stroke="rgba(17, 17, 17, 0.08)"/>
+    <text x="20" y="108" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="800" fill="#111111">Mass Builder 4-Day</text>
+    <text x="20" y="132" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" fill="rgba(17, 17, 17, 0.56)">Mon • Tue • Thu • Sat</text>
+    <rect x="20" y="150" width="84" height="40" rx="20" fill="#F7E0D8"/>
+    <rect x="112" y="150" width="84" height="40" rx="20" fill="#DDECE7"/>
+    <rect x="204" y="150" width="56" height="40" rx="20" fill="#F4DDDB"/>
+    <text x="62" y="174" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="800" fill="#C9705A">PUSH</text>
+    <text x="154" y="174" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="800" fill="#5C8578">PULL</text>
+    <text x="232" y="174" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="800" fill="#B45C58">LEGS</text>
+
+    <rect x="0" y="240" width="280" height="116" rx="30" fill="#FFFFFF" stroke="rgba(17, 17, 17, 0.08)"/>
+    <text x="20" y="272" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="rgba(17, 17, 17, 0.42)" letter-spacing="1.8">THIS WEEK</text>
+    <rect x="20" y="290" width="240" height="16" rx="8" fill="rgba(17, 17, 17, 0.08)"/>
+    <rect x="20" y="290" width="164" height="16" rx="8" fill="#111111"/>
+    <text x="20" y="334" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" fill="rgba(17, 17, 17, 0.56)">12 completed sessions • auto reminders at 06:30</text>
+
+    <rect x="0" y="376" width="280" height="132" rx="30" fill="#FFFFFF" stroke="rgba(17, 17, 17, 0.08)"/>
+    <text x="20" y="408" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="rgba(17, 17, 17, 0.42)" letter-spacing="1.8">TEMPLATE STACK</text>
+    <rect x="20" y="426" width="240" height="26" rx="13" fill="#F2E8D5"/>
+    <rect x="20" y="462" width="190" height="26" rx="13" fill="#DDECE7"/>
+    <text x="34" y="444" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="800" fill="#8A6B3A">Beginner Reset 2-Day</text>
+    <text x="34" y="480" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="800" fill="#5C8578">Back and Core Focus</text>
+  
+      </g>
+      <rect x="168" y="796" width="84" height="6" rx="3" fill="rgba(17, 17, 17, 0.16)"/>
+      <defs>
+        <linearGradient id="screen-bg" x1="210" y1="92" x2="210" y2="780" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#FFFFFF"/>
+          <stop offset="1" stop-color="#F3F0E8"/>
+        </linearGradient>
+      </defs>
+    </svg>

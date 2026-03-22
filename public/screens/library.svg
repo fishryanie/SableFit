@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="860" viewBox="0 0 420 860" fill="none">
+      <rect x="18" y="18" width="384" height="824" rx="58" fill="#111111"/>
+      <rect x="34" y="34" width="352" height="792" rx="44" fill="#F7F6F3"/>
+      <rect x="154" y="52" width="112" height="12" rx="6" fill="rgba(17, 17, 17, 0.16)"/>
+      <rect x="56" y="92" width="308" height="688" rx="34" fill="url(#screen-bg)"/>
+      <g transform="translate(70 112)">
+        
+    <text x="0" y="16" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="rgba(17, 17, 17, 0.42)" letter-spacing="2.4">LIBRARY</text>
+    <text x="0" y="50" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="800" fill="#111111" letter-spacing="-0.8">Visual cards</text>
+    <rect x="0" y="78" width="280" height="44" rx="22" fill="#FFFFFF" stroke="rgba(17, 17, 17, 0.08)"/>
+    <text x="20" y="105" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="rgba(17, 17, 17, 0.42)">Search exercise</text>
+    <rect x="0" y="138" width="86" height="34" rx="17" fill="rgba(17, 17, 17, 0.08)"/>
+    <rect x="96" y="138" width="72" height="34" rx="17" fill="#DDECE7"/>
+    <rect x="178" y="138" width="102" height="34" rx="17" fill="#F2E8D5"/>
+    <text x="43" y="160" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="800" fill="#111111">ALL</text>
+    <text x="132" y="160" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="800" fill="#5C8578">BACK</text>
+    <text x="229" y="160" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="800" fill="#8A6B3A">DUMBBELL</text>
+    <rect x="0" y="192" width="132" height="168" rx="28" fill="#FFFFFF" stroke="rgba(17, 17, 17, 0.08)"/>
+    <rect x="148" y="192" width="132" height="168" rx="28" fill="#FFFFFF" stroke="rgba(17, 17, 17, 0.08)"/>
+    <rect x="12" y="206" width="108" height="98" rx="24" fill="#DDECE7"/>
+    <rect x="160" y="206" width="108" height="98" rx="24" fill="#F7E0D8"/>
+    <text x="18" y="326" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111111">Chest Supported Row</text>
+    <text x="166" y="326" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111111">Flat Dumbbell Press</text>
+    <text x="18" y="344" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="rgba(17, 17, 17, 0.42)">Back focus</text>
+    <text x="166" y="344" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="rgba(17, 17, 17, 0.42)">Chest focus</text>
+  
+      </g>
+      <rect x="168" y="796" width="84" height="6" rx="3" fill="rgba(17, 17, 17, 0.16)"/>
+      <defs>
+        <linearGradient id="screen-bg" x1="210" y1="92" x2="210" y2="780" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#FFFFFF"/>
+          <stop offset="1" stop-color="#F3F0E8"/>
+        </linearGradient>
+      </defs>
+    </svg>

@@ -1,0 +1,132 @@
+{
+  "body-weight": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151186/sablefit/workout/equipment/body-weight/primary.png",
+    "sourcePath": "sablefit/workout/equipment/body-weight",
+    "status": "DERIVED"
+  },
+  "dumbbell": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151186/sablefit/workout/equipment/dumbbell/primary.png",
+    "sourcePath": "sablefit/workout/equipment/dumbbell",
+    "status": "DERIVED"
+  },
+  "barbell": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151186/sablefit/workout/equipment/barbell/primary.png",
+    "sourcePath": "sablefit/workout/equipment/barbell",
+    "status": "DERIVED"
+  },
+  "kettlebell": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151186/sablefit/workout/equipment/kettlebell/primary.png",
+    "sourcePath": "sablefit/workout/equipment/kettlebell",
+    "status": "DERIVED"
+  },
+  "cable-machine": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151187/sablefit/workout/equipment/cable-machine/primary.png",
+    "sourcePath": "sablefit/workout/equipment/cable-machine",
+    "status": "DERIVED"
+  },
+  "machine": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151187/sablefit/workout/equipment/machine/primary.png",
+    "sourcePath": "sablefit/workout/equipment/machine",
+    "status": "DERIVED"
+  },
+  "bench": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151187/sablefit/workout/equipment/bench/primary.png",
+    "sourcePath": "sablefit/workout/equipment/bench",
+    "status": "DERIVED"
+  },
+  "smith-machine": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151187/sablefit/workout/equipment/smith-machine/primary.png",
+    "sourcePath": "sablefit/workout/equipment/smith-machine",
+    "status": "DERIVED"
+  },
+  "lat-pulldown-machine": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151187/sablefit/workout/equipment/lat-pulldown-machine/primary.png",
+    "sourcePath": "sablefit/workout/equipment/lat-pulldown-machine",
+    "status": "DERIVED"
+  },
+  "leg-press-machine": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151187/sablefit/workout/equipment/leg-press-machine/primary.png",
+    "sourcePath": "sablefit/workout/equipment/leg-press-machine",
+    "status": "DERIVED"
+  },
+  "leg-curl-machine": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151187/sablefit/workout/equipment/leg-curl-machine/primary.png",
+    "sourcePath": "sablefit/workout/equipment/leg-curl-machine",
+    "status": "DERIVED"
+  },
+  "leg-extension-machine": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151188/sablefit/workout/equipment/leg-extension-machine/primary.png",
+    "sourcePath": "sablefit/workout/equipment/leg-extension-machine",
+    "status": "DERIVED"
+  },
+  "pull-up-bar": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151188/sablefit/workout/equipment/pull-up-bar/primary.png",
+    "sourcePath": "sablefit/workout/equipment/pull-up-bar",
+    "status": "DERIVED"
+  },
+  "parallel-bars": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151188/sablefit/workout/equipment/parallel-bars/primary.png",
+    "sourcePath": "sablefit/workout/equipment/parallel-bars",
+    "status": "DERIVED"
+  },
+  "medicine-ball": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151188/sablefit/workout/equipment/medicine-ball/primary.png",
+    "sourcePath": "sablefit/workout/equipment/medicine-ball",
+    "status": "DERIVED"
+  },
+  "resistance-bands": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151188/sablefit/workout/equipment/resistance-bands/primary.png",
+    "sourcePath": "sablefit/workout/equipment/resistance-bands",
+    "status": "DERIVED"
+  },
+  "trx": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151188/sablefit/workout/equipment/trx/primary.png",
+    "sourcePath": "sablefit/workout/equipment/trx",
+    "status": "DERIVED"
+  },
+  "plyo-box": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151188/sablefit/workout/equipment/plyo-box/primary.png",
+    "sourcePath": "sablefit/workout/equipment/plyo-box",
+    "status": "DERIVED"
+  },
+  "battle-ropes": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151189/sablefit/workout/equipment/battle-ropes/primary.png",
+    "sourcePath": "sablefit/workout/equipment/battle-ropes",
+    "status": "DERIVED"
+  },
+  "ez-curl-bar": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151189/sablefit/workout/equipment/ez-curl-bar/primary.png",
+    "sourcePath": "sablefit/workout/equipment/ez-curl-bar",
+    "status": "DERIVED"
+  },
+  "plate": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151189/sablefit/workout/equipment/plate/primary.png",
+    "sourcePath": "sablefit/workout/equipment/plate",
+    "status": "DERIVED"
+  },
+  "ab-wheel": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151189/sablefit/workout/equipment/ab-wheel/primary.png",
+    "sourcePath": "sablefit/workout/equipment/ab-wheel",
+    "status": "DERIVED"
+  },
+  "pec-deck-machine": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151189/sablefit/workout/equipment/pec-deck-machine/primary.png",
+    "sourcePath": "sablefit/workout/equipment/pec-deck-machine",
+    "status": "DERIVED"
+  },
+  "calf-raise-machine": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151189/sablefit/workout/equipment/calf-raise-machine/primary.png",
+    "sourcePath": "sablefit/workout/equipment/calf-raise-machine",
+    "status": "DERIVED"
+  },
+  "seated-calf-raise-machine": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151189/sablefit/workout/equipment/seated-calf-raise-machine/primary.png",
+    "sourcePath": "sablefit/workout/equipment/seated-calf-raise-machine",
+    "status": "DERIVED"
+  },
+  "yoga-mat": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774151190/sablefit/workout/equipment/yoga-mat/primary.png",
+    "sourcePath": "sablefit/workout/equipment/yoga-mat",
+    "status": "DERIVED"
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "pectoralis-major": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/pectoralis-major/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/pectoralis-major",
+    "status": "PROVIDED"
+  },
+  "pectoralis-minor": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/pectoralis-minor/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/pectoralis-minor",
+    "status": "DERIVED"
+  },
+  "serratus-anterior": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/serratus-anterior/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/serratus-anterior",
+    "status": "PROVIDED"
+  },
+  "latissimus-dorsi": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/latissimus-dorsi/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/latissimus-dorsi",
+    "status": "PROVIDED"
+  },
+  "rhomboids": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/rhomboids/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/rhomboids",
+    "status": "DERIVED"
+  },
+  "trapezius": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/trapezius/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/trapezius",
+    "status": "PROVIDED"
+  },
+  "erector-spinae": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/erector-spinae/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/erector-spinae",
+    "status": "PROVIDED"
+  },
+  "teres-major": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/teres-major/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/teres-major",
+    "status": "DERIVED"
+  },
+  "deltoids": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/deltoids/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/deltoids",
+    "status": "PROVIDED"
+  },
+  "rear-deltoids": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/rear-deltoids/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/rear-deltoids",
+    "status": "PROVIDED"
+  },
+  "rotator-cuff": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/rotator-cuff/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/rotator-cuff",
+    "status": "DERIVED"
+  },
+  "biceps": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/biceps/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/biceps",
+    "status": "PROVIDED"
+  },
+  "triceps": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/triceps/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/triceps",
+    "status": "PROVIDED"
+  },
+  "forearms": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/forearms/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/forearms",
+    "status": "PROVIDED"
+  },
+  "brachialis": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/brachialis/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/brachialis",
+    "status": "DERIVED"
+  },
+  "rectus-abdominis": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/rectus-abdominis/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/rectus-abdominis",
+    "status": "PROVIDED"
+  },
+  "obliques": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/obliques/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/obliques",
+    "status": "PROVIDED"
+  },
+  "hip-flexors": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/hip-flexors/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/hip-flexors",
+    "status": "PROVIDED"
+  },
+  "glutes": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/glutes/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/glutes",
+    "status": "PROVIDED"
+  },
+  "quadriceps": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/quadriceps/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/quadriceps",
+    "status": "PROVIDED"
+  },
+  "hamstrings": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/hamstrings/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/hamstrings",
+    "status": "PROVIDED"
+  },
+  "adductors": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/adductors/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/adductors",
+    "status": "PROVIDED"
+  },
+  "calves": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/calves/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/calves",
+    "status": "PROVIDED"
+  },
+  "soleus": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/soleus/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/soleus",
+    "status": "DERIVED"
+  },
+  "rectus-femoris": {
+    "imageUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/muscle/rectus-femoris/primary.png?_a=BAMAOGDh0",
+    "sourcePath": "sablefit/workout/muscle/rectus-femoris",
+    "status": "DERIVED"
+  }
+}

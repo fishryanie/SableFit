@@ -1,0 +1,1118 @@
+{
+  "totalExercises": 185,
+  "exactMatchCount": 65,
+  "equivalentMatchCount": 41,
+  "prototypeMatchCount": 79,
+  "entries": [
+    {
+      "slug": "barbell-bench-press",
+      "matchMode": "exact",
+      "sourcePath": "chest/00251301-Barbell-Bench-Press_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/barbell-bench-press"
+    },
+    {
+      "slug": "squats",
+      "matchMode": "exact",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/squats"
+    },
+    {
+      "slug": "deadlifts",
+      "matchMode": "exact",
+      "sourcePath": "leg/00321301-Barbell-Deadlift_Hips-FIX2_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/deadlifts"
+    },
+    {
+      "slug": "pull-ups",
+      "matchMode": "exact",
+      "sourcePath": "back/06521301-Pull-up_Back_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/pull-ups"
+    },
+    {
+      "slug": "bicep-curls",
+      "matchMode": "exact",
+      "sourcePath": "biceps/02851301-Dumbbell-Alternate-Biceps-Curl_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/bicep-curls"
+    },
+    {
+      "slug": "plank",
+      "matchMode": "prototype",
+      "sourcePath": "chest/06621301-Push-up-m_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/plank"
+    },
+    {
+      "slug": "lunges",
+      "matchMode": "equivalent",
+      "sourcePath": "leg/29601301-Dumbbell-Split-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/lunges"
+    },
+    {
+      "slug": "shoulder-press",
+      "matchMode": "prototype",
+      "sourcePath": "shoulder/03341301-Dumbbell-Lateral-Raise_shoulder-AFIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/shoulder-press"
+    },
+    {
+      "slug": "tricep-dips",
+      "matchMode": "exact",
+      "sourcePath": "chest/08141301-Triceps-Dip_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/tricep-dips"
+    },
+    {
+      "slug": "russian-twists",
+      "matchMode": "prototype",
+      "sourcePath": "abs/24761301-3-4-Sit-up-female_Waist_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/russian-twists"
+    },
+    {
+      "slug": "leg-press",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/leg-press"
+    },
+    {
+      "slug": "barbell-row",
+      "matchMode": "exact",
+      "sourcePath": "back/00271301-Barbell-Bent-Over-Row_Back-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/barbell-row"
+    },
+    {
+      "slug": "lat-pulldown",
+      "matchMode": "exact",
+      "sourcePath": "back/01501301-Cable-Bar-Lateral-Pulldown_Back_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/lat-pulldown"
+    },
+    {
+      "slug": "dumbbell-flyes",
+      "matchMode": "equivalent",
+      "sourcePath": "chest/02271301-Cable-Standing-Fly_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/dumbbell-flyes"
+    },
+    {
+      "slug": "cable-crossovers",
+      "matchMode": "equivalent",
+      "sourcePath": "chest/02271301-Cable-Standing-Fly_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/cable-crossovers"
+    },
+    {
+      "slug": "tricep-pushdown",
+      "matchMode": "exact",
+      "sourcePath": "triceps/02011301-Cable-Pushdown_Upper-Arms-FIX_7201.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/tricep-pushdown"
+    },
+    {
+      "slug": "dumbbell-lateral-raise",
+      "matchMode": "exact",
+      "sourcePath": "shoulder/03341301-Dumbbell-Lateral-Raise_shoulder-AFIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/dumbbell-lateral-raise"
+    },
+    {
+      "slug": "bent-over-dumbbell-row",
+      "matchMode": "exact",
+      "sourcePath": "back/02921301-Dumbbell-Bent-over-Row_back_Back_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/bent-over-dumbbell-row"
+    },
+    {
+      "slug": "seated-cable-row",
+      "matchMode": "exact",
+      "sourcePath": "back/26611301-Cable-Seated-Row-with-V-bar_Back_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/seated-cable-row"
+    },
+    {
+      "slug": "hammer-curls",
+      "matchMode": "exact",
+      "sourcePath": "biceps/03131301-Dumbbell-Hammer-Curl_Forearm_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/hammer-curls"
+    },
+    {
+      "slug": "cable-bicep-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/08681301-Cable-Curl-male_Upper-Arms-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/cable-bicep-curl"
+    },
+    {
+      "slug": "chest-press-machine",
+      "matchMode": "prototype",
+      "sourcePath": "chest/00251301-Barbell-Bench-Press_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/chest-press-machine"
+    },
+    {
+      "slug": "pec-deck-fly",
+      "matchMode": "exact",
+      "sourcePath": "chest/66d4e6f2ebc3db70602c4b14ae107fcf.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/pec-deck-fly"
+    },
+    {
+      "slug": "leg-curl",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/leg-curl"
+    },
+    {
+      "slug": "leg-extension",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/leg-extension"
+    },
+    {
+      "slug": "standing-calf-raise",
+      "matchMode": "exact",
+      "sourcePath": "leg/06051301-Lever-Standing-Calf-Raise_Calf_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/standing-calf-raise"
+    },
+    {
+      "slug": "seated-calf-raise",
+      "matchMode": "exact",
+      "sourcePath": "leg/11641301-Smith-Calf-Raise-version-2_Calves_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/seated-calf-raise"
+    },
+    {
+      "slug": "dumbbell-shrugs",
+      "matchMode": "prototype",
+      "sourcePath": "back/26611301-Cable-Seated-Row-with-V-bar_Back_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/dumbbell-shrugs"
+    },
+    {
+      "slug": "overhead-tricep-extension",
+      "matchMode": "exact",
+      "sourcePath": "triceps/17221301-Cable-High-Pulley-Overhead-Tricep-Extension_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/overhead-tricep-extension"
+    },
+    {
+      "slug": "incline-dumbbell-press",
+      "matchMode": "exact",
+      "sourcePath": "chest/03141301-Dumbbell-Incline-Bench-Press_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/incline-dumbbell-press"
+    },
+    {
+      "slug": "decline-bench-press",
+      "matchMode": "equivalent",
+      "sourcePath": "chest/00251301-Barbell-Bench-Press_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/decline-bench-press"
+    },
+    {
+      "slug": "chest-dips",
+      "matchMode": "equivalent",
+      "sourcePath": "chest/08141301-Triceps-Dip_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/chest-dips"
+    },
+    {
+      "slug": "reverse-flyes",
+      "matchMode": "equivalent",
+      "sourcePath": "shoulder/39121301-Cable-Bent-Over-One-Arm-Lateral-Raise_Shoulders_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/reverse-flyes"
+    },
+    {
+      "slug": "cable-upright-row",
+      "matchMode": "prototype",
+      "sourcePath": "shoulder/01781301-Cable-Lateral-Raise_shoulder_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/cable-upright-row"
+    },
+    {
+      "slug": "one-arm-dumbbell-row",
+      "matchMode": "exact",
+      "sourcePath": "back/02921301-Dumbbell-Bent-over-Row_back_Back_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/one-arm-dumbbell-row"
+    },
+    {
+      "slug": "cable-chest-press",
+      "matchMode": "prototype",
+      "sourcePath": "chest/02271301-Cable-Standing-Fly_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/cable-chest-press"
+    },
+    {
+      "slug": "leg-raise",
+      "matchMode": "prototype",
+      "sourcePath": "abs/24761301-3-4-Sit-up-female_Waist_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/leg-raise"
+    },
+    {
+      "slug": "hanging-leg-raise",
+      "matchMode": "prototype",
+      "sourcePath": "abs/24761301-3-4-Sit-up-female_Waist_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/hanging-leg-raise"
+    },
+    {
+      "slug": "flutter-kicks",
+      "matchMode": "prototype",
+      "sourcePath": "abs/24761301-3-4-Sit-up-female_Waist_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/flutter-kicks"
+    },
+    {
+      "slug": "side-plank",
+      "matchMode": "prototype",
+      "sourcePath": "chest/06621301-Push-up-m_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/side-plank"
+    },
+    {
+      "slug": "mountain-climbers",
+      "matchMode": "prototype",
+      "sourcePath": "chest/06621301-Push-up-m_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/mountain-climbers"
+    },
+    {
+      "slug": "jumping-jacks",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/jumping-jacks"
+    },
+    {
+      "slug": "burpees",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/burpees"
+    },
+    {
+      "slug": "high-knees",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/high-knees"
+    },
+    {
+      "slug": "box-jumps",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/box-jumps"
+    },
+    {
+      "slug": "battle-ropes",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/battle-ropes"
+    },
+    {
+      "slug": "kettlebell-swings",
+      "matchMode": "prototype",
+      "sourcePath": "leg/00321301-Barbell-Deadlift_Hips-FIX2_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/kettlebell-swings"
+    },
+    {
+      "slug": "trx-rows",
+      "matchMode": "prototype",
+      "sourcePath": "back/00271301-Barbell-Bent-Over-Row_Back-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/trx-rows"
+    },
+    {
+      "slug": "trx-push-ups",
+      "matchMode": "equivalent",
+      "sourcePath": "chest/06621301-Push-up-m_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/trx-push-ups"
+    },
+    {
+      "slug": "triceps-dip",
+      "matchMode": "exact",
+      "sourcePath": "chest/08141301-Triceps-Dip_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/triceps-dip"
+    },
+    {
+      "slug": "decline-ez-bar-skullcrusher",
+      "matchMode": "equivalent",
+      "sourcePath": "biceps/06071301-Lever-Triceps-Extension_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/decline-ez-bar-skullcrusher"
+    },
+    {
+      "slug": "dumbbell-floor-press",
+      "matchMode": "prototype",
+      "sourcePath": "triceps/17221301-Cable-High-Pulley-Overhead-Tricep-Extension_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/dumbbell-floor-press"
+    },
+    {
+      "slug": "cable-v-bar-push-down",
+      "matchMode": "equivalent",
+      "sourcePath": "triceps/02011301-Cable-Pushdown_Upper-Arms-FIX_7201.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/cable-v-bar-push-down"
+    },
+    {
+      "slug": "weighted-bench-dip",
+      "matchMode": "equivalent",
+      "sourcePath": "chest/08141301-Triceps-Dip_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/weighted-bench-dip"
+    },
+    {
+      "slug": "ez-bar-skullcrusher",
+      "matchMode": "equivalent",
+      "sourcePath": "biceps/06071301-Lever-Triceps-Extension_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/ez-bar-skullcrusher"
+    },
+    {
+      "slug": "reverse-grip-triceps-pushdown",
+      "matchMode": "equivalent",
+      "sourcePath": "triceps/02011301-Cable-Pushdown_Upper-Arms-FIX_7201.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/reverse-grip-triceps-pushdown"
+    },
+    {
+      "slug": "push-ups-close-triceps-position",
+      "matchMode": "equivalent",
+      "sourcePath": "chest/06621301-Push-up-m_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/push-ups-close-triceps-position"
+    },
+    {
+      "slug": "kneeling-cable-triceps-extension",
+      "matchMode": "exact",
+      "sourcePath": "triceps/17221301-Cable-High-Pulley-Overhead-Tricep-Extension_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/kneeling-cable-triceps-extension"
+    },
+    {
+      "slug": "single-arm-cable-triceps-extension",
+      "matchMode": "exact",
+      "sourcePath": "triceps/17221301-Cable-High-Pulley-Overhead-Tricep-Extension_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/single-arm-cable-triceps-extension"
+    },
+    {
+      "slug": "triceps-pushdown-rope-attachment",
+      "matchMode": "exact",
+      "sourcePath": "triceps/02011301-Cable-Pushdown_Upper-Arms-FIX_7201.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/triceps-pushdown-rope-attachment"
+    },
+    {
+      "slug": "seated-triceps-press",
+      "matchMode": "equivalent",
+      "sourcePath": "triceps/17221301-Cable-High-Pulley-Overhead-Tricep-Extension_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/seated-triceps-press"
+    },
+    {
+      "slug": "incline-ez-bar-skullcrusher",
+      "matchMode": "equivalent",
+      "sourcePath": "biceps/06071301-Lever-Triceps-Extension_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/incline-ez-bar-skullcrusher"
+    },
+    {
+      "slug": "decline-close-grip-bench-to-skull-crusher",
+      "matchMode": "prototype",
+      "sourcePath": "biceps/06071301-Lever-Triceps-Extension_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/decline-close-grip-bench-to-skull-crusher"
+    },
+    {
+      "slug": "tricep-dumbbell-kickback",
+      "matchMode": "prototype",
+      "sourcePath": "triceps/02011301-Cable-Pushdown_Upper-Arms-FIX_7201.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/tricep-dumbbell-kickback"
+    },
+    {
+      "slug": "dip-machine",
+      "matchMode": "exact",
+      "sourcePath": "triceps/a59cfd87c4a642cf55d2dc77e0acb2bb.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/dip-machine"
+    },
+    {
+      "slug": "standing-dumbbell-triceps-extension",
+      "matchMode": "equivalent",
+      "sourcePath": "triceps/17221301-Cable-High-Pulley-Overhead-Tricep-Extension_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/standing-dumbbell-triceps-extension"
+    },
+    {
+      "slug": "parallel-bar-dip",
+      "matchMode": "equivalent",
+      "sourcePath": "chest/08141301-Triceps-Dip_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/parallel-bar-dip"
+    },
+    {
+      "slug": "ring-dip",
+      "matchMode": "equivalent",
+      "sourcePath": "chest/08141301-Triceps-Dip_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/ring-dip"
+    },
+    {
+      "slug": "double-arm-triceps-kick-back",
+      "matchMode": "prototype",
+      "sourcePath": "triceps/17221301-Cable-High-Pulley-Overhead-Tricep-Extension_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/double-arm-triceps-kick-back"
+    },
+    {
+      "slug": "incline-hammer-curls",
+      "matchMode": "equivalent",
+      "sourcePath": "biceps/36821301-Dumbbell-Incline-Alternate-Bicep-Curl_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/incline-hammer-curls"
+    },
+    {
+      "slug": "wide-grip-barbell-curl",
+      "matchMode": "equivalent",
+      "sourcePath": "biceps/00311301-Barbell-Curl_Upper-Arms-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/wide-grip-barbell-curl"
+    },
+    {
+      "slug": "ez-bar-spider-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/04461301-EZ-Barbell-Close-grip-Curl_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/ez-bar-spider-curl"
+    },
+    {
+      "slug": "ez-bar-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/04461301-EZ-Barbell-Close-grip-Curl_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/ez-bar-curl"
+    },
+    {
+      "slug": "zottman-curl",
+      "matchMode": "equivalent",
+      "sourcePath": "biceps/16721301-Dumbbell-One-Arm-Zottman-Preacher-Curl_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/zottman-curl"
+    },
+    {
+      "slug": "biceps-curl-to-shoulder-press",
+      "matchMode": "exact",
+      "sourcePath": "biceps/02851301-Dumbbell-Alternate-Biceps-Curl_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/biceps-curl-to-shoulder-press"
+    },
+    {
+      "slug": "barbell-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/00311301-Barbell-Curl_Upper-Arms-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/barbell-curl"
+    },
+    {
+      "slug": "concentration-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/02971301-Dumbbell-Concentration-Curl_Upper-Arms-FIX_720-1.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/concentration-curl"
+    },
+    {
+      "slug": "flexor-incline-dumbbell-curls",
+      "matchMode": "exact",
+      "sourcePath": "biceps/36821301-Dumbbell-Incline-Alternate-Bicep-Curl_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/flexor-incline-dumbbell-curls"
+    },
+    {
+      "slug": "machine-bicep-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/00311301-Barbell-Curl_Upper-Arms-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/machine-bicep-curl"
+    },
+    {
+      "slug": "overhead-cable-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/08681301-Cable-Curl-male_Upper-Arms-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/overhead-cable-curl"
+    },
+    {
+      "slug": "dumbbell-alternate-bicep-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/02851301-Dumbbell-Alternate-Biceps-Curl_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/dumbbell-alternate-bicep-curl"
+    },
+    {
+      "slug": "single-arm-dumbbell-preacher-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/16721301-Dumbbell-One-Arm-Zottman-Preacher-Curl_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/single-arm-dumbbell-preacher-curl"
+    },
+    {
+      "slug": "alternate-incline-dumbbell-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/36821301-Dumbbell-Incline-Alternate-Bicep-Curl_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/alternate-incline-dumbbell-curl"
+    },
+    {
+      "slug": "standing-concentration-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/02971301-Dumbbell-Concentration-Curl_Upper-Arms-FIX_720-1.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/standing-concentration-curl"
+    },
+    {
+      "slug": "reverse-cable-curl",
+      "matchMode": "equivalent",
+      "sourcePath": "biceps/08681301-Cable-Curl-male_Upper-Arms-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/reverse-cable-curl"
+    },
+    {
+      "slug": "alternating-incline-dumbbell-biceps-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/36821301-Dumbbell-Incline-Alternate-Bicep-Curl_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/alternating-incline-dumbbell-biceps-curl"
+    },
+    {
+      "slug": "alternate-hammer-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/03131301-Dumbbell-Hammer-Curl_Forearm_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/alternate-hammer-curl"
+    },
+    {
+      "slug": "seated-dumbbell-biceps-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/02851301-Dumbbell-Alternate-Biceps-Curl_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/seated-dumbbell-biceps-curl"
+    },
+    {
+      "slug": "preacher-hammer-dumbbell-curl",
+      "matchMode": "equivalent",
+      "sourcePath": "biceps/16271301-EZ-Barbell-Close-Grip-Preacher-Curl_Upper-Arms-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/preacher-hammer-dumbbell-curl"
+    },
+    {
+      "slug": "standing-one-arm-dumbbell-curl-over-incline-bench",
+      "matchMode": "equivalent",
+      "sourcePath": "biceps/36821301-Dumbbell-Incline-Alternate-Bicep-Curl_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/standing-one-arm-dumbbell-curl-over-incline-bench"
+    },
+    {
+      "slug": "close-grip-barbell-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/04461301-EZ-Barbell-Close-grip-Curl_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/close-grip-barbell-curl"
+    },
+    {
+      "slug": "standing-biceps-cable-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/08681301-Cable-Curl-male_Upper-Arms-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/standing-biceps-cable-curl"
+    },
+    {
+      "slug": "drag-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/00311301-Barbell-Curl_Upper-Arms-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/drag-curl"
+    },
+    {
+      "slug": "dumbbell-preacher-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/16721301-Dumbbell-One-Arm-Zottman-Preacher-Curl_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/dumbbell-preacher-curl"
+    },
+    {
+      "slug": "lying-supine-dumbbell-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/02851301-Dumbbell-Alternate-Biceps-Curl_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/lying-supine-dumbbell-curl"
+    },
+    {
+      "slug": "machine-preacher-curls",
+      "matchMode": "equivalent",
+      "sourcePath": "biceps/16271301-EZ-Barbell-Close-Grip-Preacher-Curl_Upper-Arms-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/machine-preacher-curls"
+    },
+    {
+      "slug": "reverse-grip-barbell-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/00311301-Barbell-Curl_Upper-Arms-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/reverse-grip-barbell-curl"
+    },
+    {
+      "slug": "cable-rope-hammer-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/01651301-Cable-Hammer-Curl-with-rope-attachment-male_Forearms-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/cable-rope-hammer-curl"
+    },
+    {
+      "slug": "lying-cable-biceps-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/08681301-Cable-Curl-male_Upper-Arms-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/lying-cable-biceps-curl"
+    },
+    {
+      "slug": "incline-barbell-bench-press",
+      "matchMode": "exact",
+      "sourcePath": "chest/03141301-Dumbbell-Incline-Bench-Press_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/incline-barbell-bench-press"
+    },
+    {
+      "slug": "flat-dumbbell-press",
+      "matchMode": "exact",
+      "sourcePath": "chest/02891301-Dumbbell-Bench-Press_Chest_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/flat-dumbbell-press"
+    },
+    {
+      "slug": "machine-chest-press",
+      "matchMode": "prototype",
+      "sourcePath": "chest/00251301-Barbell-Bench-Press_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/machine-chest-press"
+    },
+    {
+      "slug": "decline-push-up",
+      "matchMode": "exact",
+      "sourcePath": "chest/02791301-Decline-Push-Up-m_chest_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/decline-push-up"
+    },
+    {
+      "slug": "low-to-high-cable-fly",
+      "matchMode": "equivalent",
+      "sourcePath": "chest/02271301-Cable-Standing-Fly_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/low-to-high-cable-fly"
+    },
+    {
+      "slug": "smith-machine-bench-press",
+      "matchMode": "exact",
+      "sourcePath": "chest/00251301-Barbell-Bench-Press_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/smith-machine-bench-press"
+    },
+    {
+      "slug": "close-grip-bench-press",
+      "matchMode": "equivalent",
+      "sourcePath": "chest/00251301-Barbell-Bench-Press_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/close-grip-bench-press"
+    },
+    {
+      "slug": "single-arm-cable-press",
+      "matchMode": "prototype",
+      "sourcePath": "chest/02271301-Cable-Standing-Fly_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/single-arm-cable-press"
+    },
+    {
+      "slug": "chest-supported-row",
+      "matchMode": "prototype",
+      "sourcePath": "back/32001301-Lever-Bent-over-Row-with-V-bar-plate-loaded_Back_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/chest-supported-row"
+    },
+    {
+      "slug": "meadow-row",
+      "matchMode": "prototype",
+      "sourcePath": "back/32001301-Lever-Bent-over-Row-with-V-bar-plate-loaded_Back_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/meadow-row"
+    },
+    {
+      "slug": "straight-arm-pulldown",
+      "matchMode": "prototype",
+      "sourcePath": "back/01501301-Cable-Bar-Lateral-Pulldown_Back_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/straight-arm-pulldown"
+    },
+    {
+      "slug": "inverted-row",
+      "matchMode": "prototype",
+      "sourcePath": "back/00271301-Barbell-Bent-Over-Row_Back-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/inverted-row"
+    },
+    {
+      "slug": "machine-high-row",
+      "matchMode": "exact",
+      "sourcePath": "back/05811301-Lever-High-Row-plate-loaded_Back_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/machine-high-row"
+    },
+    {
+      "slug": "pendlay-row",
+      "matchMode": "equivalent",
+      "sourcePath": "back/00271301-Barbell-Bent-Over-Row_Back-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/pendlay-row"
+    },
+    {
+      "slug": "single-arm-lat-pulldown",
+      "matchMode": "equivalent",
+      "sourcePath": "back/01501301-Cable-Bar-Lateral-Pulldown_Back_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/single-arm-lat-pulldown"
+    },
+    {
+      "slug": "neutral-grip-seated-row",
+      "matchMode": "exact",
+      "sourcePath": "back/26611301-Cable-Seated-Row-with-V-bar_Back_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/neutral-grip-seated-row"
+    },
+    {
+      "slug": "arnold-press",
+      "matchMode": "prototype",
+      "sourcePath": "shoulder/03341301-Dumbbell-Lateral-Raise_shoulder-AFIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/arnold-press"
+    },
+    {
+      "slug": "landmine-press",
+      "matchMode": "prototype",
+      "sourcePath": "shoulder/03341301-Dumbbell-Lateral-Raise_shoulder-AFIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/landmine-press"
+    },
+    {
+      "slug": "cable-lateral-raise",
+      "matchMode": "exact",
+      "sourcePath": "shoulder/01781301-Cable-Lateral-Raise_shoulder_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/cable-lateral-raise"
+    },
+    {
+      "slug": "front-plate-raise",
+      "matchMode": "prototype",
+      "sourcePath": "shoulder/03341301-Dumbbell-Lateral-Raise_shoulder-AFIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/front-plate-raise"
+    },
+    {
+      "slug": "face-pull",
+      "matchMode": "exact",
+      "sourcePath": "shoulder/3bb2d258a3c908600a52069b9fbe783c.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/face-pull"
+    },
+    {
+      "slug": "machine-shoulder-press",
+      "matchMode": "prototype",
+      "sourcePath": "shoulder/05841301-Lever-Lateral-Raise_shoulder_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/machine-shoulder-press"
+    },
+    {
+      "slug": "rear-delt-cable-fly",
+      "matchMode": "equivalent",
+      "sourcePath": "shoulder/39121301-Cable-Bent-Over-One-Arm-Lateral-Raise_Shoulders_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/rear-delt-cable-fly"
+    },
+    {
+      "slug": "upright-row",
+      "matchMode": "prototype",
+      "sourcePath": "back/26611301-Cable-Seated-Row-with-V-bar_Back_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/upright-row"
+    },
+    {
+      "slug": "preacher-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/16271301-EZ-Barbell-Close-Grip-Preacher-Curl_Upper-Arms-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/preacher-curl"
+    },
+    {
+      "slug": "cable-hammer-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/01651301-Cable-Hammer-Curl-with-rope-attachment-male_Forearms-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/cable-hammer-curl"
+    },
+    {
+      "slug": "bench-dip",
+      "matchMode": "prototype",
+      "sourcePath": "chest/08141301-Triceps-Dip_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/bench-dip"
+    },
+    {
+      "slug": "skull-crusher",
+      "matchMode": "equivalent",
+      "sourcePath": "biceps/06071301-Lever-Triceps-Extension_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/skull-crusher"
+    },
+    {
+      "slug": "overhead-cable-extension",
+      "matchMode": "exact",
+      "sourcePath": "triceps/17221301-Cable-High-Pulley-Overhead-Tricep-Extension_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/overhead-cable-extension"
+    },
+    {
+      "slug": "rope-pushdown",
+      "matchMode": "equivalent",
+      "sourcePath": "triceps/02011301-Cable-Pushdown_Upper-Arms-FIX_7201.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/rope-pushdown"
+    },
+    {
+      "slug": "reverse-curl",
+      "matchMode": "equivalent",
+      "sourcePath": "biceps/04461301-EZ-Barbell-Close-grip-Curl_Upper-Arms_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/reverse-curl"
+    },
+    {
+      "slug": "romanian-deadlift",
+      "matchMode": "equivalent",
+      "sourcePath": "leg/01161301-Barbell-Straight-Leg-Deadlift_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/romanian-deadlift"
+    },
+    {
+      "slug": "front-squat",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/front-squat"
+    },
+    {
+      "slug": "goblet-squat",
+      "matchMode": "equivalent",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/goblet-squat"
+    },
+    {
+      "slug": "bulgarian-split-squat",
+      "matchMode": "equivalent",
+      "sourcePath": "leg/04101301-Dumbbell-Single-Leg-Split-Squat_Thighs-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/bulgarian-split-squat"
+    },
+    {
+      "slug": "hack-squat",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/hack-squat"
+    },
+    {
+      "slug": "hip-thrust",
+      "matchMode": "exact",
+      "sourcePath": "leg/31101301-Smith-Hip-Thrust_Hips_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/hip-thrust"
+    },
+    {
+      "slug": "barbell-lunge",
+      "matchMode": "prototype",
+      "sourcePath": "leg/29601301-Dumbbell-Split-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/barbell-lunge"
+    },
+    {
+      "slug": "step-up",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/step-up"
+    },
+    {
+      "slug": "cable-kickback",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/cable-kickback"
+    },
+    {
+      "slug": "walking-lunge",
+      "matchMode": "equivalent",
+      "sourcePath": "leg/29601301-Dumbbell-Split-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/walking-lunge"
+    },
+    {
+      "slug": "seated-leg-curl",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/seated-leg-curl"
+    },
+    {
+      "slug": "single-leg-leg-press",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/single-leg-leg-press"
+    },
+    {
+      "slug": "sumo-deadlift",
+      "matchMode": "equivalent",
+      "sourcePath": "leg/00321301-Barbell-Deadlift_Hips-FIX2_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/sumo-deadlift"
+    },
+    {
+      "slug": "good-morning",
+      "matchMode": "prototype",
+      "sourcePath": "back/08771301-45-degree-hyperextension-arms-in-front-of-chest_Back_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/good-morning"
+    },
+    {
+      "slug": "standing-band-abduction",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/standing-band-abduction"
+    },
+    {
+      "slug": "dead-bug",
+      "matchMode": "prototype",
+      "sourcePath": "chest/06621301-Push-up-m_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/dead-bug"
+    },
+    {
+      "slug": "hollow-hold",
+      "matchMode": "prototype",
+      "sourcePath": "chest/06621301-Push-up-m_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/hollow-hold"
+    },
+    {
+      "slug": "cable-wood-chop",
+      "matchMode": "prototype",
+      "sourcePath": "abs/24761301-3-4-Sit-up-female_Waist_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/cable-wood-chop"
+    },
+    {
+      "slug": "hanging-knee-raise",
+      "matchMode": "prototype",
+      "sourcePath": "abs/24761301-3-4-Sit-up-female_Waist_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/hanging-knee-raise"
+    },
+    {
+      "slug": "pallof-press",
+      "matchMode": "prototype",
+      "sourcePath": "chest/06621301-Push-up-m_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/pallof-press"
+    },
+    {
+      "slug": "bird-dog",
+      "matchMode": "prototype",
+      "sourcePath": "back/26611301-Cable-Seated-Row-with-V-bar_Back_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/bird-dog"
+    },
+    {
+      "slug": "ab-wheel-rollout",
+      "matchMode": "prototype",
+      "sourcePath": "chest/06621301-Push-up-m_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/ab-wheel-rollout"
+    },
+    {
+      "slug": "reverse-crunch",
+      "matchMode": "prototype",
+      "sourcePath": "abs/24761301-3-4-Sit-up-female_Waist_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/reverse-crunch"
+    },
+    {
+      "slug": "suitcase-carry",
+      "matchMode": "prototype",
+      "sourcePath": "abs/24761301-3-4-Sit-up-female_Waist_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/suitcase-carry"
+    },
+    {
+      "slug": "side-plank-reach",
+      "matchMode": "prototype",
+      "sourcePath": "chest/06621301-Push-up-m_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/side-plank-reach"
+    },
+    {
+      "slug": "kettlebell-swing",
+      "matchMode": "prototype",
+      "sourcePath": "leg/00321301-Barbell-Deadlift_Hips-FIX2_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/kettlebell-swing"
+    },
+    {
+      "slug": "mountain-climber",
+      "matchMode": "prototype",
+      "sourcePath": "chest/06621301-Push-up-m_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/mountain-climber"
+    },
+    {
+      "slug": "jump-squat",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/jump-squat"
+    },
+    {
+      "slug": "burpee",
+      "matchMode": "prototype",
+      "sourcePath": "chest/06621301-Push-up-m_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/burpee"
+    },
+    {
+      "slug": "trx-row",
+      "matchMode": "prototype",
+      "sourcePath": "back/00271301-Barbell-Bent-Over-Row_Back-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/trx-row"
+    },
+    {
+      "slug": "trx-push-up",
+      "matchMode": "exact",
+      "sourcePath": "chest/06621301-Push-up-m_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/trx-push-up"
+    },
+    {
+      "slug": "battle-rope-slams",
+      "matchMode": "prototype",
+      "sourcePath": "shoulder/03341301-Dumbbell-Lateral-Raise_shoulder-AFIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/battle-rope-slams"
+    },
+    {
+      "slug": "medicine-ball-slam",
+      "matchMode": "prototype",
+      "sourcePath": "back/26611301-Cable-Seated-Row-with-V-bar_Back_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/medicine-ball-slam"
+    },
+    {
+      "slug": "box-jump",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/box-jump"
+    },
+    {
+      "slug": "resistance-band-row",
+      "matchMode": "prototype",
+      "sourcePath": "back/00271301-Barbell-Bent-Over-Row_Back-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/resistance-band-row"
+    },
+    {
+      "slug": "resistance-band-chest-press",
+      "matchMode": "prototype",
+      "sourcePath": "chest/00251301-Barbell-Bench-Press_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/resistance-band-chest-press"
+    },
+    {
+      "slug": "glute-bridge",
+      "matchMode": "equivalent",
+      "sourcePath": "leg/31101301-Smith-Hip-Thrust_Hips_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/glute-bridge"
+    },
+    {
+      "slug": "single-leg-glute-bridge",
+      "matchMode": "equivalent",
+      "sourcePath": "leg/31101301-Smith-Hip-Thrust_Hips_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/single-leg-glute-bridge"
+    },
+    {
+      "slug": "bear-crawl",
+      "matchMode": "prototype",
+      "sourcePath": "shoulder/03341301-Dumbbell-Lateral-Raise_shoulder-AFIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/bear-crawl"
+    },
+    {
+      "slug": "farmer-carry",
+      "matchMode": "prototype",
+      "sourcePath": "back/26611301-Cable-Seated-Row-with-V-bar_Back_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/farmer-carry"
+    },
+    {
+      "slug": "standing-calf-raise-on-step",
+      "matchMode": "exact",
+      "sourcePath": "leg/06051301-Lever-Standing-Calf-Raise_Calf_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/standing-calf-raise-on-step"
+    },
+    {
+      "slug": "donkey-calf-raise",
+      "matchMode": "exact",
+      "sourcePath": "leg/11641301-Smith-Calf-Raise-version-2_Calves_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/donkey-calf-raise"
+    },
+    {
+      "slug": "adductor-machine-squeeze",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/adductor-machine-squeeze"
+    },
+    {
+      "slug": "machine-leg-extension-pause",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/machine-leg-extension-pause"
+    },
+    {
+      "slug": "barbell-hip-hinge",
+      "matchMode": "exact",
+      "sourcePath": "leg/00321301-Barbell-Deadlift_Hips-FIX2_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/barbell-hip-hinge"
+    },
+    {
+      "slug": "cross-body-hammer-curl",
+      "matchMode": "exact",
+      "sourcePath": "biceps/03131301-Dumbbell-Hammer-Curl_Forearm_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/cross-body-hammer-curl"
+    },
+    {
+      "slug": "cable-y-raise",
+      "matchMode": "prototype",
+      "sourcePath": "shoulder/01781301-Cable-Lateral-Raise_shoulder_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/cable-y-raise"
+    },
+    {
+      "slug": "paused-push-up",
+      "matchMode": "equivalent",
+      "sourcePath": "chest/06621301-Push-up-m_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/paused-push-up"
+    },
+    {
+      "slug": "seated-dumbbell-clean-to-press",
+      "matchMode": "prototype",
+      "sourcePath": "shoulder/03341301-Dumbbell-Lateral-Raise_shoulder-AFIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/seated-dumbbell-clean-to-press"
+    },
+    {
+      "slug": "renegade-row",
+      "matchMode": "prototype",
+      "sourcePath": "back/02921301-Dumbbell-Bent-over-Row_back_Back_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/renegade-row"
+    },
+    {
+      "slug": "dumbbell-pullover",
+      "matchMode": "prototype",
+      "sourcePath": "chest/02891301-Dumbbell-Bench-Press_Chest_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/dumbbell-pullover"
+    },
+    {
+      "slug": "seated-band-pull-apart",
+      "matchMode": "prototype",
+      "sourcePath": "back/26611301-Cable-Seated-Row-with-V-bar_Back_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/seated-band-pull-apart"
+    },
+    {
+      "slug": "machine-glute-drive",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/machine-glute-drive"
+    },
+    {
+      "slug": "box-step-down",
+      "matchMode": "prototype",
+      "sourcePath": "leg/15551301-Dumbbell-Squat_Thighs_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/box-step-down"
+    },
+    {
+      "slug": "standing-pallof-hold",
+      "matchMode": "prototype",
+      "sourcePath": "chest/06621301-Push-up-m_Chest-FIX_720.gif",
+      "cloudinaryFolder": "sablefit/workout/exercise/standing-pallof-hold"
+    }
+  ]
+}

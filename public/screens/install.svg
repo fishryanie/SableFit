@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="860" viewBox="0 0 420 860" fill="none">
+      <rect x="18" y="18" width="384" height="824" rx="58" fill="#111111"/>
+      <rect x="34" y="34" width="352" height="792" rx="44" fill="#F7F6F3"/>
+      <rect x="154" y="52" width="112" height="12" rx="6" fill="rgba(17, 17, 17, 0.16)"/>
+      <rect x="56" y="92" width="308" height="688" rx="34" fill="url(#screen-bg)"/>
+      <g transform="translate(70 112)">
+        
+    <text x="0" y="16" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="rgba(17, 17, 17, 0.42)" letter-spacing="2.4">INSTALL</text>
+    <text x="0" y="50" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="800" fill="#111111" letter-spacing="-0.8">Home screen ready</text>
+    <rect x="0" y="76" width="280" height="152" rx="32" fill="#FFFFFF" stroke="rgba(17, 17, 17, 0.08)"/>
+    <rect x="20" y="96" width="68" height="68" rx="22" fill="#111111"/>
+    <path d="M44 114C44 107 50 101 58 101H76V114H64C60 114 58 116 58 119C58 122 60 124 64 124H69C80 124 89 133 89 145C89 156 80 165 69 165H44V152H66C70 152 73 149 73 145C73 141 70 138 66 138H58C50 138 44 132 44 124V114Z" fill="#FFFDF8"/>
+    <path d="M80 102L94 96" stroke="#B79B67" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="96" cy="95" r="5" fill="#F2E8D5" stroke="#B79B67" stroke-width="2"/>
+    <text x="104" y="118" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="800" fill="#111111">SableFit</text>
+    <text x="104" y="146" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" fill="rgba(17, 17, 17, 0.56)">Install for reminders, standalone mode, and faster launch.</text>
+    <rect x="0" y="248" width="280" height="188" rx="32" fill="#FFFFFF" stroke="rgba(17, 17, 17, 0.08)"/>
+    <text x="20" y="280" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="rgba(17, 17, 17, 0.42)" letter-spacing="1.8">FIRST-RUN FLOW</text>
+    <rect x="20" y="298" width="240" height="38" rx="19" fill="rgba(17, 17, 17, 0.08)"/>
+    <rect x="20" y="346" width="240" height="38" rx="19" fill="#F2E8D5"/>
+    <rect x="20" y="394" width="240" height="38" rx="19" fill="#DDECE7"/>
+    <text x="36" y="322" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="800" fill="#111111">1. Open Share or browser menu</text>
+    <text x="36" y="370" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="800" fill="#8A6B3A">2. Tap Add to Home Screen</text>
+    <text x="36" y="418" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="800" fill="#5C8578">3. Enable push on the installed app</text>
+  
+      </g>
+      <rect x="168" y="796" width="84" height="6" rx="3" fill="rgba(17, 17, 17, 0.16)"/>
+      <defs>
+        <linearGradient id="screen-bg" x1="210" y1="92" x2="210" y2="780" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#FFFFFF"/>
+          <stop offset="1" stop-color="#F3F0E8"/>
+        </linearGradient>
+      </defs>
+    </svg>

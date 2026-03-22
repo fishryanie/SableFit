@@ -1,0 +1,163 @@
+{
+  "totalEquipments": 26,
+  "providedCount": 0,
+  "derivedCount": 26,
+  "entries": [
+    {
+      "slug": "body-weight",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/body-weight",
+      "cloudinaryFolder": "sablefit/workout/equipment/body-weight"
+    },
+    {
+      "slug": "dumbbell",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/dumbbell",
+      "cloudinaryFolder": "sablefit/workout/equipment/dumbbell"
+    },
+    {
+      "slug": "barbell",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/barbell",
+      "cloudinaryFolder": "sablefit/workout/equipment/barbell"
+    },
+    {
+      "slug": "kettlebell",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/kettlebell",
+      "cloudinaryFolder": "sablefit/workout/equipment/kettlebell"
+    },
+    {
+      "slug": "cable-machine",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/cable-machine",
+      "cloudinaryFolder": "sablefit/workout/equipment/cable-machine"
+    },
+    {
+      "slug": "machine",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/machine",
+      "cloudinaryFolder": "sablefit/workout/equipment/machine"
+    },
+    {
+      "slug": "bench",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/bench",
+      "cloudinaryFolder": "sablefit/workout/equipment/bench"
+    },
+    {
+      "slug": "smith-machine",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/smith-machine",
+      "cloudinaryFolder": "sablefit/workout/equipment/smith-machine"
+    },
+    {
+      "slug": "lat-pulldown-machine",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/lat-pulldown-machine",
+      "cloudinaryFolder": "sablefit/workout/equipment/lat-pulldown-machine"
+    },
+    {
+      "slug": "leg-press-machine",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/leg-press-machine",
+      "cloudinaryFolder": "sablefit/workout/equipment/leg-press-machine"
+    },
+    {
+      "slug": "leg-curl-machine",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/leg-curl-machine",
+      "cloudinaryFolder": "sablefit/workout/equipment/leg-curl-machine"
+    },
+    {
+      "slug": "leg-extension-machine",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/leg-extension-machine",
+      "cloudinaryFolder": "sablefit/workout/equipment/leg-extension-machine"
+    },
+    {
+      "slug": "pull-up-bar",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/pull-up-bar",
+      "cloudinaryFolder": "sablefit/workout/equipment/pull-up-bar"
+    },
+    {
+      "slug": "parallel-bars",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/parallel-bars",
+      "cloudinaryFolder": "sablefit/workout/equipment/parallel-bars"
+    },
+    {
+      "slug": "medicine-ball",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/medicine-ball",
+      "cloudinaryFolder": "sablefit/workout/equipment/medicine-ball"
+    },
+    {
+      "slug": "resistance-bands",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/resistance-bands",
+      "cloudinaryFolder": "sablefit/workout/equipment/resistance-bands"
+    },
+    {
+      "slug": "trx",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/trx",
+      "cloudinaryFolder": "sablefit/workout/equipment/trx"
+    },
+    {
+      "slug": "plyo-box",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/plyo-box",
+      "cloudinaryFolder": "sablefit/workout/equipment/plyo-box"
+    },
+    {
+      "slug": "battle-ropes",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/battle-ropes",
+      "cloudinaryFolder": "sablefit/workout/equipment/battle-ropes"
+    },
+    {
+      "slug": "ez-curl-bar",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/ez-curl-bar",
+      "cloudinaryFolder": "sablefit/workout/equipment/ez-curl-bar"
+    },
+    {
+      "slug": "plate",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/plate",
+      "cloudinaryFolder": "sablefit/workout/equipment/plate"
+    },
+    {
+      "slug": "ab-wheel",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/ab-wheel",
+      "cloudinaryFolder": "sablefit/workout/equipment/ab-wheel"
+    },
+    {
+      "slug": "pec-deck-machine",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/pec-deck-machine",
+      "cloudinaryFolder": "sablefit/workout/equipment/pec-deck-machine"
+    },
+    {
+      "slug": "calf-raise-machine",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/calf-raise-machine",
+      "cloudinaryFolder": "sablefit/workout/equipment/calf-raise-machine"
+    },
+    {
+      "slug": "seated-calf-raise-machine",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/seated-calf-raise-machine",
+      "cloudinaryFolder": "sablefit/workout/equipment/seated-calf-raise-machine"
+    },
+    {
+      "slug": "yoga-mat",
+      "status": "DERIVED",
+      "sourcePath": "internal://equipment-svg/yoga-mat",
+      "cloudinaryFolder": "sablefit/workout/equipment/yoga-mat"
+    }
+  ]
+}
