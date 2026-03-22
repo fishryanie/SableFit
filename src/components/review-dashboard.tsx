@@ -211,7 +211,7 @@ function Stats({
   const { start, end } = getRange(data);
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <div className="grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4 dark:*:data-[slot=card]:bg-card">
       <Card size="sm" className="@container/card bg-gradient-to-t from-primary/5 to-card shadow-xs">
         <CardHeader>
           <CardDescription>{dictionary.showing}</CardDescription>
@@ -468,51 +468,53 @@ export function ReviewDashboard({ locale, data, dictionary }: ReviewDashboardPro
     <div className="flex flex-1 flex-col gap-4 md:gap-6">
       <Stats data={data} dictionary={dictionary} />
 
-      <Card className="shadow-xs">
-        <CardHeader className="gap-4">
-          <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
-            <div className="max-w-3xl">
-              <CardDescription>{dictionary.sections[data.section]}</CardDescription>
-              <CardTitle className="mt-1 text-2xl font-semibold tracking-tight md:text-3xl">{dictionary.title}</CardTitle>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">{dictionary.subtitle}</p>
-            </div>
-
-            <form className="flex w-full max-w-[560px] gap-2">
-              <input type="hidden" name="section" value={data.section} />
-              <div className="relative flex-1">
-                <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  type="search"
-                  name="q"
-                  defaultValue={data.q}
-                  placeholder={dictionary.searchPlaceholder}
-                  className="h-10 pl-10"
-                />
+      <div className="px-4 lg:px-6">
+        <Card className="shadow-xs">
+          <CardHeader className="gap-4">
+            <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+              <div className="max-w-3xl">
+                <CardDescription>{dictionary.sections[data.section]}</CardDescription>
+                <CardTitle className="mt-1 text-2xl font-semibold tracking-tight md:text-3xl">{dictionary.title}</CardTitle>
+                <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">{dictionary.subtitle}</p>
               </div>
-              <Button type="submit" size="lg" className="px-4">
-                <Search className="h-4 w-4" />
-              </Button>
-            </form>
-          </div>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <ReviewSectionTabs
-            section={data.section}
-            sections={dictionary.sections}
-            counts={{
-              exercises: data.summary.exercises.count,
-              muscles: data.summary.muscles.count,
-              equipments: data.summary.equipments.count,
-              goals: data.summary.goals.count,
-              categories: data.summary.categories.count,
-            }}
-          />
-        </CardContent>
-      </Card>
+
+              <form className="flex w-full max-w-[560px] gap-2">
+                <input type="hidden" name="section" value={data.section} />
+                <div className="relative flex-1">
+                  <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    type="search"
+                    name="q"
+                    defaultValue={data.q}
+                    placeholder={dictionary.searchPlaceholder}
+                    className="h-10 pl-10"
+                  />
+                </div>
+                <Button type="submit" size="lg" className="px-4">
+                  <Search className="h-4 w-4" />
+                </Button>
+              </form>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <ReviewSectionTabs
+              section={data.section}
+              sections={dictionary.sections}
+              counts={{
+                exercises: data.summary.exercises.count,
+                muscles: data.summary.muscles.count,
+                equipments: data.summary.equipments.count,
+                goals: data.summary.goals.count,
+                categories: data.summary.categories.count,
+              }}
+            />
+          </CardContent>
+        </Card>
+      </div>
 
       {getSectionItems(data) ? (
         <>
-          <div className="grid gap-3 lg:hidden">
+          <div className="grid gap-3 px-4 lg:hidden">
                 {data.section === "exercises"
                   ? data.exercises.map((item) => (
                       <MobileExerciseCard key={item.id} locale={locale} item={item} />
@@ -535,90 +537,92 @@ export function ReviewDashboard({ locale, data, dictionary }: ReviewDashboardPro
                 ))}
           </div>
 
-          <Card className="hidden shadow-xs lg:flex">
-            <CardHeader className="flex-row items-center justify-between gap-3">
-              <div>
-                <CardTitle>{dictionary.sections[data.section]}</CardTitle>
-                <CardDescription>
-                  {dictionary.showing} {start}-{end} / {data.total} {dictionary.records}
-                </CardDescription>
-              </div>
-              <div className="hidden lg:block" />
-            </CardHeader>
-            <CardContent>
-              <div className="overflow-hidden rounded-lg border">
-                <div className="max-h-[calc(100svh-25rem)] overflow-auto">
-                {data.section === "exercises" ? (
-                  <Table className="min-w-[1180px]">
-                    <TableHeader className="sticky top-0 z-10 bg-muted">
-                      <TableRow>
-                        <TableHead>{dictionary.item}</TableHead>
-                        <TableHead>{dictionary.focus}</TableHead>
-                        <TableHead>{dictionary.equipment}</TableHead>
-                        <TableHead>{dictionary.categories}</TableHead>
-                        <TableHead>{dictionary.media}</TableHead>
-                        <TableHead>{dictionary.source}</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {data.exercises.map((item) => (
-                        <ExerciseTableRow key={item.id} locale={locale} item={item} dictionary={dictionary} />
-                      ))}
-                    </TableBody>
-                  </Table>
-                ) : (
-                  <Table className="min-w-[980px]">
-                    <TableHeader className="sticky top-0 z-10 bg-muted">
-                      <TableRow>
-                        <TableHead>{dictionary.item}</TableHead>
-                        <TableHead>{dictionary.details}</TableHead>
-                        <TableHead>{dictionary.category}</TableHead>
-                        <TableHead>{dictionary.linkedExercises}</TableHead>
-                        <TableHead>{dictionary.media}</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {(data.section === "muscles"
-                        ? data.muscles
-                        : data.section === "equipments"
-                          ? data.equipments
-                          : data.section === "goals"
-                            ? data.goals
-                            : data.categories
-                      ).map((item) => (
-                        <ReferenceTableRow
-                          key={item.id}
-                          locale={locale}
-                          item={item}
-                          showImage={data.section === "muscles" || data.section === "equipments"}
-                        />
-                      ))}
-                    </TableBody>
-                  </Table>
-                )}
+          <div className="hidden px-4 lg:block lg:px-6">
+            <Card className="overflow-hidden shadow-xs">
+              <CardHeader className="flex-row items-center justify-between gap-3">
+                <div>
+                  <CardTitle>{dictionary.sections[data.section]}</CardTitle>
+                  <CardDescription>
+                    {dictionary.showing} {start}-{end} / {data.total} {dictionary.records}
+                  </CardDescription>
                 </div>
-              </div>
-            </CardContent>
-            <CardFooter className="justify-between border-t bg-muted/30">
-              <Pagination
-                section={data.section}
-                q={data.q}
-                page={data.page}
-                totalPages={data.totalPages}
-                pageSize={data.pageSize}
-                total={data.total}
-                dictionary={dictionary}
-              />
-            </CardFooter>
-          </Card>
+                <div className="hidden lg:block" />
+              </CardHeader>
+              <CardContent className="p-0">
+                <div className="max-h-[calc(100svh-24rem)] overflow-auto border-t">
+                  {data.section === "exercises" ? (
+                    <Table className="min-w-[1180px]">
+                      <TableHeader className="[&_tr]:bg-background/95 [&_tr]:backdrop-blur supports-[backdrop-filter]:[&_tr]:bg-background/80">
+                        <TableRow className="hover:bg-transparent">
+                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">{dictionary.item}</TableHead>
+                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">{dictionary.focus}</TableHead>
+                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">{dictionary.equipment}</TableHead>
+                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">{dictionary.categories}</TableHead>
+                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">{dictionary.media}</TableHead>
+                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">{dictionary.source}</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {data.exercises.map((item) => (
+                          <ExerciseTableRow key={item.id} locale={locale} item={item} dictionary={dictionary} />
+                        ))}
+                      </TableBody>
+                    </Table>
+                  ) : (
+                    <Table className="min-w-[980px]">
+                      <TableHeader className="[&_tr]:bg-background/95 [&_tr]:backdrop-blur supports-[backdrop-filter]:[&_tr]:bg-background/80">
+                        <TableRow className="hover:bg-transparent">
+                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">{dictionary.item}</TableHead>
+                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">{dictionary.details}</TableHead>
+                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">{dictionary.category}</TableHead>
+                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">{dictionary.linkedExercises}</TableHead>
+                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">{dictionary.media}</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {(data.section === "muscles"
+                          ? data.muscles
+                          : data.section === "equipments"
+                            ? data.equipments
+                            : data.section === "goals"
+                              ? data.goals
+                              : data.categories
+                        ).map((item) => (
+                          <ReferenceTableRow
+                            key={item.id}
+                            locale={locale}
+                            item={item}
+                            showImage={data.section === "muscles" || data.section === "equipments"}
+                          />
+                        ))}
+                      </TableBody>
+                    </Table>
+                  )}
+                </div>
+              </CardContent>
+              <CardFooter className="justify-between border-t bg-muted/30">
+                <Pagination
+                  section={data.section}
+                  q={data.q}
+                  page={data.page}
+                  totalPages={data.totalPages}
+                  pageSize={data.pageSize}
+                  total={data.total}
+                  dictionary={dictionary}
+                />
+              </CardFooter>
+            </Card>
+          </div>
         </>
       ) : (
-        <Card className="shadow-xs">
-          <CardContent className="py-10 text-center">
-            <h2 className="font-heading text-2xl font-semibold">{dictionary.noResultsTitle}</h2>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">{dictionary.noResultsBody}</p>
-          </CardContent>
-        </Card>
+        <div className="px-4 lg:px-6">
+          <Card className="shadow-xs">
+            <CardContent className="py-10 text-center">
+              <h2 className="font-heading text-2xl font-semibold">{dictionary.noResultsTitle}</h2>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">{dictionary.noResultsBody}</p>
+            </CardContent>
+          </Card>
+        </div>
       )}
     </div>
   );
