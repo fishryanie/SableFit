@@ -18,6 +18,8 @@ export function BrandLockup({
   wordmarkWidth = 146,
   className = "",
 }: BrandLockupProps) {
+  const wordmarkHeight = Math.round((wordmarkWidth * 104) / 306);
+
   const content = (
     <span className={`inline-flex items-center gap-3 ${className}`.trim()}>
       <Image
@@ -27,16 +29,18 @@ export function BrandLockup({
         height={markSize}
         priority={priority}
         unoptimized
-        className="h-auto w-auto"
+        className="shrink-0"
+        style={{ width: `${markSize}px`, height: `${markSize}px` }}
       />
       <Image
-        src={inverse ? "/brand/sablefit-wordmark-inverse.svg" : "/brand/sablefit-wordmark.svg"}
+        src={inverse ? "/brand/sablefit-wordmark-text-inverse.svg" : "/brand/sablefit-wordmark-text.svg"}
         alt="SableFit"
         width={wordmarkWidth}
-        height={36}
+        height={wordmarkHeight}
         priority={priority}
         unoptimized
-        className="h-auto w-auto"
+        className="shrink-0"
+        style={{ width: `${wordmarkWidth}px`, height: "auto" }}
       />
     </span>
   );

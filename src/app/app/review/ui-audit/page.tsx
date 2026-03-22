@@ -1,9 +1,13 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { UiAuditPanel } from "@/components/ui-audit-panel";
-import { requireAuthSession } from "@/lib/auth";
+
+export const metadata: Metadata = {
+  title: "AI UI Audit",
+  description: "Local AI-powered screenshot review for SableFit admin and dashboard UI.",
+};
 
 export default async function UiAuditPage() {
-  await requireAuthSession();
   const t = await getTranslations("uiAuditPage");
 
   return (

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="306" height="104" viewBox="0 0 306 104" fill="none">
+  <text
+    x="0"
+    y="52"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="46"
+    font-weight="800"
+    fill="#111111"
+    letter-spacing="-1.6"
+  >
+    SableFit
+  </text>
+  <text
+    x="0"
+    y="80"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="13"
+    font-weight="700"
+    fill="rgba(17, 17, 17, 0.56)"
+    letter-spacing="3.2"
+  >
+    VISUAL WORKOUT PLANNER
+  </text>
+</svg>
