@@ -105,6 +105,7 @@
     "anyMuscle": "Mọi nhóm cơ",
     "anyEquipment": "Mọi dụng cụ",
     "anyLevel": "Mọi cấp độ",
+    "anyMovementType": "Mọi kiểu chuyển động",
     "apply": "Lọc kết quả",
     "emptyTitle": "Chưa tìm thấy bài tập phù hợp",
     "emptyBody": "Thử tìm rộng hơn hoặc bỏ bớt một bộ lọc để thấy thêm bài tập.",
@@ -122,7 +123,12 @@
     "level": "Cấp độ",
     "source": "Nguồn",
     "movementFrames": "Các pha chuyển động",
-    "slowMotion": "GIF chuyển động chậm"
+    "slowMotion": "GIF chuyển động chậm",
+    "movementType": "Kiểu chuyển động",
+    "movementTypes": {
+      "dynamic": "Động",
+      "isometric": "Isometric"
+    }
   },
   "inboxPage": {
     "title": "Hộp thư",
@@ -157,6 +163,7 @@
     "reviewStatus": "Trạng thái duyệt",
     "level": "Cấp độ",
     "focus": "Nhóm cơ chính",
+    "secondaryFocus": "Nhóm cơ phụ",
     "equipment": "Dụng cụ",
     "goals": "Mục tiêu",
     "categories": "Phân loại",
@@ -168,9 +175,32 @@
     "next": "Sau",
     "openExercise": "Mở bài tập",
     "showing": "Đang xem",
+    "totalRecords": "Tổng bản ghi",
     "item": "Mục dữ liệu",
     "media": "Media",
     "details": "Chi tiết",
+    "filtersTitle": "Bộ lọc bài tập",
+    "muscleCategoryFilter": "Loại nhóm cơ",
+    "applyFilters": "Áp dụng bộ lọc",
+    "activeFilters": "Bộ lọc đang dùng",
+    "resetFilters": "Đặt lại",
+    "slowMotion": "GIF chuyển động chậm",
+    "movementFrames": "Các pha chuyển động",
+    "gifReady": "Có GIF",
+    "movementType": "Kiểu chuyển động",
+    "movementTypeDynamicHelp": "Dynamic là bài tập có chuyển động qua biên độ, thường gồm pha eccentric và concentric.",
+    "movementTypeIsometricHelp": "Isometric là bài tập giữ nguyên tư thế và siết cơ, gần như không có chuyển động qua biên độ.",
+    "movementTypes": {
+      "dynamic": "Động",
+      "isometric": "Isometric"
+    },
+    "allMovementTypes": "Tất cả kiểu chuyển động",
+    "allLevels": "Tất cả cấp độ",
+    "allMuscleCategories": "Tất cả loại nhóm cơ",
+    "allMuscles": "Tất cả nhóm cơ",
+    "allEquipments": "Tất cả dụng cụ",
+    "allGoals": "Tất cả mục tiêu",
+    "allCategories": "Tất cả danh mục",
     "sections": {
       "exercises": "Bài tập",
       "muscles": "Nhóm cơ",

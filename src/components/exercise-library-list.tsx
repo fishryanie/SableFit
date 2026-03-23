@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ChevronRight, Info } from "lucide-react";
 import { ExerciseMediaFigure } from "@/components/exercise-media-figure";
+import { ExerciseThumbnailPreview } from "@/components/exercise-media-preview-sheet";
 import { getLocalizedText } from "@/lib/localized";
 import type { ExerciseCatalogItem } from "@/lib/data";
 import type { AppLocale } from "@/types/domain";
@@ -14,6 +15,13 @@ type ExerciseLibraryListProps = {
     emptyBody: string;
     openDetail: string;
     resultLabel: string;
+    movementType: string;
+    movementTypes: {
+      dynamic: string;
+      isometric: string;
+    };
+    slowMotion: string;
+    movementFrames: string;
   };
 };
 
@@ -61,8 +69,21 @@ export function ExerciseLibraryList({
               className="rounded-[30px] bg-background-secondary px-3 py-3 shadow-[0_12px_28px_rgba(17,17,17,0.05)]"
             >
               <div className="flex items-center gap-3">
-                <Link href={href} className="flex min-w-0 flex-1 items-center gap-3">
-                  <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-[26px] bg-white p-2 shadow-[0_10px_24px_rgba(17,17,17,0.06)]">
+                <ExerciseThumbnailPreview
+                  locale={locale}
+                  title={getLocalizedText(locale, exercise.name)}
+                  alt={alt}
+                  media={exercise.media}
+                  movementType={exercise.movementType}
+                  dictionary={{
+                    movementTypeLabel: dictionary.movementType,
+                    movementTypes: dictionary.movementTypes,
+                    motionLabel: dictionary.slowMotion,
+                    framesLabel: dictionary.movementFrames,
+                  }}
+                  className="shrink-0"
+                >
+                  <div className="flex h-24 w-24 items-center justify-center rounded-[26px] bg-white p-2 shadow-[0_10px_24px_rgba(17,17,17,0.06)]">
                     <ExerciseMediaFigure
                       media={exercise.media}
                       alt={alt}
@@ -70,6 +91,9 @@ export function ExerciseLibraryList({
                       className="h-full w-full object-contain"
                     />
                   </div>
+                </ExerciseThumbnailPreview>
+
+                <Link href={href} className="flex min-w-0 flex-1 items-center gap-3">
 
                   <div className="min-w-0">
                     <h2 className="line-clamp-2 font-heading text-[1.45rem] font-semibold leading-[1.02] text-foreground">

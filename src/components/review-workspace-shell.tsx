@@ -95,16 +95,17 @@ function ReviewWorkspaceFrame({
 }) {
   return (
     <SidebarProvider
-      className="review-neutral-theme"
+      className="review-neutral-theme fixed inset-0 overflow-hidden"
       style={
         {
-          "--sidebar-width": "calc(var(--spacing) * 72)",
-          "--header-height": "calc(var(--spacing) * 12)",
+          "--sidebar-width": "calc(var(--spacing) * 64)",
+          "--header-height": "calc(var(--spacing) * 12 + 1px)",
         } as React.CSSProperties
       }
     >
       <ReviewAppSidebar
-        variant="inset"
+        variant="sidebar"
+        collapsible="none"
         user={user}
         dictionary={{
           auditAction: dictionary.auditAction,
@@ -119,16 +120,15 @@ function ReviewWorkspaceFrame({
           sections: dictionary.sections,
         }}
       />
-      <SidebarInset>
+      <SidebarInset className="h-full min-h-0 w-auto min-w-0 overflow-hidden">
         <ReviewSiteHeader
-          reviewTitle={dictionary.reviewTitle}
           pageLabel={pageLabel}
           auditAction={dictionary.auditAction}
           isUiAudit={isUiAudit}
         />
-        <div className="flex flex-1 flex-col">
-          <div className="@container/main flex flex-1 flex-col gap-2">
-            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+        <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
+          <div className="@container/main flex min-h-0 flex-1 flex-col overflow-y-auto">
+            <div className="flex flex-col gap-4 px-4 py-4 md:gap-6 md:px-5 md:py-6 lg:px-6">
               {children}
             </div>
           </div>

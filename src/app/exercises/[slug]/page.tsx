@@ -57,6 +57,11 @@ export default async function MarketingExerciseDetailPage({
         source: t("source"),
         movementFrames: t("movementFrames"),
         slowMotion: t("slowMotion"),
+        movementType: t("movementType"),
+        movementTypes: {
+          dynamic: t("movementTypes.dynamic"),
+          isometric: t("movementTypes.isometric"),
+        },
       }}
       footerCta={{
         href: "/auth/phone",

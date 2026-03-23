@@ -1,23 +1,21 @@
 import type { ComponentType } from "react";
-import { Accessibility, ChevronDown, Dumbbell, Search, SlidersHorizontal } from "lucide-react";
-import type { AppLocale } from "@/types/domain";
-import { getLocalizedText } from "@/lib/localized";
-import type { NamedReference } from "@/lib/data";
-
+import { Accessibility, ChevronDown, Dumbbell, Search, SlidersHorizontal, StretchHorizontal } from "lucide-react";
 type ExerciseFilterFormProps = {
-  locale: AppLocale;
   searchValue: string;
   muscleValue: string;
   equipmentValue: string;
   levelValue: string;
-  muscles: NamedReference[];
-  equipments: NamedReference[];
-  levels: NamedReference[];
+  movementTypeValue: string;
+  muscles: Array<{ value: string; label: string }>;
+  equipments: Array<{ value: string; label: string }>;
+  levels: Array<{ value: string; label: string }>;
+  movementTypes: Array<{ value: string; label: string }>;
   dictionary: {
     searchPlaceholder: string;
     anyMuscle: string;
     anyEquipment: string;
     anyLevel: string;
+    anyMovementType: string;
     apply: string;
   };
 };
@@ -27,8 +25,7 @@ type FilterPillProps = {
   name: string;
   value: string;
   defaultLabel: string;
-  options: NamedReference[];
-  locale: AppLocale;
+  options: Array<{ value: string; label: string }>;
 };
 
 function FilterPill({
@@ -37,7 +34,6 @@ function FilterPill({
   value,
   defaultLabel,
   options,
-  locale,
 }: FilterPillProps) {
   return (
     <label className="relative min-w-[148px] flex-1">
@@ -49,8 +45,8 @@ function FilterPill({
       >
         <option value="">{defaultLabel}</option>
         {options.map((item) => (
-          <option key={item.id} value={item.slug}>
-            {getLocalizedText(locale, item.name)}
+          <option key={item.value} value={item.value}>
+            {item.label}
           </option>
         ))}
       </select>
@@ -60,14 +56,15 @@ function FilterPill({
 }
 
 export function ExerciseFilterForm({
-  locale,
   searchValue,
   muscleValue,
   equipmentValue,
   levelValue,
+  movementTypeValue,
   muscles,
   equipments,
   levels,
+  movementTypes,
   dictionary,
 }: ExerciseFilterFormProps) {
   return (
@@ -93,7 +90,6 @@ export function ExerciseFilterForm({
           value={muscleValue}
           defaultLabel={dictionary.anyMuscle}
           options={muscles}
-          locale={locale}
         />
         <FilterPill
           icon={Dumbbell}
@@ -101,7 +97,6 @@ export function ExerciseFilterForm({
           value={equipmentValue}
           defaultLabel={dictionary.anyEquipment}
           options={equipments}
-          locale={locale}
         />
         <FilterPill
           icon={SlidersHorizontal}
@@ -109,7 +104,13 @@ export function ExerciseFilterForm({
           value={levelValue}
           defaultLabel={dictionary.anyLevel}
           options={levels}
-          locale={locale}
+        />
+        <FilterPill
+          icon={StretchHorizontal}
+          name="movementType"
+          value={movementTypeValue}
+          defaultLabel={dictionary.anyMovementType}
+          options={movementTypes}
         />
       </div>
 

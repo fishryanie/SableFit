@@ -105,6 +105,7 @@
     "anyMuscle": "Any Muscle",
     "anyEquipment": "Any Equipment",
     "anyLevel": "Any Level",
+    "anyMovementType": "Any Movement Type",
     "apply": "Apply filters",
     "emptyTitle": "No exercises found",
     "emptyBody": "Try a broader search or clear one of the filters to reveal more movements.",
@@ -122,7 +123,12 @@
     "level": "Level",
     "source": "Source",
     "movementFrames": "Movement frames",
-    "slowMotion": "Slow motion"
+    "slowMotion": "Slow motion",
+    "movementType": "Movement type",
+    "movementTypes": {
+      "dynamic": "Dynamic",
+      "isometric": "Isometric"
+    }
   },
   "inboxPage": {
     "title": "Inbox",
@@ -157,6 +163,7 @@
     "reviewStatus": "Review status",
     "level": "Level",
     "focus": "Focus",
+    "secondaryFocus": "Secondary muscles",
     "equipment": "Equipment",
     "goals": "Goals",
     "categories": "Categories",
@@ -168,9 +175,32 @@
     "next": "Next",
     "openExercise": "Open exercise",
     "showing": "Showing",
+    "totalRecords": "Total records",
     "item": "Item",
     "media": "Media",
     "details": "Details",
+    "filtersTitle": "Exercise filters",
+    "muscleCategoryFilter": "Muscle group type",
+    "applyFilters": "Apply filters",
+    "activeFilters": "Active filters",
+    "resetFilters": "Reset",
+    "slowMotion": "Slow motion",
+    "movementFrames": "Movement frames",
+    "gifReady": "GIF ready",
+    "movementType": "Movement type",
+    "movementTypeDynamicHelp": "Dynamic means the exercise moves through a range of motion, usually with eccentric and concentric phases.",
+    "movementTypeIsometricHelp": "Isometric means the exercise holds one position under tension with little or no range-of-motion movement.",
+    "movementTypes": {
+      "dynamic": "Dynamic",
+      "isometric": "Isometric"
+    },
+    "allMovementTypes": "All movement types",
+    "allLevels": "All levels",
+    "allMuscleCategories": "All muscle group types",
+    "allMuscles": "All muscles",
+    "allEquipments": "All equipments",
+    "allGoals": "All goals",
+    "allCategories": "All categories",
     "sections": {
       "exercises": "Exercises",
       "muscles": "Muscles",

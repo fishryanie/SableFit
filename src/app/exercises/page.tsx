@@ -1,10 +1,17 @@
+import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { BrandLockup } from "@/components/brand-lockup";
 import { ExerciseFilterForm } from "@/components/exercise-filter-form";
 import { ExerciseLibraryList } from "@/components/exercise-library-list";
 import { LocaleSwitcher } from "@/components/locale-switcher";
+import { getLocalizedText } from "@/lib/localized";
 import { getPublicExerciseCatalog, getShellBootstrap } from "@/lib/data";
 import type { AppLocale } from "@/types/domain";
+
+export const metadata: Metadata = {
+  title: "Exercise Library Preview",
+  description: "Search the SableFit exercise catalog by muscle, equipment, level, and movement type.",
+};
 
 export default async function MarketingExercisesPage({
   searchParams,
@@ -16,12 +23,13 @@ export default async function MarketingExercisesPage({
   const equipment = typeof params?.equipment === "string" ? params.equipment : "";
   const level = typeof params?.level === "string" ? params.level : "";
   const muscle = typeof params?.muscle === "string" ? params.muscle : "";
+  const movementType = typeof params?.movementType === "string" ? params.movementType : "";
 
   const locale = (await getLocale()) as AppLocale;
   const [t, ui, catalog, bootstrap] = await Promise.all([
     getTranslations("marketingExercises"),
     getTranslations("exerciseCatalog"),
-    getPublicExerciseCatalog({ q, equipment, level, muscle }),
+    getPublicExerciseCatalog({ q, equipment, level, muscle, movementType }),
     getShellBootstrap(),
   ]);
 
@@ -42,19 +50,33 @@ export default async function MarketingExercisesPage({
 
           <div className="mt-4">
             <ExerciseFilterForm
-              locale={locale}
               searchValue={q}
               muscleValue={muscle}
               equipmentValue={equipment}
               levelValue={level}
-              muscles={bootstrap.muscles}
-              equipments={bootstrap.equipments}
-              levels={bootstrap.levels}
+              movementTypeValue={movementType}
+              muscles={bootstrap.muscles.map((item) => ({
+                value: item.slug,
+                label: getLocalizedText(locale, item.name),
+              }))}
+              equipments={bootstrap.equipments.map((item) => ({
+                value: item.slug,
+                label: getLocalizedText(locale, item.name),
+              }))}
+              levels={bootstrap.levels.map((item) => ({
+                value: item.slug,
+                label: getLocalizedText(locale, item.name),
+              }))}
+              movementTypes={[
+                { value: "DYNAMIC", label: ui("movementTypes.dynamic") },
+                { value: "ISOMETRIC", label: ui("movementTypes.isometric") },
+              ]}
               dictionary={{
                 searchPlaceholder: ui("searchPlaceholder"),
                 anyMuscle: ui("anyMuscle"),
                 anyEquipment: ui("anyEquipment"),
                 anyLevel: ui("anyLevel"),
+                anyMovementType: ui("anyMovementType"),
                 apply: ui("apply"),
               }}
             />
@@ -71,6 +93,13 @@ export default async function MarketingExercisesPage({
               emptyBody: ui("emptyBody"),
               openDetail: ui("openDetail"),
               resultLabel: ui("resultLabel"),
+              movementType: ui("movementType"),
+              movementTypes: {
+                dynamic: ui("movementTypes.dynamic"),
+                isometric: ui("movementTypes.isometric"),
+              },
+              slowMotion: ui("slowMotion"),
+              movementFrames: ui("movementFrames"),
             }}
           />
         </div>

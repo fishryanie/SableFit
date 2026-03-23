@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import {
@@ -13,7 +14,6 @@ import {
   Target,
   Waves,
 } from "lucide-react";
-import { BrandLockup } from "@/components/brand-lockup";
 import { ReviewSidebarUser } from "@/components/review-sidebar-user";
 import {
   Sidebar,
@@ -64,7 +64,8 @@ export function ReviewAppSidebar({
 }: ReviewAppSidebarProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const activeSection = (searchParams.get("section") as ReviewSection | null) ?? "exercises";
+  const activeSection =
+    (searchParams.get("section") as ReviewSection | null) ?? "exercises";
   const isUiAudit = pathname.startsWith("/app/review/ui-audit");
 
   const workspaceItems = [
@@ -74,7 +75,10 @@ export function ReviewAppSidebar({
     { href: "/app/settings", label: dictionary.nav.settings, icon: Settings2 },
   ];
 
-  const collectionItems: Array<{ section: ReviewSection; icon: typeof LayoutGrid }> = [
+  const collectionItems: Array<{
+    section: ReviewSection;
+    icon: typeof LayoutGrid;
+  }> = [
     { section: "exercises", icon: LayoutGrid },
     { section: "muscles", icon: Waves },
     { section: "equipments", icon: Dumbbell },
@@ -83,17 +87,21 @@ export function ReviewAppSidebar({
   ];
 
   return (
-    <Sidebar collapsible="offcanvas" {...props}>
-      <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:p-1.5!">
-              <Link href="/app/review">
-                <BrandLockup markSize={26} wordmarkWidth={116} />
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+    <Sidebar
+      className="sticky top-0 h-screen max-h-screen self-start overflow-hidden border-r"
+      {...props}
+    >
+      <SidebarHeader className="h-(--header-height) flex-row items-center gap-0 border-b p-0 px-4">
+        <Link href="/app/review" className="inline-flex items-center">
+          <Image
+            src="/brand/sablefit-wordmark.svg"
+            alt="SableFit"
+            width={148}
+            height={37}
+            unoptimized
+            className="block h-auto w-[148px] max-w-full shrink-0"
+          />
+        </Link>
       </SidebarHeader>
 
       <SidebarContent>
@@ -106,11 +114,16 @@ export function ReviewAppSidebar({
                 const isActive =
                   item.href === "/app/review"
                     ? pathname.startsWith("/app/review")
-                    : pathname === item.href || pathname.startsWith(`${item.href}/`);
+                    : pathname === item.href ||
+                      pathname.startsWith(`${item.href}/`);
 
                 return (
                   <SidebarMenuItem key={item.href}>
-                    <SidebarMenuButton asChild isActive={isActive} tooltip={item.label}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={isActive}
+                      tooltip={item.label}
+                    >
                       <Link href={item.href}>
                         <Icon />
                         <span>{item.label}</span>
@@ -129,11 +142,18 @@ export function ReviewAppSidebar({
             <SidebarMenu>
               {collectionItems.map((item) => {
                 const Icon = item.icon;
-                const isActive = !isUiAudit && pathname === "/app/review" && activeSection === item.section;
+                const isActive =
+                  !isUiAudit &&
+                  pathname === "/app/review" &&
+                  activeSection === item.section;
 
                 return (
                   <SidebarMenuItem key={item.section}>
-                    <SidebarMenuButton asChild isActive={isActive} tooltip={dictionary.sections[item.section]}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={isActive}
+                      tooltip={dictionary.sections[item.section]}
+                    >
                       <Link href={buildReviewHref(item.section)}>
                         <Icon />
                         <span>{dictionary.sections[item.section]}</span>
@@ -151,7 +171,11 @@ export function ReviewAppSidebar({
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isUiAudit} tooltip={dictionary.auditAction}>
+                <SidebarMenuButton
+                  asChild
+                  isActive={isUiAudit}
+                  tooltip={dictionary.auditAction}
+                >
                   <Link href="/app/review/ui-audit">
                     <Sparkles />
                     <span>{dictionary.auditAction}</span>

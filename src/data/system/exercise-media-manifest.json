@@ -1362,64 +1362,6 @@
     "videoUrl": "",
     "videoPosterUrl": ""
   },
-  "trx-rows": {
-    "style": "ANATOMY",
-    "status": "READY",
-    "thumbnailUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-rows/phase-01.webp?_a=BAMAOGDh0",
-    "detailUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-rows/phase-02.webp?_a=BAMAOGDh0",
-    "keyframes": [
-      {
-        "order": 1,
-        "label": {
-          "en": "Key pose 1",
-          "vi": "Tư thế chính 1"
-        },
-        "url": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-rows/phase-01.webp?_a=BAMAOGDh0"
-      },
-      {
-        "order": 2,
-        "label": {
-          "en": "Key pose 2",
-          "vi": "Tư thế chính 2"
-        },
-        "url": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-rows/phase-02.webp?_a=BAMAOGDh0"
-      }
-    ],
-    "animationUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-rows/motion-slow.gif?_a=BAMAOGDh0",
-    "sourceProvider": "CLOUDINARY",
-    "sourcePath": "sablefit/workout/exercise/trx-rows",
-    "videoUrl": "",
-    "videoPosterUrl": ""
-  },
-  "trx-push-ups": {
-    "style": "ANATOMY",
-    "status": "READY",
-    "thumbnailUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-push-ups/phase-01.webp?_a=BAMAOGDh0",
-    "detailUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-push-ups/phase-02.webp?_a=BAMAOGDh0",
-    "keyframes": [
-      {
-        "order": 1,
-        "label": {
-          "en": "Key pose 1",
-          "vi": "Tư thế chính 1"
-        },
-        "url": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-push-ups/phase-01.webp?_a=BAMAOGDh0"
-      },
-      {
-        "order": 2,
-        "label": {
-          "en": "Key pose 2",
-          "vi": "Tư thế chính 2"
-        },
-        "url": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-push-ups/phase-02.webp?_a=BAMAOGDh0"
-      }
-    ],
-    "animationUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-push-ups/motion-slow.gif?_a=BAMAOGDh0",
-    "sourceProvider": "CLOUDINARY",
-    "sourcePath": "sablefit/workout/exercise/trx-push-ups",
-    "videoUrl": "",
-    "videoPosterUrl": ""
-  },
   "triceps-dip": {
     "style": "ANATOMY",
     "status": "READY",
@@ -4613,60 +4555,64 @@
   "trx-row": {
     "style": "ANATOMY",
     "status": "READY",
-    "thumbnailUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-row/phase-01.webp?_a=BAMAOGDh0",
-    "detailUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-row/phase-02.webp?_a=BAMAOGDh0",
+    "thumbnailUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774258306/sablefit/workout/exercise/trx-row/phase-01.webp",
+    "detailUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774258306/sablefit/workout/exercise/trx-row/phase-02.webp",
     "keyframes": [
       {
         "order": 1,
+        "phase": "ECCENTRIC",
         "label": {
-          "en": "Key pose 1",
-          "vi": "Tư thế chính 1"
+          "en": "Eccentric",
+          "vi": "Pha eccentric"
         },
-        "url": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-row/phase-01.webp?_a=BAMAOGDh0"
+        "url": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774258306/sablefit/workout/exercise/trx-row/phase-01.webp"
       },
       {
         "order": 2,
+        "phase": "CONCENTRIC",
         "label": {
-          "en": "Key pose 2",
-          "vi": "Tư thế chính 2"
+          "en": "Concentric",
+          "vi": "Pha concentric"
         },
-        "url": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-row/phase-02.webp?_a=BAMAOGDh0"
+        "url": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774258306/sablefit/workout/exercise/trx-row/phase-02.webp"
       }
     ],
-    "animationUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-row/motion-slow.gif?_a=BAMAOGDh0",
-    "sourceProvider": "CLOUDINARY",
-    "sourcePath": "sablefit/workout/exercise/trx-row",
+    "animationUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774258307/sablefit/workout/exercise/trx-row/motion-slow.gif",
     "videoUrl": "",
-    "videoPosterUrl": ""
+    "videoPosterUrl": "",
+    "sourceProvider": "CLOUDINARY",
+    "sourcePath": "sablefit/workout/exercise/trx-row"
   },
   "trx-push-up": {
     "style": "ANATOMY",
     "status": "READY",
-    "thumbnailUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-push-up/phase-01.webp?_a=BAMAOGDh0",
-    "detailUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-push-up/phase-02.webp?_a=BAMAOGDh0",
+    "thumbnailUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774258303/sablefit/workout/exercise/trx-push-up/phase-01.webp",
+    "detailUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774258302/sablefit/workout/exercise/trx-push-up/phase-02.webp",
     "keyframes": [
       {
         "order": 1,
+        "phase": "ECCENTRIC",
         "label": {
-          "en": "Key pose 1",
-          "vi": "Tư thế chính 1"
+          "en": "Eccentric",
+          "vi": "Pha eccentric"
         },
-        "url": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-push-up/phase-01.webp?_a=BAMAOGDh0"
+        "url": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774258303/sablefit/workout/exercise/trx-push-up/phase-01.webp"
       },
       {
         "order": 2,
+        "phase": "CONCENTRIC",
         "label": {
-          "en": "Key pose 2",
-          "vi": "Tư thế chính 2"
+          "en": "Concentric",
+          "vi": "Pha concentric"
         },
-        "url": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-push-up/phase-02.webp?_a=BAMAOGDh0"
+        "url": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774258302/sablefit/workout/exercise/trx-push-up/phase-02.webp"
       }
     ],
-    "animationUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/trx-push-up/motion-slow.gif?_a=BAMAOGDh0",
-    "sourceProvider": "CLOUDINARY",
-    "sourcePath": "sablefit/workout/exercise/trx-push-up",
+    "animationUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774258304/sablefit/workout/exercise/trx-push-up/motion-slow.gif",
     "videoUrl": "",
-    "videoPosterUrl": ""
+    "videoPosterUrl": "",
+    "sourceProvider": "CLOUDINARY",
+    "sourcePath": "sablefit/workout/exercise/trx-push-up"
   },
   "battle-rope-slams": {
     "style": "ANATOMY",

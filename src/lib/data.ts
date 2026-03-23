@@ -10,18 +10,21 @@ import {
   ExerciseCategory,
   ExerciseGoal,
   ExerciseLevel,
+  MuscleCategory,
   Muscle,
 } from "@/models/catalog";
 import { Notification, WorkoutOccurrence, WorkoutPlan, WorkoutSession } from "@/models/workouts";
-import type { ExerciseMedia, LocalizedString } from "@/types/domain";
+import type { ExerciseMedia, ExerciseMovementType, LocalizedString } from "@/types/domain";
 
-type ExerciseFilters = {
+export type ExerciseFilters = {
   q?: string;
   equipment?: string;
   level?: string;
   muscle?: string;
+  muscleCategory?: string;
   goal?: string;
   category?: string;
+  movementType?: string;
 };
 
 export type NamedReference = {
@@ -67,6 +70,7 @@ export type ExerciseCatalogItem = {
   primaryMuscles: NamedReference[];
   secondaryMuscles: NamedReference[];
   level: NamedReference | null;
+  movementType: ExerciseMovementType;
 };
 
 export type ExerciseDetail = ExerciseCatalogItem & {
@@ -74,6 +78,7 @@ export type ExerciseDetail = ExerciseCatalogItem & {
   goals: NamedReference[];
   categories: NamedReference[];
   movementPattern: string;
+  movementType: ExerciseMovementType;
   source: string;
   sourceUrl: string;
 };
@@ -121,8 +126,10 @@ export type ReviewExerciseItem = {
   level: NamedReference | null;
   equipment: NamedReference[];
   primaryMuscles: NamedReference[];
+  secondaryMuscles: NamedReference[];
   goals: NamedReference[];
   categories: NamedReference[];
+  movementType: ExerciseMovementType;
   reviewStatus: "APPROVED" | "DRAFT";
   source: string;
   sourceUrl: string;
@@ -152,6 +159,16 @@ export type ReviewDashboardData = {
   goals: ReviewReferenceItem[];
   categories: ReviewReferenceItem[];
 };
+
+export type ReviewFilterOption = {
+  slug: string;
+  name: LocalizedString;
+};
+
+export type ReviewExerciseFilters = Pick<
+  ExerciseFilters,
+  "equipment" | "level" | "muscle" | "muscleCategory" | "goal" | "category" | "movementType"
+>;
 
 function compactNamedReferences(values: Array<NamedReference | null>): NamedReference[] {
   return values.filter((value): value is NamedReference => Boolean(value));
@@ -276,10 +293,12 @@ export async function getReviewDashboardData({
   section = "exercises",
   q = "",
   page = 1,
+  filters = {},
 }: {
   section?: ReviewSection;
   q?: string;
   page?: number;
+  filters?: ReviewExerciseFilters;
 } = {}): Promise<ReviewDashboardData> {
   await ensureSystemSeed();
   await connectToDatabase();
@@ -291,9 +310,36 @@ export async function getReviewDashboardData({
   const summaryPromise = buildReviewSummary();
 
   if (normalizedSection === "exercises") {
+    const [level, equipment, muscle, muscleCategory, goal, category] = await Promise.all([
+      filters.level ? ExerciseLevel.findOne({ slug: filters.level }).select("_id").lean() : null,
+      filters.equipment ? Equipment.findOne({ slug: filters.equipment }).select("_id").lean() : null,
+      filters.muscle ? Muscle.findOne({ slug: filters.muscle }).select("_id").lean() : null,
+      filters.muscleCategory ? MuscleCategory.findOne({ slug: filters.muscleCategory }).select("_id").lean() : null,
+      filters.goal ? ExerciseGoal.findOne({ slug: filters.goal }).select("_id").lean() : null,
+      filters.category ? ExerciseCategory.findOne({ slug: filters.category }).select("_id").lean() : null,
+    ]);
+
     const query = {
       reviewStatus: "APPROVED",
       ...searchQuery,
+      ...(level ? { levelId: level._id } : {}),
+      ...(equipment ? { equipmentIds: equipment._id } : {}),
+      ...(muscleCategory ? { muscleCategoryIds: muscleCategory._id } : {}),
+      ...(goal ? { goalIds: goal._id } : {}),
+      ...(category ? { categoryIds: category._id } : {}),
+      ...(filters.movementType ? { movementType: filters.movementType } : {}),
+      ...(muscle
+        ? {
+            $and: [
+              {
+                $or: [
+                  { primaryMuscleIds: muscle._id },
+                  { secondaryMuscleIds: muscle._id },
+                ],
+              },
+            ],
+          }
+        : {}),
     };
 
     const total = await Exercise.countDocuments(query);
@@ -301,6 +347,7 @@ export async function getReviewDashboardData({
     const items = await Exercise.find(query)
       .populate("equipmentIds", "slug name imageUrl")
       .populate("primaryMuscleIds", "slug name imageUrl")
+      .populate("secondaryMuscleIds", "slug name imageUrl")
       .populate("goalIds", "slug name")
       .populate("categoryIds", "slug name")
       .populate("levelId", "slug name")
@@ -324,12 +371,14 @@ export async function getReviewDashboardData({
         description: item.description,
         imageUrl: item.imageUrl,
         imageAlt: item.imageAlt,
-        media: item.media ?? getFallbackExerciseMedia(item.slug),
+        media: item.media ?? getFallbackExerciseMedia(item.slug, item.movementType ?? "DYNAMIC"),
         level: toNamedReference(item.levelId),
         equipment: compactNamedReferences((Array.isArray(item.equipmentIds) ? item.equipmentIds : []).map((value) => toNamedReference(value))),
         primaryMuscles: compactNamedReferences((Array.isArray(item.primaryMuscleIds) ? item.primaryMuscleIds : []).map((value) => toNamedReference(value))),
+        secondaryMuscles: compactNamedReferences((Array.isArray(item.secondaryMuscleIds) ? item.secondaryMuscleIds : []).map((value) => toNamedReference(value))),
         goals: compactNamedReferences((Array.isArray(item.goalIds) ? item.goalIds : []).map((value) => toNamedReference(value))),
         categories: compactNamedReferences((Array.isArray(item.categoryIds) ? item.categoryIds : []).map((value) => toNamedReference(value))),
+        movementType: item.movementType ?? "DYNAMIC",
         reviewStatus: item.reviewStatus,
         source: item.source ?? "INTERNAL_CURATION",
         sourceUrl: item.sourceUrl ?? "",
@@ -474,10 +523,11 @@ export const getShellBootstrap = cache(async () => {
   await ensureSystemSeed();
   await connectToDatabase();
 
-  const [levels, equipments, muscles, goals, categories] = await Promise.all([
+  const [levels, equipments, muscles, muscleCategories, goals, categories] = await Promise.all([
     ExerciseLevel.find().sort({ order: 1 }).lean(),
     Equipment.find().sort({ order: 1 }).lean(),
     Muscle.find().sort({ order: 1 }).lean(),
+    MuscleCategory.find().sort({ order: 1 }).lean(),
     ExerciseGoal.find().sort({ order: 1 }).lean(),
     ExerciseCategory.find().sort({ order: 1 }).lean(),
   ]);
@@ -491,6 +541,12 @@ export const getShellBootstrap = cache(async () => {
       imageUrl: item.imageUrl,
     })),
     muscles: muscles.map((item) => ({
+      id: toId(item._id),
+      slug: item.slug,
+      name: item.name,
+      imageUrl: item.imageUrl,
+    })),
+    muscleCategories: muscleCategories.map((item) => ({
       id: toId(item._id),
       slug: item.slug,
       name: item.name,
@@ -531,6 +587,13 @@ export const getPublicExerciseCatalog = cache(async (filters: ExerciseFilters = 
     }
   }
 
+  if (filters.muscleCategory) {
+    const muscleCategory = await MuscleCategory.findOne({ slug: filters.muscleCategory }).select("_id").lean();
+    if (muscleCategory) {
+      query.muscleCategoryIds = muscleCategory._id;
+    }
+  }
+
   if (filters.goal) {
     const goal = await ExerciseGoal.findOne({ slug: filters.goal }).select("_id").lean();
     if (goal) {
@@ -543,6 +606,10 @@ export const getPublicExerciseCatalog = cache(async (filters: ExerciseFilters = 
     if (category) {
       query.categoryIds = category._id;
     }
+  }
+
+  if (filters.movementType) {
+    query.movementType = filters.movementType;
   }
 
   if (filters.q) {
@@ -565,11 +632,12 @@ export const getPublicExerciseCatalog = cache(async (filters: ExerciseFilters = 
     description: item.description,
     imageUrl: item.imageUrl,
     imageAlt: item.imageAlt,
-    media: item.media ?? getFallbackExerciseMedia(item.slug),
+    media: item.media ?? getFallbackExerciseMedia(item.slug, item.movementType ?? "DYNAMIC"),
     equipment: compactNamedReferences((Array.isArray(item.equipmentIds) ? item.equipmentIds : []).map((value) => toNamedReference(value))),
     primaryMuscles: compactNamedReferences((Array.isArray(item.primaryMuscleIds) ? item.primaryMuscleIds : []).map((value) => toNamedReference(value))),
     secondaryMuscles: compactNamedReferences((Array.isArray(item.secondaryMuscleIds) ? item.secondaryMuscleIds : []).map((value) => toNamedReference(value))),
     level: toNamedReference(item.levelId),
+    movementType: item.movementType ?? "DYNAMIC",
   }));
 });
 
@@ -819,7 +887,7 @@ export const getExerciseDetail = cache(async (slug: string) => {
     instructionSteps: item.instructionSteps ?? [],
     imageUrl: item.imageUrl,
     imageAlt: item.imageAlt,
-    media: item.media ?? getFallbackExerciseMedia(item.slug),
+    media: item.media ?? getFallbackExerciseMedia(item.slug, item.movementType ?? "DYNAMIC"),
     equipment: compactNamedReferences((Array.isArray(item.equipmentIds) ? item.equipmentIds : []).map((value) => toNamedReference(value))),
     primaryMuscles: compactNamedReferences((Array.isArray(item.primaryMuscleIds) ? item.primaryMuscleIds : []).map((value) => toNamedReference(value))),
     secondaryMuscles: compactNamedReferences((Array.isArray(item.secondaryMuscleIds) ? item.secondaryMuscleIds : []).map((value) => toNamedReference(value))),
@@ -827,6 +895,7 @@ export const getExerciseDetail = cache(async (slug: string) => {
     categories: compactNamedReferences((Array.isArray(item.categoryIds) ? item.categoryIds : []).map((value) => toNamedReference(value))),
     level: toNamedReference(item.levelId),
     movementPattern: item.movementPattern ?? "general",
+    movementType: item.movementType ?? "DYNAMIC",
     source: item.source ?? "INTERNAL_CURATION",
     sourceUrl: item.sourceUrl ?? "",
   } satisfies ExerciseDetail;

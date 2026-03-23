@@ -15,18 +15,63 @@ export default function AppleIcon() {
           alignItems: "center",
           background: "#111111",
           borderRadius: 42,
-          color: "#FFFDF8",
           display: "flex",
-          fontFamily: "sans-serif",
-          fontSize: 82,
-          fontWeight: 800,
           height: "100%",
           justifyContent: "center",
-          letterSpacing: "-0.12em",
+          position: "relative",
           width: "100%",
         }}
       >
-        SF
+        <div
+          style={{
+            background: "linear-gradient(145deg, #303030 0%, #111111 100%)",
+            borderRadius: 38,
+            display: "flex",
+            height: 122,
+            position: "relative",
+            width: 122,
+          }}
+        >
+          <div
+            style={{
+              color: "#FFFDF8",
+              fontFamily: "sans-serif",
+              fontSize: 92,
+              fontWeight: 800,
+              inset: 0,
+              letterSpacing: "-0.14em",
+              lineHeight: "122px",
+              position: "absolute",
+              textAlign: "center",
+            }}
+          >
+            S
+          </div>
+          <div
+            style={{
+              background: "#B79B67",
+              borderRadius: 999,
+              height: 8,
+              position: "absolute",
+              right: 18,
+              top: 20,
+              transform: "rotate(-24deg)",
+              width: 28,
+            }}
+          />
+          <div
+            style={{
+              background: "#F2E8D5",
+              border: "3px solid #B79B67",
+              borderRadius: 999,
+              height: 18,
+              position: "absolute",
+              right: 8,
+              top: 12,
+              width: 18,
+            }}
+          />
+        </div>
       </div>
     ),
     size,

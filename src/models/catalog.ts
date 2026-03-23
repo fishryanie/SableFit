@@ -146,6 +146,11 @@ const exerciseMediaSchema = new Schema(
               type: Number,
               required: true,
             },
+            phase: {
+              type: String,
+              enum: ["ECCENTRIC", "CONCENTRIC", "SETUP", "HOLD"],
+              required: true,
+            },
             label: {
               type: localizedStringSchema,
               required: true,
@@ -268,6 +273,12 @@ const exerciseSchema = new Schema(
       default: "general",
       index: true,
     },
+    movementType: {
+      type: String,
+      enum: ["DYNAMIC", "ISOMETRIC"],
+      default: "DYNAMIC",
+      index: true,
+    },
     source: {
       type: String,
       trim: true,
@@ -315,6 +326,7 @@ exerciseSchema.index({ primaryMuscleIds: 1, reviewStatus: 1, isSearchable: 1 });
 exerciseSchema.index({ muscleCategoryIds: 1, reviewStatus: 1, isSearchable: 1 });
 exerciseSchema.index({ goalIds: 1, reviewStatus: 1, isSearchable: 1 });
 exerciseSchema.index({ categoryIds: 1, reviewStatus: 1, isSearchable: 1 });
+exerciseSchema.index({ movementType: 1, reviewStatus: 1, isSearchable: 1 });
 exerciseSchema.index({ aliases: 1 });
 exerciseSchema.index({ "media.style": 1, "media.status": 1, reviewStatus: 1 });
 

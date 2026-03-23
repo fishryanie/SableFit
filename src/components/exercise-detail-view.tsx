@@ -1,7 +1,7 @@
 import type { ComponentType } from "react";
 import Link from "next/link";
-import { ArrowLeft, CircleDot, Dumbbell, Flame, Layers3, PlayCircle, Sparkles } from "lucide-react";
-import { ExerciseMediaFigure } from "@/components/exercise-media-figure";
+import { ArrowLeft, CircleDot, Dumbbell, Flame, Layers3, Sparkles } from "lucide-react";
+import { ExerciseMediaGallery } from "@/components/exercise-media-preview-sheet";
 import { getLocalizedText } from "@/lib/localized";
 import type { ExerciseDetail } from "@/lib/data";
 import type { AppLocale } from "@/types/domain";
@@ -23,6 +23,11 @@ type ExerciseDetailViewProps = {
     source: string;
     movementFrames: string;
     slowMotion: string;
+    movementType: string;
+    movementTypes: {
+      dynamic: string;
+      isometric: string;
+    };
     openApp?: string;
     signIn?: string;
   };
@@ -86,10 +91,6 @@ export function ExerciseDetailView({
   const goals = exercise.goals.map((item) => getLocalizedText(locale, item.name)).join(", ");
   const categories = exercise.categories.map((item) => getLocalizedText(locale, item.name)).join(", ");
   const level = exercise.level ? getLocalizedText(locale, exercise.level.name) : "";
-  const keyframes = exercise.media.keyframes.slice(0, 2);
-  const motionClassName = exercise.media.videoUrl
-    ? "aspect-[9/16] mx-auto w-full max-w-[250px] object-contain"
-    : "aspect-[4/3] w-full object-contain";
 
   return (
     <main className="min-h-dvh bg-[linear-gradient(180deg,#f6f7f8,#e9ebef)]">
@@ -118,41 +119,20 @@ export function ExerciseDetailView({
           </h1>
           <p className="mt-3 text-sm leading-6 text-foreground-secondary">{description}</p>
 
-          <div className="mt-5 rounded-[34px] bg-background-secondary p-4 shadow-[0_12px_30px_rgba(17,17,17,0.04)]">
-            <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-foreground">
-              <PlayCircle className="h-5 w-5" />
-              {dictionary.slowMotion}
-            </div>
-            <div className="overflow-hidden rounded-[28px] bg-white p-3">
-              <ExerciseMediaFigure
-                media={exercise.media}
-                alt={imageAlt}
-                variant="motion"
-                priority
-                className={motionClassName}
-              />
-            </div>
-          </div>
-
-          <div className="mt-4 rounded-[30px] bg-background-secondary p-4 shadow-[0_12px_30px_rgba(17,17,17,0.04)]">
-            <div className="mb-3 text-sm font-semibold text-foreground">{dictionary.movementFrames}</div>
-            <div className="grid grid-cols-2 gap-3">
-              {keyframes.map((frame) => (
-                <div key={`${exercise.id}-frame-${frame.order}`} className="rounded-[24px] bg-background p-3">
-                  <div className="overflow-hidden rounded-[20px] bg-white p-2">
-                    <ExerciseMediaFigure
-                      src={frame.url}
-                      alt={`${imageAlt} ${getLocalizedText(locale, frame.label)}`}
-                      variant="frame"
-                      className="aspect-square w-full object-contain"
-                    />
-                  </div>
-                  <p className="mt-3 text-center text-sm font-semibold text-foreground">
-                    {getLocalizedText(locale, frame.label)}
-                  </p>
-                </div>
-              ))}
-            </div>
+          <div className="mt-5">
+            <ExerciseMediaGallery
+              locale={locale}
+              title={name}
+              alt={imageAlt}
+              media={exercise.media}
+              movementType={exercise.movementType}
+              dictionary={{
+                motionLabel: dictionary.slowMotion,
+                framesLabel: dictionary.movementFrames,
+                movementTypeLabel: dictionary.movementType,
+                movementTypes: dictionary.movementTypes,
+              }}
+            />
           </div>
 
           <div className="mt-4 grid grid-cols-2 gap-3">
@@ -170,9 +150,17 @@ export function ExerciseDetailView({
           ) : null}
 
           <div className="mt-5 space-y-4">
-            {exercise.instructionSteps.map((step, index) => (
-              <StepCard key={`${exercise.id}-${index}`} order={index + 1} body={getLocalizedText(locale, step)} />
-            ))}
+            {exercise.instructionSteps.map((step, index) => {
+              const stepBody = getLocalizedText(locale, step);
+
+              return (
+                <StepCard
+                  key={`${exercise.id}-${step.en}-${step.vi}`}
+                  order={index + 1}
+                  body={stepBody}
+                />
+              );
+            })}
           </div>
 
           {exercise.sourceUrl ? (

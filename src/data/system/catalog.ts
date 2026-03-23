@@ -6,11 +6,13 @@ import rawMuscles from "@/data/raw/kinis-muscles.json";
 import { getEquipmentImage } from "@/data/system/equipment-images";
 import { getExerciseMedia, getExerciseMediaManifest } from "@/data/system/exercise-media";
 import { getMuscleImage } from "@/data/system/muscle-images";
+import { getExerciseMovementType } from "@/lib/exercise-movement";
 import { manualExerciseSeeds } from "@/data/system/manual-exercises";
 import { systemPlanDrafts, systemSessionDrafts } from "@/data/system/sample-plans";
 import { slugify } from "@/lib/strings";
 import type {
   ExerciseMedia,
+  ExerciseMovementType,
   LocalizedString,
   WorkoutPlanDraft,
   WorkoutSessionDraft,
@@ -47,6 +49,7 @@ type BuiltExerciseSeed = {
   levelSlug: string;
   categorySlugs: string[];
   movementPattern: string;
+  movementType: ExerciseMovementType;
   source: string;
   sourceUrl: string;
   reviewStatus: "APPROVED" | "DRAFT";
@@ -255,6 +258,81 @@ function normalizeAlias(value: string) {
   return value.trim().toLowerCase();
 }
 
+function normalizeExerciseIdentityToken(value: string) {
+  let token = value.trim().toLowerCase();
+
+  if (!token) {
+    return "";
+  }
+
+  if (token.endsWith("ies") && token.length > 4) {
+    token = `${token.slice(0, -3)}y`;
+  } else if (token.endsWith("s") && token.length > 4 && !token.endsWith("ss")) {
+    token = token.slice(0, -1);
+  }
+
+  return token;
+}
+
+function getExerciseCanonicalKey(name: string, equipmentSlug: string) {
+  const normalizedLabel = name
+    .toLowerCase()
+    .replace(/push[\s-]*ups?/g, "pushup")
+    .replace(/pull[\s-]*ups?/g, "pullup")
+    .replace(/chin[\s-]*ups?/g, "chinup")
+    .replace(/[_/]+/g, " ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+
+  const tokens = unique(
+    normalizedLabel
+      .split(/\s+/)
+      .map((token) => normalizeExerciseIdentityToken(token))
+      .filter(Boolean),
+  );
+
+  return `${equipmentSlug}|${tokens.join(" ")}`;
+}
+
+function mergeExerciseSeedPair(
+  preferred: BuiltExerciseSeed,
+  incoming: BuiltExerciseSeed,
+): BuiltExerciseSeed {
+  const primaryMuscleSlugs = preferred.primaryMuscleSlugs.length
+    ? preferred.primaryMuscleSlugs
+    : incoming.primaryMuscleSlugs;
+  const secondaryMuscleSlugs = unique([
+    ...preferred.secondaryMuscleSlugs,
+    ...incoming.secondaryMuscleSlugs,
+    ...incoming.primaryMuscleSlugs.filter((slug) => !primaryMuscleSlugs.includes(slug)),
+  ]).filter((slug) => !primaryMuscleSlugs.includes(slug));
+
+  return {
+    ...preferred,
+    aliases: buildAliases(
+      ...preferred.aliases,
+      ...incoming.aliases,
+      preferred.name.en,
+      preferred.name.vi,
+      incoming.name.en,
+      incoming.name.vi,
+      preferred.slug.replaceAll("-", " "),
+      incoming.slug.replaceAll("-", " "),
+    ),
+    primaryEquipmentSlug: preferred.primaryEquipmentSlug || incoming.primaryEquipmentSlug,
+    equipmentSlugs: unique([...preferred.equipmentSlugs, ...incoming.equipmentSlugs]),
+    primaryMuscleSlugs,
+    secondaryMuscleSlugs,
+    muscleCategorySlugs: deriveMuscleCategorySlugs([
+      ...primaryMuscleSlugs,
+      ...secondaryMuscleSlugs,
+    ]),
+    goalSlugs: unique([...preferred.goalSlugs, ...incoming.goalSlugs]),
+    categorySlugs: unique([...preferred.categorySlugs, ...incoming.categorySlugs]),
+    sourceUrl: preferred.sourceUrl || incoming.sourceUrl,
+  };
+}
+
 function buildAliases(...values: Array<string | undefined>) {
   return unique(
     values
@@ -452,13 +530,14 @@ function buildRawExerciseSeeds() {
     const primaryMuscleSlugs = normalizeMuscles(record.muscles_targeted ?? record.muscle);
     const categorySlugs = deriveCategorySlugs(record, primaryMuscleSlugs);
     const movementPattern = deriveMovementPattern(record.name, categorySlugs);
+    const movementType = getExerciseMovementType(categorySlugs, record.name);
     const localizedName = {
       en: record.name,
       vi: record.name,
     };
 
     const descriptionEn = record.description?.trim() || `${record.name} helps build controlled strength and movement confidence.`;
-    const media = getExerciseMedia(slug);
+    const media = getExerciseMedia(slug, movementType);
 
     bySlug.set(slug, {
       slug,
@@ -486,6 +565,7 @@ function buildRawExerciseSeeds() {
       levelSlug: record.difficulty?.toLowerCase() || "beginner",
       categorySlugs,
       movementPattern,
+      movementType,
       source: "FITATE_IMPORT",
       sourceUrl: "",
       reviewStatus: "APPROVED",
@@ -502,7 +582,8 @@ function buildManualExerciseSeeds() {
       en: record.nameEn,
       vi: record.nameVi,
     };
-    const media = getExerciseMedia(slug);
+    const movementType = getExerciseMovementType(record.categorySlugs, record.nameEn);
+    const media = getExerciseMedia(slug, movementType);
 
     return {
       slug,
@@ -525,6 +606,7 @@ function buildManualExerciseSeeds() {
       levelSlug: record.levelSlug,
       categorySlugs: record.categorySlugs,
       movementPattern: deriveMovementPattern(record.nameEn, record.categorySlugs),
+      movementType,
       source: "INTERNAL_CURATION",
       sourceUrl: NASM_SOURCE,
       reviewStatus: "APPROVED" as const,
@@ -534,16 +616,27 @@ function buildManualExerciseSeeds() {
 
 function mergeExerciseSeeds() {
   const all = [...buildRawExerciseSeeds(), ...buildManualExerciseSeeds()];
-  const bySlug = new Map<string, BuiltExerciseSeed>();
+  const byCanonicalKey = new Map<string, BuiltExerciseSeed>();
 
   for (const item of all) {
-    const existing = bySlug.get(item.slug);
-    if (!existing || (existing.source !== "INTERNAL_CURATION" && item.source === "INTERNAL_CURATION")) {
-      bySlug.set(item.slug, item);
+    const canonicalKey = getExerciseCanonicalKey(item.name.en, item.primaryEquipmentSlug);
+    const existing = byCanonicalKey.get(canonicalKey);
+
+    if (!existing) {
+      byCanonicalKey.set(canonicalKey, item);
+      continue;
     }
+
+    const preferred =
+      existing.source === "INTERNAL_CURATION" || item.source !== "INTERNAL_CURATION"
+        ? existing
+        : item;
+    const incoming = preferred === existing ? item : existing;
+
+    byCanonicalKey.set(canonicalKey, mergeExerciseSeedPair(preferred, incoming));
   }
 
-  return [...bySlug.values()];
+  return [...byCanonicalKey.values()];
 }
 
 export function getSystemTaxonomy() {

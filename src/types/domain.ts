@@ -19,8 +19,13 @@ export type ExerciseMediaStyle = "ANATOMY" | "ILLUSTRATION";
 
 export type ExerciseMediaStatus = "READY" | "FALLBACK";
 
+export type ExerciseMovementType = "DYNAMIC" | "ISOMETRIC";
+
+export type ExerciseMediaFramePhase = "ECCENTRIC" | "CONCENTRIC" | "SETUP" | "HOLD";
+
 export type ExerciseMediaFrame = {
   order: number;
+  phase: ExerciseMediaFramePhase;
   label: LocalizedString;
   url: string;
 };

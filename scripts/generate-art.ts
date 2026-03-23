@@ -80,6 +80,16 @@ type PickedSourceAsset = {
   matchMode: "exact" | "equivalent" | "prototype";
 };
 
+type DerivedExerciseMediaMatchMode = "exact" | "equivalent";
+
+type DerivedExerciseMediaSpec = {
+  baseRelativePath: string;
+  matchMode: DerivedExerciseMediaMatchMode;
+  sourceProvider: string;
+  sourcePath: string;
+  overlayVariant: "trx-push-up" | "trx-row";
+};
+
 type ExerciseMediaAuditEntry = {
   slug: string;
   matchMode: "exact" | "equivalent" | "prototype";
@@ -117,6 +127,12 @@ type SourceAsset = {
   normalizedLabel: string;
 };
 
+type RenderedFrame = {
+  rgba: Uint8Array;
+  width: number;
+  height: number;
+};
+
 const root = process.cwd();
 const publicDir = path.join(root, "public");
 const srcDir = path.join(root, "src");
@@ -147,6 +163,23 @@ const customExerciseVideoOverrides: Record<string, ExerciseVideoOverride> = {
   "triceps-pushdown-rope-attachment": {
     videoPublicId: "motion-slow-video",
     posterPublicId: "motion-poster",
+  },
+};
+
+const derivedExerciseMediaSpecs: Record<string, DerivedExerciseMediaSpec> = {
+  "trx-push-up": {
+    baseRelativePath: "chest/06621301-Push-up-m_Chest-FIX_720.gif",
+    matchMode: "exact",
+    sourceProvider: "INTERNAL_DERIVED",
+    sourcePath: "derived://trx-push-up/from/chest/06621301-Push-up-m_Chest-FIX_720.gif",
+    overlayVariant: "trx-push-up",
+  },
+  "trx-row": {
+    baseRelativePath: "back/06521301-Pull-up_Back_720.gif",
+    matchMode: "equivalent",
+    sourceProvider: "INTERNAL_DERIVED",
+    sourcePath: "derived://trx-row/from/back/06521301-Pull-up_Back_720.gif",
+    overlayVariant: "trx-row",
   },
 };
 
@@ -555,9 +588,13 @@ function getLocalMuscleImagePaths(slug: string) {
 
 function buildKeyframeLabel(order: number) {
   return {
-    en: `Key pose ${order}`,
-    vi: `Tư thế chính ${order}`,
+    en: order === 1 ? "Eccentric" : "Concentric",
+    vi: order === 1 ? "Pha eccentric" : "Pha concentric",
   };
+}
+
+function buildKeyframePhase(order: number) {
+  return order === 1 ? "ECCENTRIC" : "CONCENTRIC";
 }
 
 function buildCloudinaryExerciseVideoOverrideUrl(
@@ -1801,6 +1838,101 @@ async function renderAnimatedFrame(
   };
 }
 
+function buildTrxOverlaySvg(
+  width: number,
+  height: number,
+  positions: {
+    leftAnchor: [number, number];
+    rightAnchor: [number, number];
+    leftHandle: [number, number];
+    rightHandle: [number, number];
+  },
+) {
+  const strokeWidth = Math.max(6, Math.round(width * 0.012));
+  const handleWidth = Math.max(22, Math.round(width * 0.04));
+  const handleHeight = Math.max(16, Math.round(height * 0.03));
+  const anchorRadius = Math.max(6, Math.round(width * 0.012));
+
+  const [leftAnchorX, leftAnchorY] = positions.leftAnchor;
+  const [rightAnchorX, rightAnchorY] = positions.rightAnchor;
+  const [leftHandleX, leftHandleY] = positions.leftHandle;
+  const [rightHandleX, rightHandleY] = positions.rightHandle;
+
+  return `
+    <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+      <g stroke="#121212" stroke-width="${strokeWidth}" stroke-linecap="round" fill="none" opacity="0.92">
+        <line x1="${leftAnchorX}" y1="${leftAnchorY}" x2="${leftHandleX}" y2="${leftHandleY}" />
+        <line x1="${rightAnchorX}" y1="${rightAnchorY}" x2="${rightHandleX}" y2="${rightHandleY}" />
+      </g>
+      <g stroke="#121212" stroke-width="${Math.max(5, strokeWidth - 1)}" stroke-linecap="round" fill="none">
+        <path d="M ${leftHandleX - handleWidth / 2} ${leftHandleY} q ${handleWidth / 2} -${handleHeight} ${handleWidth} 0 v ${handleHeight} q -${handleWidth / 2} ${handleHeight} -${handleWidth} 0 z" />
+        <path d="M ${rightHandleX - handleWidth / 2} ${rightHandleY} q ${handleWidth / 2} -${handleHeight} ${handleWidth} 0 v ${handleHeight} q -${handleWidth / 2} ${handleHeight} -${handleWidth} 0 z" />
+      </g>
+      <g fill="#1a1a1a" opacity="0.22">
+        <circle cx="${leftAnchorX}" cy="${leftAnchorY}" r="${anchorRadius}" />
+        <circle cx="${rightAnchorX}" cy="${rightAnchorY}" r="${anchorRadius}" />
+      </g>
+    </svg>
+  `;
+}
+
+function getDerivedExerciseOverlaySvg(
+  variant: DerivedExerciseMediaSpec["overlayVariant"],
+  width: number,
+  height: number,
+) {
+  if (variant === "trx-row") {
+    return buildTrxOverlaySvg(width, height, {
+      leftAnchor: [Math.round(width * 0.405), Math.round(height * 0.035)],
+      rightAnchor: [Math.round(width * 0.64), Math.round(height * 0.035)],
+      leftHandle: [Math.round(width * 0.355), Math.round(height * 0.18)],
+      rightHandle: [Math.round(width * 0.635), Math.round(height * 0.18)],
+    });
+  }
+
+  return buildTrxOverlaySvg(width, height, {
+    leftAnchor: [Math.round(width * 0.615), Math.round(height * 0.03)],
+    rightAnchor: [Math.round(width * 0.83), Math.round(height * 0.03)],
+    leftHandle: [Math.round(width * 0.625), Math.round(height * 0.63)],
+    rightHandle: [Math.round(width * 0.89), Math.round(height * 0.645)],
+  });
+}
+
+async function compositeOverlayOnFrame(
+  frame: RenderedFrame,
+  overlaySvg: string,
+) {
+  const { data, info } = await sharp(Buffer.from(frame.rgba), {
+    raw: {
+      width: frame.width,
+      height: frame.height,
+      channels: 4,
+    },
+  })
+    .composite([{ input: Buffer.from(overlaySvg) }])
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  return {
+    rgba: new Uint8Array(data),
+    width: info.width,
+    height: info.height,
+  } satisfies RenderedFrame;
+}
+
+async function renderDerivedExerciseFrame(
+  assetPath: string,
+  page: number,
+  width: number,
+  height: number,
+  variant: DerivedExerciseMediaSpec["overlayVariant"],
+) {
+  const baseFrame = await renderAnimatedFrame(assetPath, page, width, height);
+  const overlaySvg = getDerivedExerciseOverlaySvg(variant, baseFrame.width, baseFrame.height);
+
+  return compositeOverlayOnFrame(baseFrame, overlaySvg);
+}
+
 async function writeAnimatedFrameVariant(
   sourcePath: string,
   target: string,
@@ -2250,6 +2382,7 @@ async function generateMuscleImages() {
 async function generateExerciseMedia() {
   const exercises = getSystemExercises();
   const sourceAssets = await loadSourceAssets();
+  const sourceAssetLookup = buildSourceAssetLookup(sourceAssets);
   const manifest: MediaManifest = {};
   const auditEntries: ExerciseMediaAuditEntry[] = [];
   const cloudinaryRootFolder = process.env.CLOUDINARY_ROOT_FOLDER?.trim() || "sablefit";
@@ -2261,28 +2394,65 @@ async function generateExerciseMedia() {
 
   for (const exercise of exercises) {
     const localPaths = getLocalExerciseMediaPaths(exercise.slug);
-    const pickedSource = pickBestSourceAsset(exercise, sourceAssets);
+    const derivedSpec = derivedExerciseMediaSpecs[exercise.slug];
+    const pickedSource = derivedSpec ? null : pickBestSourceAsset(exercise, sourceAssets);
 
-    if (!pickedSource || pickedSource.asset.extension !== ".gif") {
+    const matchedAsset = derivedSpec
+      ? sourceAssetLookup.get(derivedSpec.baseRelativePath) ?? null
+      : pickedSource?.asset ?? null;
+    const matchMode = derivedSpec ? derivedSpec.matchMode : pickedSource?.matchMode ?? null;
+
+    if (!matchedAsset || matchedAsset.extension !== ".gif" || !matchMode) {
       throw new Error(`Unable to resolve anatomy media for exercise: ${exercise.slug}`);
     }
 
-    const { asset: matchedAsset, matchMode } = pickedSource;
     const metadata = await sharp(matchedAsset.absolutePath, { animated: true }).metadata();
     const pageCount = metadata.pages ?? 1;
     const delays = metadata.delay ?? [];
     const [phase1Index, phase2Index] = getPhaseIndexes(pageCount);
 
-    await Promise.all([
-      writeAnimatedFrameVariant(matchedAsset.absolutePath, localPaths.phase1Path, phase1Index, 520, 520),
-      writeAnimatedFrameVariant(matchedAsset.absolutePath, localPaths.phase2Path, phase2Index, 520, 520),
-    ]);
+    if (derivedSpec) {
+      const [phase1Frame, phase2Frame] = await Promise.all([
+        renderDerivedExerciseFrame(
+          matchedAsset.absolutePath,
+          phase1Index,
+          520,
+          520,
+          derivedSpec.overlayVariant,
+        ),
+        renderDerivedExerciseFrame(
+          matchedAsset.absolutePath,
+          phase2Index,
+          520,
+          520,
+          derivedSpec.overlayVariant,
+        ),
+      ]);
+
+      await Promise.all([
+        writeRgbaWebp(phase1Frame.rgba, phase1Frame.width, phase1Frame.height, localPaths.phase1Path),
+        writeRgbaWebp(phase2Frame.rgba, phase2Frame.width, phase2Frame.height, localPaths.phase2Path),
+      ]);
+    } else {
+      await Promise.all([
+        writeAnimatedFrameVariant(matchedAsset.absolutePath, localPaths.phase1Path, phase1Index, 520, 520),
+        writeAnimatedFrameVariant(matchedAsset.absolutePath, localPaths.phase2Path, phase2Index, 520, 520),
+      ]);
+    }
 
     const motionFrames = await mapWithConcurrency(
       Array.from({ length: pageCount }, (_, index) => index),
       4,
       async (page) => {
-        const frame = await getAnimatedFramePixels(matchedAsset.absolutePath, page, 720, 720);
+        const frame = derivedSpec
+          ? await renderDerivedExerciseFrame(
+              matchedAsset.absolutePath,
+              page,
+              720,
+              720,
+              derivedSpec.overlayVariant,
+            )
+          : await getAnimatedFramePixels(matchedAsset.absolutePath, page, 720, 720);
 
         return {
           ...frame,
@@ -2302,11 +2472,13 @@ async function generateExerciseMedia() {
       keyframes: [
         {
           order: 1,
+          phase: buildKeyframePhase(1),
           label: buildKeyframeLabel(1),
           url: localPaths.phase1Url,
         },
         {
           order: 2,
+          phase: buildKeyframePhase(2),
           label: buildKeyframeLabel(2),
           url: localPaths.phase2Url,
         },
@@ -2314,8 +2486,9 @@ async function generateExerciseMedia() {
       animationUrl: localPaths.motionUrl,
       videoUrl: "",
       videoPosterUrl: "",
-      sourceProvider: "FITATE_LOCAL",
-      sourcePath: matchedAsset.relativePath.replaceAll(path.sep, "/"),
+      sourceProvider: derivedSpec?.sourceProvider ?? "FITATE_LOCAL",
+      sourcePath:
+        derivedSpec?.sourcePath ?? matchedAsset.relativePath.replaceAll(path.sep, "/"),
     };
     anatomyCount += 1;
 
@@ -2330,7 +2503,8 @@ async function generateExerciseMedia() {
     auditEntries.push({
       slug: exercise.slug,
       matchMode,
-      sourcePath: matchedAsset.relativePath.replaceAll(path.sep, "/"),
+      sourcePath:
+        derivedSpec?.sourcePath ?? matchedAsset.relativePath.replaceAll(path.sep, "/"),
       cloudinaryFolder: `${cloudinaryRootFolder}/workout/exercise/${exercise.slug}`,
     });
   }

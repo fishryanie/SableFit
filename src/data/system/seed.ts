@@ -18,7 +18,7 @@ import { getSystemExercises, getSystemPlanDrafts, getSystemSessionDrafts, getSys
 import { mirrorLocalized } from "@/lib/strings";
 
 export const SYSTEM_SEED_KEY = "sablefit-core";
-export const SYSTEM_SEED_VERSION = "2026-03-22.10";
+export const SYSTEM_SEED_VERSION = "2026-03-23.2";
 
 function compactIds(values: Array<string | undefined>) {
   return values.filter(Boolean);
@@ -364,6 +364,7 @@ export async function ensureSystemSeed({ force = false }: { force?: boolean } = 
             levelId: toObjectId(levelMap.get(seed.levelSlug)),
             categoryIds: compactObjectIds(seed.categorySlugs.map((slug) => categoryMap.get(slug))),
             movementPattern: seed.movementPattern,
+            movementType: seed.movementType,
             source: seed.source,
             sourceUrl: seed.sourceUrl,
             reviewStatus: seed.reviewStatus,
