@@ -1,12 +1,11 @@
-import Link from "next/link";
 import { RotateCcw, SlidersHorizontal, X } from "lucide-react";
 import type { ReviewExerciseFilters } from "@/lib/data";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 type ReviewExerciseFilterBarProps = {
-  q: string;
   filters: ReviewExerciseFilters;
+  appliedFilters: ReviewExerciseFilters;
   options: {
     movementTypes: Array<{ slug: string; label: string }>;
     levels: Array<{ slug: string; label: string }>;
@@ -36,6 +35,9 @@ type ReviewExerciseFilterBarProps = {
     goal: string;
     category: string;
   };
+  onFilterChange: (name: keyof ReviewExerciseFilters, value: string) => void;
+  onApply: () => void;
+  onReset: () => void;
 };
 
 function findOptionLabel(
@@ -52,22 +54,25 @@ function findOptionLabel(
 function FilterSelect({
   name,
   label,
-  defaultValue,
+  value,
   placeholder,
   options,
+  onChange,
 }: {
   name: keyof ReviewExerciseFilters;
   label: string;
-  defaultValue?: string;
+  value?: string;
   placeholder: string;
   options: Array<{ slug: string; label: string }>;
+  onChange: (name: keyof ReviewExerciseFilters, value: string) => void;
 }) {
   return (
     <label className="space-y-1.5">
       <span className="text-xs font-medium text-muted-foreground">{label}</span>
       <select
         name={name}
-        defaultValue={defaultValue || ""}
+        value={value || ""}
+        onChange={(event) => onChange(name, event.target.value)}
         className="flex h-9 w-full rounded-lg border border-input bg-background px-3 text-sm text-foreground outline-none transition-colors focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30"
       >
         <option value="">{placeholder}</option>
@@ -82,52 +87,49 @@ function FilterSelect({
 }
 
 export function ReviewExerciseFilterBar({
-  q,
   filters,
+  appliedFilters,
   options,
   dictionary,
+  onFilterChange,
+  onApply,
+  onReset,
 }: ReviewExerciseFilterBarProps) {
   const activeCount = [
-    filters.movementType,
-    filters.level,
-    filters.muscleCategory,
-    filters.muscle,
-    filters.equipment,
-    filters.goal,
-    filters.category,
+    appliedFilters.movementType,
+    appliedFilters.level,
+    appliedFilters.muscleCategory,
+    appliedFilters.muscle,
+    appliedFilters.equipment,
+    appliedFilters.goal,
+    appliedFilters.category,
   ].filter(Boolean).length;
-  const resetHref = q.trim()
-    ? `/app/review?section=exercises&q=${encodeURIComponent(q.trim())}`
-    : "/app/review?section=exercises";
   const activeFilters = [
-    filters.movementType
-      ? { key: "movementType", label: dictionary.movementType, value: findOptionLabel(options.movementTypes, filters.movementType) }
+    appliedFilters.movementType
+      ? { key: "movementType", label: dictionary.movementType, value: findOptionLabel(options.movementTypes, appliedFilters.movementType) }
       : null,
-    filters.level
-      ? { key: "level", label: dictionary.level, value: findOptionLabel(options.levels, filters.level) }
+    appliedFilters.level
+      ? { key: "level", label: dictionary.level, value: findOptionLabel(options.levels, appliedFilters.level) }
       : null,
-    filters.muscleCategory
-      ? { key: "muscleCategory", label: dictionary.muscleCategory, value: findOptionLabel(options.muscleCategories, filters.muscleCategory) }
+    appliedFilters.muscleCategory
+      ? { key: "muscleCategory", label: dictionary.muscleCategory, value: findOptionLabel(options.muscleCategories, appliedFilters.muscleCategory) }
       : null,
-    filters.muscle
-      ? { key: "muscle", label: dictionary.muscle, value: findOptionLabel(options.muscles, filters.muscle) }
+    appliedFilters.muscle
+      ? { key: "muscle", label: dictionary.muscle, value: findOptionLabel(options.muscles, appliedFilters.muscle) }
       : null,
-    filters.equipment
-      ? { key: "equipment", label: dictionary.equipment, value: findOptionLabel(options.equipments, filters.equipment) }
+    appliedFilters.equipment
+      ? { key: "equipment", label: dictionary.equipment, value: findOptionLabel(options.equipments, appliedFilters.equipment) }
       : null,
-    filters.goal
-      ? { key: "goal", label: dictionary.goal, value: findOptionLabel(options.goals, filters.goal) }
+    appliedFilters.goal
+      ? { key: "goal", label: dictionary.goal, value: findOptionLabel(options.goals, appliedFilters.goal) }
       : null,
-    filters.category
-      ? { key: "category", label: dictionary.category, value: findOptionLabel(options.categories, filters.category) }
+    appliedFilters.category
+      ? { key: "category", label: dictionary.category, value: findOptionLabel(options.categories, appliedFilters.category) }
       : null,
   ].filter(Boolean) as Array<{ key: string; label: string; value: string }>;
 
   return (
-    <form action="/app/review" method="get" className="rounded-2xl border bg-muted/15 p-4 shadow-xs">
-      <input type="hidden" name="section" value="exercises" />
-      {q.trim() ? <input type="hidden" name="q" value={q.trim()} /> : null}
-
+    <div className="rounded-2xl border bg-muted/15 p-4 shadow-xs">
       <div className="flex flex-col gap-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2 text-sm font-medium">
@@ -139,11 +141,9 @@ export function ReviewExerciseFilterBar({
               </span>
             ) : null}
           </div>
-          <Button asChild type="button" variant="ghost" size="sm">
-            <Link href={resetHref}>
-              <RotateCcw className="h-4 w-4" />
-              {dictionary.reset}
-            </Link>
+          <Button type="button" variant="ghost" size="sm" onClick={onReset}>
+            <RotateCcw className="h-4 w-4" />
+            {dictionary.reset}
           </Button>
         </div>
 
@@ -161,11 +161,9 @@ export function ReviewExerciseFilterBar({
                 {filter.label}: {filter.value}
               </Badge>
             ))}
-            <Button asChild type="button" variant="ghost" size="sm" className="ml-auto h-7 px-2 text-muted-foreground">
-              <Link href={resetHref}>
-                <X className="h-3.5 w-3.5" />
-                {dictionary.reset}
-              </Link>
+            <Button type="button" variant="ghost" size="sm" className="ml-auto h-7 px-2 text-muted-foreground" onClick={onReset}>
+              <X className="h-3.5 w-3.5" />
+              {dictionary.reset}
             </Button>
           </div>
         ) : null}
@@ -174,60 +172,67 @@ export function ReviewExerciseFilterBar({
           <FilterSelect
             name="movementType"
             label={dictionary.movementType}
-            defaultValue={filters.movementType}
+            value={filters.movementType}
             placeholder={dictionary.allMovementTypes}
             options={options.movementTypes}
+            onChange={onFilterChange}
           />
           <FilterSelect
             name="level"
             label={dictionary.level}
-            defaultValue={filters.level}
+            value={filters.level}
             placeholder={dictionary.allLevels}
             options={options.levels}
+            onChange={onFilterChange}
           />
           <FilterSelect
             name="muscleCategory"
             label={dictionary.muscleCategory}
-            defaultValue={filters.muscleCategory}
+            value={filters.muscleCategory}
             placeholder={dictionary.allMuscleCategories}
             options={options.muscleCategories}
+            onChange={onFilterChange}
           />
           <FilterSelect
             name="muscle"
             label={dictionary.muscle}
-            defaultValue={filters.muscle}
+            value={filters.muscle}
             placeholder={dictionary.allMuscles}
             options={options.muscles}
+            onChange={onFilterChange}
           />
           <FilterSelect
             name="equipment"
             label={dictionary.equipment}
-            defaultValue={filters.equipment}
+            value={filters.equipment}
             placeholder={dictionary.allEquipments}
             options={options.equipments}
+            onChange={onFilterChange}
           />
           <FilterSelect
             name="goal"
             label={dictionary.goal}
-            defaultValue={filters.goal}
+            value={filters.goal}
             placeholder={dictionary.allGoals}
             options={options.goals}
+            onChange={onFilterChange}
           />
           <FilterSelect
             name="category"
             label={dictionary.category}
-            defaultValue={filters.category}
+            value={filters.category}
             placeholder={dictionary.allCategories}
             options={options.categories}
+            onChange={onFilterChange}
           />
         </div>
 
         <div className="flex justify-end">
-          <Button type="submit" size="sm" className="min-w-32">
+          <Button type="button" size="sm" className="min-w-32" onClick={onApply}>
             {dictionary.apply}
           </Button>
         </div>
       </div>
-    </form>
+    </div>
   );
 }

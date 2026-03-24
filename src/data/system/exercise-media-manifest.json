@@ -5168,31 +5168,33 @@
   "dumbbell-pullover": {
     "style": "ANATOMY",
     "status": "READY",
-    "thumbnailUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/dumbbell-pullover/phase-01.webp?_a=BAMAOGDh0",
-    "detailUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/dumbbell-pullover/phase-02.webp?_a=BAMAOGDh0",
+    "thumbnailUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774276841/sablefit/workout/exercise/dumbbell-pullover/phase-01.webp",
+    "detailUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774276842/sablefit/workout/exercise/dumbbell-pullover/phase-02.webp",
     "keyframes": [
       {
         "order": 1,
+        "phase": "ECCENTRIC",
         "label": {
-          "en": "Key pose 1",
-          "vi": "Tư thế chính 1"
+          "en": "Eccentric",
+          "vi": "Pha hạ tạ"
         },
-        "url": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/dumbbell-pullover/phase-01.webp?_a=BAMAOGDh0"
+        "url": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774276841/sablefit/workout/exercise/dumbbell-pullover/phase-01.webp"
       },
       {
         "order": 2,
+        "phase": "CONCENTRIC",
         "label": {
-          "en": "Key pose 2",
-          "vi": "Tư thế chính 2"
+          "en": "Concentric",
+          "vi": "Pha đẩy tạ"
         },
-        "url": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/dumbbell-pullover/phase-02.webp?_a=BAMAOGDh0"
+        "url": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774276842/sablefit/workout/exercise/dumbbell-pullover/phase-02.webp"
       }
     ],
-    "animationUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1/sablefit/workout/exercise/dumbbell-pullover/motion-slow.gif?_a=BAMAOGDh0",
-    "sourceProvider": "CLOUDINARY",
-    "sourcePath": "sablefit/workout/exercise/dumbbell-pullover",
+    "animationUrl": "https://res.cloudinary.com/dwnucvodc/image/upload/v1774276844/sablefit/workout/exercise/dumbbell-pullover/motion-slow.gif",
     "videoUrl": "",
-    "videoPosterUrl": ""
+    "videoPosterUrl": "",
+    "sourceProvider": "WIKIMEDIA_COMMONS_CC_BY_SA_3_0",
+    "sourcePath": "https://commons.wikimedia.org/wiki/File:Dumbbell_bent_arm_pullover_1.svg | https://commons.wikimedia.org/wiki/File:Dumbbell_bent_arm_pullover_2.svg"
   },
   "seated-band-pull-apart": {
     "style": "ANATOMY",

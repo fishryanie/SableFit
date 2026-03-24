@@ -87,7 +87,18 @@ type DerivedExerciseMediaSpec = {
   matchMode: DerivedExerciseMediaMatchMode;
   sourceProvider: string;
   sourcePath: string;
-  overlayVariant: "trx-push-up" | "trx-row";
+  overlayVariant: "trx-push-up" | "trx-row" | "dumbbell-pullover";
+};
+
+type RemoteExerciseMediaMatchMode = "exact" | "equivalent";
+
+type RemoteExerciseMediaSpec = {
+  phase1Url: string;
+  phase2Url: string;
+  matchMode: RemoteExerciseMediaMatchMode;
+  sourceProvider: string;
+  sourcePath: string;
+  renderVariant: "dumbbell-pullover";
 };
 
 type ExerciseMediaAuditEntry = {
@@ -166,7 +177,26 @@ const customExerciseVideoOverrides: Record<string, ExerciseVideoOverride> = {
   },
 };
 
+const remoteExerciseMediaSpecs: Record<string, RemoteExerciseMediaSpec> = {
+  "dumbbell-pullover": {
+    phase1Url: "https://upload.wikimedia.org/wikipedia/commons/a/a2/Dumbbell_bent_arm_pullover_2.svg",
+    phase2Url: "https://upload.wikimedia.org/wikipedia/commons/4/46/Dumbbell_bent_arm_pullover_1.svg",
+    matchMode: "exact",
+    sourceProvider: "WIKIMEDIA_COMMONS_CC_BY_SA_3_0",
+    sourcePath:
+      "https://commons.wikimedia.org/wiki/File:Dumbbell_bent_arm_pullover_1.svg | https://commons.wikimedia.org/wiki/File:Dumbbell_bent_arm_pullover_2.svg",
+    renderVariant: "dumbbell-pullover",
+  },
+};
+
 const derivedExerciseMediaSpecs: Record<string, DerivedExerciseMediaSpec> = {
+  "dumbbell-pullover": {
+    baseRelativePath: "chest/02891301-Dumbbell-Bench-Press_Chest_720.gif",
+    matchMode: "equivalent",
+    sourceProvider: "INTERNAL_DERIVED",
+    sourcePath: "derived://dumbbell-pullover/from/chest/02891301-Dumbbell-Bench-Press_Chest_720.gif",
+    overlayVariant: "dumbbell-pullover",
+  },
   "trx-push-up": {
     baseRelativePath: "chest/06621301-Push-up-m_Chest-FIX_720.gif",
     matchMode: "exact",
@@ -1880,7 +1910,30 @@ function getDerivedExerciseOverlaySvg(
   variant: DerivedExerciseMediaSpec["overlayVariant"],
   width: number,
   height: number,
+  progress = 0,
 ) {
+  if (variant === "dumbbell-pullover") {
+    const centerX = Math.round(width * (0.34 + 0.16 * progress));
+    const centerY = Math.round(height * (0.2 + 0.14 * progress));
+    const angle = -30 + progress * 42;
+    const plateRadius = Math.round(width * 0.052);
+    const handleLength = Math.round(width * 0.15);
+    const handleThickness = Math.max(10, Math.round(width * 0.018));
+
+    return `
+      <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+        <g transform="translate(${centerX} ${centerY}) rotate(${angle})">
+          <rect x="${-handleLength / 2}" y="${-handleThickness / 2}" width="${handleLength}" height="${handleThickness}" rx="${Math.round(handleThickness / 2)}" fill="#1a1a1a" />
+          <circle cx="${-handleLength / 2}" cy="0" r="${plateRadius}" fill="#111" />
+          <circle cx="${-handleLength / 2}" cy="0" r="${Math.round(plateRadius * 0.58)}" fill="none" stroke="#2b2b2b" stroke-width="${Math.max(4, Math.round(width * 0.008))}" />
+          <circle cx="${handleLength / 2}" cy="0" r="${plateRadius}" fill="#111" />
+          <circle cx="${handleLength / 2}" cy="0" r="${Math.round(plateRadius * 0.58)}" fill="none" stroke="#2b2b2b" stroke-width="${Math.max(4, Math.round(width * 0.008))}" />
+          <rect x="${-(handleLength * 0.22)}" y="${-handleThickness * 0.9}" width="${Math.round(handleLength * 0.44)}" height="${Math.round(handleThickness * 1.8)}" rx="${Math.round(handleThickness / 2)}" fill="#2a2a2a" />
+        </g>
+      </svg>
+    `;
+  }
+
   if (variant === "trx-row") {
     return buildTrxOverlaySvg(width, height, {
       leftAnchor: [Math.round(width * 0.405), Math.round(height * 0.035)],
@@ -1898,20 +1951,52 @@ function getDerivedExerciseOverlaySvg(
   });
 }
 
+function getDerivedExerciseEraseSvg(
+  variant: DerivedExerciseMediaSpec["overlayVariant"],
+  width: number,
+  height: number,
+  progress = 0,
+) {
+  if (variant !== "dumbbell-pullover") {
+    return "";
+  }
+
+  const centerX = Math.round(width * (0.34 + 0.16 * progress));
+  const centerY = Math.round(height * (0.2 + 0.14 * progress));
+
+  return `
+    <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+      <g fill="#000">
+        <circle cx="${Math.round(width * 0.18)}" cy="${Math.round(height * 0.16)}" r="${Math.round(width * 0.11)}" />
+        <circle cx="${Math.round(width * 0.57)}" cy="${Math.round(height * 0.49)}" r="${Math.round(width * 0.12)}" />
+        <circle cx="${centerX}" cy="${centerY}" r="${Math.round(width * 0.04)}" />
+      </g>
+    </svg>
+  `;
+}
+
 async function compositeOverlayOnFrame(
   frame: RenderedFrame,
   overlaySvg: string,
+  eraseSvg?: string,
 ) {
-  const { data, info } = await sharp(Buffer.from(frame.rgba), {
+  const pipeline = sharp(Buffer.from(frame.rgba), {
     raw: {
       width: frame.width,
       height: frame.height,
       channels: 4,
     },
-  })
-    .composite([{ input: Buffer.from(overlaySvg) }])
-    .raw()
-    .toBuffer({ resolveWithObject: true });
+  });
+
+  const compositeInputs = [];
+  if (eraseSvg) {
+    compositeInputs.push({ input: Buffer.from(eraseSvg), blend: "dest-out" as const });
+  }
+  compositeInputs.push({ input: Buffer.from(overlaySvg) });
+
+  const { data, info } = await pipeline.composite(compositeInputs).raw().toBuffer({
+    resolveWithObject: true,
+  });
 
   return {
     rgba: new Uint8Array(data),
@@ -1926,11 +2011,131 @@ async function renderDerivedExerciseFrame(
   width: number,
   height: number,
   variant: DerivedExerciseMediaSpec["overlayVariant"],
+  pageCount = 2,
 ) {
   const baseFrame = await renderAnimatedFrame(assetPath, page, width, height);
-  const overlaySvg = getDerivedExerciseOverlaySvg(variant, baseFrame.width, baseFrame.height);
+  const progress = pageCount <= 1 ? 1 : page / (pageCount - 1);
+  const overlaySvg = getDerivedExerciseOverlaySvg(
+    variant,
+    baseFrame.width,
+    baseFrame.height,
+    progress,
+  );
+  const eraseSvg = getDerivedExerciseEraseSvg(
+    variant,
+    baseFrame.width,
+    baseFrame.height,
+    progress,
+  );
 
-  return compositeOverlayOnFrame(baseFrame, overlaySvg);
+  return compositeOverlayOnFrame(
+    baseFrame,
+    overlaySvg,
+    eraseSvg || undefined,
+  );
+}
+
+const remoteTextCache = new Map<string, string>();
+
+async function fetchRemoteText(url: string) {
+  const cached = remoteTextCache.get(url);
+  if (cached) {
+    return cached;
+  }
+
+  const response = await fetch(url, {
+    headers: {
+      "user-agent": "Mozilla/5.0 Codex SableFit/1.0",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Unable to fetch remote media source: ${url} (${response.status})`);
+  }
+
+  const text = await response.text();
+  remoteTextCache.set(url, text);
+  return text;
+}
+
+function tintDumbbellPulloverSvg(svg: string) {
+  return svg.replace(/<path /g, '<path fill="#8a8a8a" ');
+}
+
+function getDumbbellPulloverMuscleOverlaySvg(
+  width: number,
+  height: number,
+  phase: 1 | 2,
+) {
+  if (phase === 1) {
+    return `
+      <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+        <g opacity="0.78">
+          <ellipse cx="${Math.round(width * 0.49)}" cy="${Math.round(height * 0.39)}" rx="${Math.round(width * 0.127)}" ry="${Math.round(height * 0.065)}" fill="#d55b4a" transform="rotate(-2 ${Math.round(width * 0.49)} ${Math.round(height * 0.39)})" />
+          <ellipse cx="${Math.round(width * 0.4)}" cy="${Math.round(height * 0.44)}" rx="${Math.round(width * 0.104)}" ry="${Math.round(height * 0.05)}" fill="#d55b4a" transform="rotate(-12 ${Math.round(width * 0.4)} ${Math.round(height * 0.44)})" />
+          <ellipse cx="${Math.round(width * 0.58)}" cy="${Math.round(height * 0.44)}" rx="${Math.round(width * 0.104)}" ry="${Math.round(height * 0.05)}" fill="#d55b4a" transform="rotate(12 ${Math.round(width * 0.58)} ${Math.round(height * 0.44)})" />
+        </g>
+      </svg>
+    `;
+  }
+
+  return `
+    <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+      <g opacity="0.78">
+        <ellipse cx="${Math.round(width * 0.5)}" cy="${Math.round(height * 0.38)}" rx="${Math.round(width * 0.127)}" ry="${Math.round(height * 0.069)}" fill="#d55b4a" transform="rotate(-18 ${Math.round(width * 0.5)} ${Math.round(height * 0.38)})" />
+        <ellipse cx="${Math.round(width * 0.41)}" cy="${Math.round(height * 0.442)}" rx="${Math.round(width * 0.112)}" ry="${Math.round(height * 0.058)}" fill="#d55b4a" transform="rotate(-24 ${Math.round(width * 0.41)} ${Math.round(height * 0.442)})" />
+        <ellipse cx="${Math.round(width * 0.588)}" cy="${Math.round(height * 0.438)}" rx="${Math.round(width * 0.108)}" ry="${Math.round(height * 0.054)}" fill="#d55b4a" transform="rotate(18 ${Math.round(width * 0.588)} ${Math.round(height * 0.438)})" />
+      </g>
+    </svg>
+  `;
+}
+
+async function renderDumbbellPulloverReferenceFrame(
+  svgUrl: string,
+  width: number,
+  height: number,
+  phase: 1 | 2,
+) {
+  const tintedSvg = tintDumbbellPulloverSvg(await fetchRemoteText(svgUrl));
+  const overlaySvg = getDumbbellPulloverMuscleOverlaySvg(width, height, phase);
+
+  const { data, info } = await sharp(Buffer.from(tintedSvg))
+    .resize(width, height, {
+      fit: "contain",
+      background: { r: 255, g: 255, b: 255, alpha: 1 },
+    })
+    .flatten({ background: "#ffffff" })
+    .composite([{ input: Buffer.from(overlaySvg), blend: "multiply" }])
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  return {
+    rgba: new Uint8Array(data),
+    width: info.width,
+    height: info.height,
+  } satisfies RenderedFrame;
+}
+
+function blendRenderedFrames(
+  from: RenderedFrame,
+  to: RenderedFrame,
+  progress: number,
+) {
+  if (from.width !== to.width || from.height !== to.height) {
+    throw new Error("Unable to blend frames with mismatched dimensions");
+  }
+
+  const output = new Uint8Array(from.rgba.length);
+  for (let index = 0; index < from.rgba.length; index += 1) {
+    output[index] = Math.round(from.rgba[index] * (1 - progress) + to.rgba[index] * progress);
+  }
+
+  return {
+    rgba: output,
+    width: from.width,
+    height: from.height,
+  } satisfies RenderedFrame;
 }
 
 async function writeAnimatedFrameVariant(
@@ -2394,75 +2599,119 @@ async function generateExerciseMedia() {
 
   for (const exercise of exercises) {
     const localPaths = getLocalExerciseMediaPaths(exercise.slug);
-    const derivedSpec = derivedExerciseMediaSpecs[exercise.slug];
-    const pickedSource = derivedSpec ? null : pickBestSourceAsset(exercise, sourceAssets);
+    const remoteSpec = remoteExerciseMediaSpecs[exercise.slug];
+    const derivedSpec = remoteSpec ? null : derivedExerciseMediaSpecs[exercise.slug];
+    const pickedSource = remoteSpec || derivedSpec ? null : pickBestSourceAsset(exercise, sourceAssets);
 
     const matchedAsset = derivedSpec
       ? sourceAssetLookup.get(derivedSpec.baseRelativePath) ?? null
       : pickedSource?.asset ?? null;
-    const matchMode = derivedSpec ? derivedSpec.matchMode : pickedSource?.matchMode ?? null;
+    const matchMode = remoteSpec
+      ? remoteSpec.matchMode
+      : derivedSpec
+        ? derivedSpec.matchMode
+        : pickedSource?.matchMode ?? null;
 
-    if (!matchedAsset || matchedAsset.extension !== ".gif" || !matchMode) {
+    if (!remoteSpec && (!matchedAsset || matchedAsset.extension !== ".gif" || !matchMode)) {
       throw new Error(`Unable to resolve anatomy media for exercise: ${exercise.slug}`);
     }
 
-    const metadata = await sharp(matchedAsset.absolutePath, { animated: true }).metadata();
-    const pageCount = metadata.pages ?? 1;
-    const delays = metadata.delay ?? [];
-    const [phase1Index, phase2Index] = getPhaseIndexes(pageCount);
+    let motionFrames: Array<RenderedFrame & { delay: number }>;
 
-    if (derivedSpec) {
+    if (remoteSpec?.renderVariant === "dumbbell-pullover") {
       const [phase1Frame, phase2Frame] = await Promise.all([
-        renderDerivedExerciseFrame(
-          matchedAsset.absolutePath,
-          phase1Index,
-          520,
-          520,
-          derivedSpec.overlayVariant,
-        ),
-        renderDerivedExerciseFrame(
-          matchedAsset.absolutePath,
-          phase2Index,
-          520,
-          520,
-          derivedSpec.overlayVariant,
-        ),
+        renderDumbbellPulloverReferenceFrame(remoteSpec.phase1Url, 520, 520, 1),
+        renderDumbbellPulloverReferenceFrame(remoteSpec.phase2Url, 520, 520, 2),
       ]);
 
       await Promise.all([
         writeRgbaWebp(phase1Frame.rgba, phase1Frame.width, phase1Frame.height, localPaths.phase1Path),
         writeRgbaWebp(phase2Frame.rgba, phase2Frame.width, phase2Frame.height, localPaths.phase2Path),
       ]);
-    } else {
-      await Promise.all([
-        writeAnimatedFrameVariant(matchedAsset.absolutePath, localPaths.phase1Path, phase1Index, 520, 520),
-        writeAnimatedFrameVariant(matchedAsset.absolutePath, localPaths.phase2Path, phase2Index, 520, 520),
+
+      const [motionPhase1, motionPhase2] = await Promise.all([
+        renderDumbbellPulloverReferenceFrame(remoteSpec.phase1Url, 720, 720, 1),
+        renderDumbbellPulloverReferenceFrame(remoteSpec.phase2Url, 720, 720, 2),
       ]);
+
+      const motionProgressValues = [0, 0.18, 0.36, 0.54, 0.72, 0.88, 1, 0.82, 0.64, 0.46, 0.28, 0.1];
+      motionFrames = motionProgressValues.map((progress, index) => ({
+        ...blendRenderedFrames(motionPhase1, motionPhase2, progress),
+        delay: index === 0 || index === motionProgressValues.length / 2 ? 280 : 160,
+      }));
+    } else {
+      if (!matchedAsset) {
+        throw new Error(`Unable to resolve anatomy media for exercise: ${exercise.slug}`);
+      }
+
+      const metadata = await sharp(matchedAsset.absolutePath, { animated: true }).metadata();
+      const pageCount = metadata.pages ?? 1;
+      const delays = metadata.delay ?? [];
+      const [phase1Index, phase2Index] = getPhaseIndexes(pageCount);
+
+      if (derivedSpec) {
+        const [phase1Frame, phase2Frame] = await Promise.all([
+          renderDerivedExerciseFrame(
+            matchedAsset.absolutePath,
+            phase1Index,
+            520,
+            520,
+            derivedSpec.overlayVariant,
+            pageCount,
+          ),
+          renderDerivedExerciseFrame(
+            matchedAsset.absolutePath,
+            phase2Index,
+            520,
+            520,
+            derivedSpec.overlayVariant,
+            pageCount,
+          ),
+        ]);
+
+        await Promise.all([
+          writeRgbaWebp(phase1Frame.rgba, phase1Frame.width, phase1Frame.height, localPaths.phase1Path),
+          writeRgbaWebp(phase2Frame.rgba, phase2Frame.width, phase2Frame.height, localPaths.phase2Path),
+        ]);
+      } else {
+        await Promise.all([
+          writeAnimatedFrameVariant(matchedAsset.absolutePath, localPaths.phase1Path, phase1Index, 520, 520),
+          writeAnimatedFrameVariant(matchedAsset.absolutePath, localPaths.phase2Path, phase2Index, 520, 520),
+        ]);
+      }
+
+      motionFrames = await mapWithConcurrency(
+        Array.from({ length: pageCount }, (_, index) => index),
+        4,
+        async (page) => {
+          const frame = derivedSpec
+            ? await renderDerivedExerciseFrame(
+                matchedAsset.absolutePath,
+                page,
+                720,
+                720,
+                derivedSpec.overlayVariant,
+                pageCount,
+              )
+            : await getAnimatedFramePixels(matchedAsset.absolutePath, page, 720, 720);
+
+          return {
+            ...frame,
+            delay: Math.max(180, Math.round((delays[page] ?? 100) * 1.8)),
+          };
+        },
+      );
     }
-
-    const motionFrames = await mapWithConcurrency(
-      Array.from({ length: pageCount }, (_, index) => index),
-      4,
-      async (page) => {
-        const frame = derivedSpec
-          ? await renderDerivedExerciseFrame(
-              matchedAsset.absolutePath,
-              page,
-              720,
-              720,
-              derivedSpec.overlayVariant,
-            )
-          : await getAnimatedFramePixels(matchedAsset.absolutePath, page, 720, 720);
-
-        return {
-          ...frame,
-          delay: Math.max(180, Math.round((delays[page] ?? 100) * 1.8)),
-        };
-      },
-    );
 
     await writeAnimatedGif(motionFrames, localPaths.motionPath);
     motionCount += 1;
+
+    const resolvedMatchMode = matchMode ?? "prototype";
+    const resolvedSourcePath =
+      remoteSpec?.sourcePath ??
+      derivedSpec?.sourcePath ??
+      matchedAsset?.relativePath.replaceAll(path.sep, "/") ??
+      "";
 
     manifest[exercise.slug] = {
       style: "ANATOMY",
@@ -2486,15 +2735,14 @@ async function generateExerciseMedia() {
       animationUrl: localPaths.motionUrl,
       videoUrl: "",
       videoPosterUrl: "",
-      sourceProvider: derivedSpec?.sourceProvider ?? "FITATE_LOCAL",
-      sourcePath:
-        derivedSpec?.sourcePath ?? matchedAsset.relativePath.replaceAll(path.sep, "/"),
+      sourceProvider: remoteSpec?.sourceProvider ?? derivedSpec?.sourceProvider ?? "FITATE_LOCAL",
+      sourcePath: resolvedSourcePath,
     };
     anatomyCount += 1;
 
-    if (matchMode === "exact") {
+    if (resolvedMatchMode === "exact") {
       exactCount += 1;
-    } else if (matchMode === "equivalent") {
+    } else if (resolvedMatchMode === "equivalent") {
       equivalentCount += 1;
     } else {
       prototypeCount += 1;
@@ -2502,9 +2750,8 @@ async function generateExerciseMedia() {
 
     auditEntries.push({
       slug: exercise.slug,
-      matchMode,
-      sourcePath:
-        derivedSpec?.sourcePath ?? matchedAsset.relativePath.replaceAll(path.sep, "/"),
+      matchMode: resolvedMatchMode,
+      sourcePath: resolvedSourcePath,
       cloudinaryFolder: `${cloudinaryRootFolder}/workout/exercise/${exercise.slug}`,
     });
   }

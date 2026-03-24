@@ -10,7 +10,9 @@
     "save": "Save",
     "cancel": "Cancel",
     "loading": "Loading",
-    "logout": "Log out"
+    "logout": "Log out",
+    "switchToDark": "Switch to dark mode",
+    "switchToLight": "Switch to light mode"
   },
   "pwaPrompt": {
     "title": "Install SableFit",
@@ -137,6 +139,19 @@
   "settingsPage": {
     "title": "Settings",
     "subtitle": "Control language, reminder time, push permissions, and account state.",
+    "themeTitle": "Theme studio",
+    "themeBody": "Paste a shadcn-style token snippet and SableFit will apply it across the app immediately.",
+    "themeSnippetLabel": "Theme snippet",
+    "themeHint": "Paste the :root and .dark blocks. The optional @theme inline block is ignored because the app already maps those tokens internally.",
+    "themeApplyAction": "Apply theme",
+    "themeResetAction": "Reset to default",
+    "themeStatusDefault": "Default SableFit theme",
+    "themeStatusCustom": "Custom theme loaded",
+    "themeStatusApplied": "Live",
+    "themeScope": "Stored on this device in your browser and applied to both light and dark mode.",
+    "themeApplied": "Custom theme applied.",
+    "themeReset": "Custom theme cleared.",
+    "themeInvalid": "Theme snippet is invalid: {reason}",
     "reviewTitle": "Data review",
     "reviewBody": "Inspect live Mongo data for exercises, muscles, equipments, goals, and categories before you scale further.",
     "reviewAction": "Open review dashboard"
@@ -144,11 +159,8 @@
   "reviewPage": {
     "title": "Catalog review",
     "subtitle": "Review live data coming from Mongo and Cloudinary-backed URLs before approving the next content pass.",
-    "auditAction": "AI UI audit",
     "workspaceLabel": "Workspace",
     "collectionsLabel": "Collections",
-    "toolsLabel": "Tools",
-    "localReviewLabel": "Local review",
     "account": "Account",
     "billing": "Billing",
     "notifications": "Notifications",
@@ -208,28 +220,5 @@
       "goals": "Exercise goals",
       "categories": "Exercise categories"
     }
-  },
-  "uiAuditPage": {
-    "title": "AI UI audit",
-    "subtitle": "Upload screenshots and let a vision model review hierarchy, clipping, overlap, spacing, and overall polish before you iterate again.",
-    "helper": "This runs only in local/dev and calls the OpenAI Responses API from the server. It is meant for fast design QA, not for replacing manual product judgment.",
-    "pageUrl": "Page URL",
-    "viewport": "Viewport",
-    "notes": "Extra notes",
-    "screenshots": "Screenshots",
-    "desktop": "Desktop",
-    "mobile": "Mobile",
-    "runAudit": "Run AI audit",
-    "running": "Reviewing",
-    "emptyState": "Add one or more screenshots to review this UI.",
-    "configHint": "Requires OPENAI_API_KEY and optionally OPENAI_UI_REVIEW_MODEL in local env.",
-    "score": "Score",
-    "summary": "Summary",
-    "positives": "What works",
-    "issues": "Findings",
-    "nextActions": "Next actions",
-    "uploadHint": "Upload up to 4 screenshots. Include the broken state, not only the ideal state.",
-    "openReview": "Back to data review",
-    "errorTitle": "Could not run the AI audit."
   }
 }

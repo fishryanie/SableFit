@@ -1,8 +1,8 @@
 {
   "totalExercises": 183,
-  "exactMatchCount": 65,
+  "exactMatchCount": 66,
   "equivalentMatchCount": 41,
-  "prototypeMatchCount": 77,
+  "prototypeMatchCount": 76,
   "entries": [
     {
       "slug": "ab-wheel-rollout",
@@ -354,8 +354,8 @@
     },
     {
       "slug": "dumbbell-pullover",
-      "matchMode": "prototype",
-      "sourcePath": "chest/02891301-Dumbbell-Bench-Press_Chest_720.gif",
+      "matchMode": "exact",
+      "sourcePath": "https://commons.wikimedia.org/wiki/File:Dumbbell_bent_arm_pullover_1.svg | https://commons.wikimedia.org/wiki/File:Dumbbell_bent_arm_pullover_2.svg",
       "cloudinaryFolder": "sablefit/workout/exercise/dumbbell-pullover"
     },
     {

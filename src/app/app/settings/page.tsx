@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FolderKanban } from "lucide-react";
 import { LogoutButton } from "@/components/logout-button";
 import { PushSubscriptionCard } from "@/components/push-subscription-card";
+import { ThemeStudioCard } from "@/components/theme-studio-card";
 import { requireAuthSession } from "@/lib/auth";
 import { getSettingsData } from "@/lib/data";
 import { getTranslations } from "next-intl/server";
@@ -36,6 +37,8 @@ export default async function SettingsPage() {
       </section>
 
       <PushSubscriptionCard hasActiveSubscription={data.pushSubscriptions.length > 0} />
+
+      <ThemeStudioCard />
 
       <Link
         href="/app/review"

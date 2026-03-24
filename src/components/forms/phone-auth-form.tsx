@@ -1,5 +1,6 @@
 "use client";
 
+import { FirebaseError } from "firebase/app";
 import { getFirebaseClientAuth, hasFirebaseWebConfig } from "@/lib/firebase-client";
 import { Loader2, ShieldCheck, Smartphone } from "lucide-react";
 import {
@@ -14,6 +15,37 @@ import { useRouter } from "next/navigation";
 declare global {
   interface Window {
     sablefitRecaptcha?: RecaptchaVerifier;
+  }
+}
+
+function getFirebaseErrorMessage(error: unknown) {
+  if (!(error instanceof FirebaseError)) {
+    return "Unexpected Firebase error.";
+  }
+
+  switch (error.code) {
+    case "auth/invalid-phone-number":
+      return "Phone number format is invalid. Use full E.164 format, for example +84...";
+    case "auth/operation-not-allowed":
+      return "Phone sign-in is not enabled in Firebase Authentication yet.";
+    case "auth/unauthorized-domain":
+      return "This domain is not authorized in Firebase Authentication.";
+    case "auth/captcha-check-failed":
+      return "reCAPTCHA verification failed. Reload the page and try again.";
+    case "auth/invalid-app-credential":
+      return "Firebase rejected the app credential. Check the auth domain and reCAPTCHA setup.";
+    case "auth/quota-exceeded":
+      return "Firebase SMS quota is exhausted for this project.";
+    case "auth/too-many-requests":
+      return "Too many attempts. Firebase has temporarily blocked more SMS requests.";
+    case "auth/missing-phone-number":
+      return "Phone number is missing.";
+    case "auth/code-expired":
+      return "The verification code expired. Request a new OTP.";
+    case "auth/invalid-verification-code":
+      return "The verification code is invalid.";
+    default:
+      return `${error.code}: ${error.message}`;
   }
 }
 
@@ -69,7 +101,7 @@ export function PhoneAuthForm() {
       setMessage("");
     } catch (error) {
       console.error("[phone-auth] send otp failed", error);
-      setMessage("Could not send OTP. Check Firebase config and phone format.");
+      setMessage(getFirebaseErrorMessage(error));
     } finally {
       setSubmitting(false);
     }
@@ -99,7 +131,8 @@ export function PhoneAuthForm() {
       });
 
       if (!response.ok) {
-        throw new Error("Session exchange failed.");
+        const payload = (await response.json().catch(() => null)) as { message?: string } | null;
+        throw new Error(payload?.message || "Session exchange failed.");
       }
 
       startTransition(() => {
@@ -108,7 +141,7 @@ export function PhoneAuthForm() {
       });
     } catch (error) {
       console.error("[phone-auth] verify failed", error);
-      setMessage("Could not verify the code. Please try again.");
+      setMessage(error instanceof Error ? error.message : "Could not verify the code. Please try again.");
     } finally {
       setSubmitting(false);
     }

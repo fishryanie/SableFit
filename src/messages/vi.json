@@ -10,7 +10,9 @@
     "save": "Lưu",
     "cancel": "Hủy",
     "loading": "Đang tải",
-    "logout": "Đăng xuất"
+    "logout": "Đăng xuất",
+    "switchToDark": "Chuyển sang dark mode",
+    "switchToLight": "Chuyển sang light mode"
   },
   "pwaPrompt": {
     "title": "Cài SableFit",
@@ -137,6 +139,19 @@
   "settingsPage": {
     "title": "Cài đặt",
     "subtitle": "Điều chỉnh ngôn ngữ, giờ nhắc, quyền push và trạng thái tài khoản.",
+    "themeTitle": "Theme studio",
+    "themeBody": "Dán snippet token kiểu shadcn vào đây và SableFit sẽ áp dụng ngay trên toàn app.",
+    "themeSnippetLabel": "Theme snippet",
+    "themeHint": "Chỉ cần dán block :root và .dark. Block @theme inline là optional và sẽ được bỏ qua vì app đã tự map token bên trong.",
+    "themeApplyAction": "Áp dụng theme",
+    "themeResetAction": "Về theme mặc định",
+    "themeStatusDefault": "Theme mặc định của SableFit",
+    "themeStatusCustom": "Đã nạp theme tùy chỉnh",
+    "themeStatusApplied": "Đang dùng",
+    "themeScope": "Theme được lưu trên trình duyệt của thiết bị này và áp dụng cho cả light lẫn dark mode.",
+    "themeApplied": "Đã áp dụng theme tùy chỉnh.",
+    "themeReset": "Đã xóa theme tùy chỉnh.",
+    "themeInvalid": "Snippet theme chưa hợp lệ: {reason}",
     "reviewTitle": "Review dữ liệu",
     "reviewBody": "Kiểm tra dữ liệu thật từ Mongo cho bài tập, nhóm cơ, dụng cụ, mục tiêu và danh mục trước khi scale tiếp.",
     "reviewAction": "Mở dashboard review"
@@ -144,11 +159,8 @@
   "reviewPage": {
     "title": "Review catalog",
     "subtitle": "Kiểm tra dữ liệu live từ Mongo và URL đã gắn Cloudinary trước khi duyệt vòng content tiếp theo.",
-    "auditAction": "AI review UI",
     "workspaceLabel": "Không gian",
     "collectionsLabel": "Danh mục",
-    "toolsLabel": "Công cụ",
-    "localReviewLabel": "Review local",
     "account": "Tài khoản",
     "billing": "Thanh toán",
     "notifications": "Thông báo",
@@ -208,28 +220,5 @@
       "goals": "Mục tiêu bài tập",
       "categories": "Danh mục bài tập"
     }
-  },
-  "uiAuditPage": {
-    "title": "AI review UI",
-    "subtitle": "Upload screenshot để vision model soi bố cục, chồng lớp, cắt nội dung, khoảng trắng và độ hoàn thiện trước khi mình sửa tiếp.",
-    "helper": "Tool này chỉ chạy ở local/dev và gọi OpenAI Responses API từ server. Nó dùng để QA thiết kế nhanh, không thay thế việc review sản phẩm bằng mắt người.",
-    "pageUrl": "URL trang",
-    "viewport": "Viewport",
-    "notes": "Ghi chú thêm",
-    "screenshots": "Screenshot",
-    "desktop": "Desktop",
-    "mobile": "Mobile",
-    "runAudit": "Chạy AI audit",
-    "running": "Đang review",
-    "emptyState": "Thêm ít nhất một screenshot để review UI này.",
-    "configHint": "Cần OPENAI_API_KEY và có thể thêm OPENAI_UI_REVIEW_MODEL trong env local.",
-    "score": "Điểm",
-    "summary": "Tóm tắt",
-    "positives": "Điểm ổn",
-    "issues": "Phát hiện",
-    "nextActions": "Việc nên làm tiếp",
-    "uploadHint": "Upload tối đa 4 screenshot. Nên đưa cả trạng thái bị lỗi, không chỉ ảnh đẹp.",
-    "openReview": "Quay lại review dữ liệu",
-    "errorTitle": "Không chạy được AI audit."
   }
 }

@@ -10,7 +10,6 @@ import {
   House,
   LayoutGrid,
   Settings2,
-  Sparkles,
   Target,
   Waves,
 } from "lucide-react";
@@ -37,12 +36,10 @@ type ReviewAppSidebarProps = React.ComponentProps<typeof Sidebar> & {
   dictionary: {
     workspaceLabel: string;
     collectionsLabel: string;
-    toolsLabel: string;
     account: string;
     billing: string;
     notifications: string;
     logout: string;
-    auditAction: string;
     nav: {
       today: string;
       library: string;
@@ -66,7 +63,6 @@ export function ReviewAppSidebar({
   const searchParams = useSearchParams();
   const activeSection =
     (searchParams.get("section") as ReviewSection | null) ?? "exercises";
-  const isUiAudit = pathname.startsWith("/app/review/ui-audit");
 
   const workspaceItems = [
     { href: "/app/today", label: dictionary.nav.today, icon: House },
@@ -143,7 +139,6 @@ export function ReviewAppSidebar({
               {collectionItems.map((item) => {
                 const Icon = item.icon;
                 const isActive =
-                  !isUiAudit &&
                   pathname === "/app/review" &&
                   activeSection === item.section;
 
@@ -162,26 +157,6 @@ export function ReviewAppSidebar({
                   </SidebarMenuItem>
                 );
               })}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        <SidebarGroup className="mt-auto">
-          <SidebarGroupLabel>{dictionary.toolsLabel}</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton
-                  asChild
-                  isActive={isUiAudit}
-                  tooltip={dictionary.auditAction}
-                >
-                  <Link href="/app/review/ui-audit">
-                    <Sparkles />
-                    <span>{dictionary.auditAction}</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

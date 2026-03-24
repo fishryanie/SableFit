@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -16,8 +18,16 @@ import {
   Search,
   Target,
 } from "lucide-react";
+import {
+  startTransition,
+  useDeferredValue,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import type {
   ReviewDashboardData,
+  ReviewDashboardSnapshot,
   ReviewExerciseFilters,
   ReviewExerciseItem,
   ReviewReferenceItem,
@@ -31,7 +41,14 @@ import { ReviewExerciseFilterBar } from "@/components/review-exercise-filter-bar
 import { ReviewSectionTabs } from "@/components/review-section-tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import {
   Table,
@@ -44,8 +61,13 @@ import {
 
 type ReviewDashboardProps = {
   locale: AppLocale;
-  data: ReviewDashboardData;
-  filterState: ReviewExerciseFilters;
+  snapshot: ReviewDashboardSnapshot;
+  initialState: {
+    section: ReviewSection;
+    q: string;
+    page: number;
+    filters: ReviewExerciseFilters;
+  };
   filterOptions: {
     movementTypes: Array<{ slug: string; label: string }>;
     levels: Array<{ slug: string; label: string }>;
@@ -109,44 +131,6 @@ type ReviewDashboardProps = {
   };
 };
 
-function buildReviewHref(
-  section: ReviewSection,
-  q: string,
-  page = 1,
-  filters: ReviewExerciseFilters = {},
-) {
-  const params = new URLSearchParams();
-  params.set("section", section);
-  if (q.trim()) {
-    params.set("q", q.trim());
-  }
-  if (filters.level) {
-    params.set("level", filters.level);
-  }
-  if (filters.movementType) {
-    params.set("movementType", filters.movementType);
-  }
-  if (filters.muscle) {
-    params.set("muscle", filters.muscle);
-  }
-  if (filters.muscleCategory) {
-    params.set("muscleCategory", filters.muscleCategory);
-  }
-  if (filters.equipment) {
-    params.set("equipment", filters.equipment);
-  }
-  if (filters.goal) {
-    params.set("goal", filters.goal);
-  }
-  if (filters.category) {
-    params.set("category", filters.category);
-  }
-  if (page > 1) {
-    params.set("page", String(page));
-  }
-  return `/app/review?${params.toString()}`;
-}
-
 function detectAssetSource(url?: string) {
   if (!url) {
     return "missing";
@@ -190,6 +174,164 @@ function summarizeLabels(values: string[], limit: number) {
     visible,
     remaining,
     text: visible.join(", "),
+  };
+}
+
+function normalizeText(value: string) {
+  return value.trim().toLowerCase();
+}
+
+function matchesQuery(value: string, q: string) {
+  return normalizeText(value).includes(q);
+}
+
+function buildReviewUrl({
+  section,
+  q,
+  page,
+  filters,
+}: {
+  section: ReviewSection;
+  q: string;
+  page: number;
+  filters: ReviewExerciseFilters;
+}) {
+  const params = new URLSearchParams();
+  params.set("section", section);
+
+  if (q.trim()) {
+    params.set("q", q.trim());
+  }
+
+  if (section === "exercises") {
+    if (filters.level) {
+      params.set("level", filters.level);
+    }
+    if (filters.movementType) {
+      params.set("movementType", filters.movementType);
+    }
+    if (filters.muscle) {
+      params.set("muscle", filters.muscle);
+    }
+    if (filters.muscleCategory) {
+      params.set("muscleCategory", filters.muscleCategory);
+    }
+    if (filters.equipment) {
+      params.set("equipment", filters.equipment);
+    }
+    if (filters.goal) {
+      params.set("goal", filters.goal);
+    }
+    if (filters.category) {
+      params.set("category", filters.category);
+    }
+  }
+
+  if (page > 1) {
+    params.set("page", String(page));
+  }
+
+  return `/app/review?${params.toString()}`;
+}
+
+function filterExercises(items: ReviewExerciseItem[], q: string, filters: ReviewExerciseFilters) {
+  return items.filter((item) => {
+    if (filters.level && item.level?.slug !== filters.level) {
+      return false;
+    }
+
+    if (filters.equipment && !item.equipment.some((value) => value.slug === filters.equipment)) {
+      return false;
+    }
+
+    if (
+      filters.muscleCategory &&
+      !item.muscleCategories.some((value) => value.slug === filters.muscleCategory)
+    ) {
+      return false;
+    }
+
+    if (
+      filters.muscle &&
+      ![...item.primaryMuscles, ...item.secondaryMuscles].some(
+        (value) => value.slug === filters.muscle,
+      )
+    ) {
+      return false;
+    }
+
+    if (filters.goal && !item.goals.some((value) => value.slug === filters.goal)) {
+      return false;
+    }
+
+    if (filters.category && !item.categories.some((value) => value.slug === filters.category)) {
+      return false;
+    }
+
+    if (filters.movementType && item.movementType !== filters.movementType) {
+      return false;
+    }
+
+    if (!q) {
+      return true;
+    }
+
+    const haystacks = [
+      item.slug,
+      item.name.en,
+      item.name.vi,
+      item.description.en,
+      item.description.vi,
+      ...item.primaryMuscles.map((value) => value.name.en),
+      ...item.primaryMuscles.map((value) => value.name.vi),
+      ...item.secondaryMuscles.map((value) => value.name.en),
+      ...item.secondaryMuscles.map((value) => value.name.vi),
+      ...item.muscleCategories.map((value) => value.name.en),
+      ...item.muscleCategories.map((value) => value.name.vi),
+      ...item.equipment.map((value) => value.name.en),
+      ...item.equipment.map((value) => value.name.vi),
+      ...item.goals.map((value) => value.name.en),
+      ...item.goals.map((value) => value.name.vi),
+      ...item.categories.map((value) => value.name.en),
+      ...item.categories.map((value) => value.name.vi),
+    ];
+
+    return haystacks.some((value) => matchesQuery(value || "", q));
+  });
+}
+
+function filterReferences(items: ReviewReferenceItem[], q: string) {
+  if (!q) {
+    return items;
+  }
+
+  return items.filter((item) => {
+    const haystacks = [
+      item.slug,
+      item.name.en,
+      item.name.vi,
+      item.description.en,
+      item.description.vi,
+      item.category?.slug ?? "",
+      item.category?.name.en ?? "",
+      item.category?.name.vi ?? "",
+    ];
+
+    return haystacks.some((value) => matchesQuery(value, q));
+  });
+}
+
+function paginateItems<T>(items: T[], page: number, pageSize: number) {
+  const total = items.length;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const safePage = Math.min(Math.max(1, page), totalPages);
+  const start = (safePage - 1) * pageSize;
+
+  return {
+    page: safePage,
+    total,
+    totalPages,
+    items: items.slice(start, start + pageSize),
   };
 }
 
@@ -241,23 +383,19 @@ function ExerciseMetaRow({
 }
 
 function Pagination({
-  section,
-  q,
   page,
   totalPages,
   pageSize,
   total,
-  filters,
   dictionary,
+  onPageChange,
 }: {
-  section: ReviewSection;
-  q: string;
   page: number;
   totalPages: number;
   pageSize: number;
   total: number;
-  filters: ReviewExerciseFilters;
   dictionary: ReviewDashboardProps["dictionary"];
+  onPageChange: (page: number) => void;
 }) {
   return (
     <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -272,48 +410,44 @@ function Pagination({
         </div>
         <div className="ml-auto flex items-center gap-2 sm:ml-0">
           <Button
-            asChild
+            type="button"
             variant="outline"
             size="icon"
             className={cn("hidden lg:flex", page <= 1 && "pointer-events-none opacity-50")}
+            onClick={() => onPageChange(1)}
           >
-            <Link href={buildReviewHref(section, q, 1, filters)}>
-              <span className="sr-only">Go to first page</span>
-              <ChevronsLeft className="h-4 w-4" />
-            </Link>
+            <span className="sr-only">Go to first page</span>
+            <ChevronsLeft className="h-4 w-4" />
           </Button>
           <Button
-            asChild
+            type="button"
             variant="outline"
             size="icon"
             className={cn(page <= 1 && "pointer-events-none opacity-50")}
+            onClick={() => onPageChange(Math.max(1, page - 1))}
           >
-            <Link href={buildReviewHref(section, q, Math.max(1, page - 1), filters)}>
-              <span className="sr-only">Go to previous page</span>
-              <ChevronLeft className="h-4 w-4" />
-            </Link>
+            <span className="sr-only">Go to previous page</span>
+            <ChevronLeft className="h-4 w-4" />
           </Button>
           <Button
-            asChild
+            type="button"
             variant="outline"
             size="icon"
             className={cn(page >= totalPages && "pointer-events-none opacity-50")}
+            onClick={() => onPageChange(Math.min(totalPages, page + 1))}
           >
-            <Link href={buildReviewHref(section, q, Math.min(totalPages, page + 1), filters)}>
-              <span className="sr-only">Go to next page</span>
-              <ChevronRight className="h-4 w-4" />
-            </Link>
+            <span className="sr-only">Go to next page</span>
+            <ChevronRight className="h-4 w-4" />
           </Button>
           <Button
-            asChild
+            type="button"
             variant="outline"
             size="icon"
             className={cn("hidden lg:flex", page >= totalPages && "pointer-events-none opacity-50")}
+            onClick={() => onPageChange(totalPages)}
           >
-            <Link href={buildReviewHref(section, q, totalPages, filters)}>
-              <span className="sr-only">Go to last page</span>
-              <ChevronsRight className="h-4 w-4" />
-            </Link>
+            <span className="sr-only">Go to last page</span>
+            <ChevronsRight className="h-4 w-4" />
           </Button>
         </div>
       </div>
@@ -323,12 +457,12 @@ function Pagination({
 
 function Stats({
   data,
-  filters,
   dictionary,
+  onPageChange,
 }: {
   data: ReviewDashboardData;
-  filters: ReviewExerciseFilters;
   dictionary: ReviewDashboardProps["dictionary"];
+  onPageChange: (page: number) => void;
 }) {
   const { start, end } = getRange(data);
   const statCards = [
@@ -368,7 +502,11 @@ function Stats({
         const Icon = card.icon;
 
         return (
-          <Card key={card.key} size="sm" className="@container/card bg-gradient-to-t from-primary/5 to-card shadow-xs">
+          <Card
+            key={card.key}
+            size="sm"
+            className="@container/card bg-gradient-to-t from-primary/5 to-card shadow-xs"
+          >
             <CardHeader className="flex flex-row items-start justify-between space-y-0">
               <div>
                 <CardDescription>{card.label}</CardDescription>
@@ -393,14 +531,12 @@ function Stats({
         </CardHeader>
         <CardContent>
           <Pagination
-            section={data.section}
-            q={data.q}
             page={data.page}
             totalPages={data.totalPages}
             pageSize={data.pageSize}
             total={data.total}
-            filters={filters}
             dictionary={dictionary}
+            onPageChange={onPageChange}
           />
         </CardContent>
       </Card>
@@ -468,7 +604,14 @@ function ExerciseTableRow({
           showOverlayIcon={false}
         >
           <div className="flex h-[88px] w-[88px] items-center justify-center overflow-hidden rounded-2xl border bg-muted/35 p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] transition-transform group-hover:scale-[1.01]">
-            <Image src={item.imageUrl} alt={name} width={168} height={168} unoptimized className="h-full w-full object-contain" />
+            <Image
+              src={item.imageUrl}
+              alt={name}
+              width={168}
+              height={168}
+              unoptimized
+              className="h-full w-full object-contain"
+            />
           </div>
         </ExerciseThumbnailPreview>
 
@@ -556,7 +699,14 @@ function ReferenceTableRow({
         <div className="flex gap-3">
           <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-muted">
             {showImage && item.imageUrl ? (
-              <Image src={item.imageUrl} alt={name} width={140} height={140} unoptimized className="h-full w-full object-contain" />
+              <Image
+                src={item.imageUrl}
+                alt={name}
+                width={140}
+                height={140}
+                unoptimized
+                className="h-full w-full object-contain"
+              />
             ) : (
               <ImageIcon className="h-5 w-5 text-muted-foreground" />
             )}
@@ -648,7 +798,14 @@ function MobileExerciseCard({
           >
             <div className="w-20">
               <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-xl border bg-muted/40 p-2">
-                <Image src={item.imageUrl} alt={name} width={160} height={160} unoptimized className="h-full w-full object-contain" />
+                <Image
+                  src={item.imageUrl}
+                  alt={name}
+                  width={160}
+                  height={160}
+                  unoptimized
+                  className="h-full w-full object-contain"
+                />
               </div>
               <span className="mt-1 block text-center text-[11px] font-medium text-muted-foreground">
                 Preview
@@ -657,7 +814,9 @@ function MobileExerciseCard({
           </ExerciseThumbnailPreview>
           <div className="min-w-0 flex-1">
             <h3 className="font-medium">{name}</h3>
-            <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted-foreground">{description}</p>
+            <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted-foreground">
+              {description}
+            </p>
             <div className="mt-3 flex flex-wrap gap-2">
               {primaryMuscles.visible.map((value) => (
                 <Badge
@@ -730,7 +889,14 @@ function MobileReferenceCard({
         <div className="flex gap-3">
           <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-muted">
             {showImage && item.imageUrl ? (
-              <Image src={item.imageUrl} alt={name} width={120} height={120} unoptimized className="h-full w-full object-contain" />
+              <Image
+                src={item.imageUrl}
+                alt={name}
+                width={120}
+                height={120}
+                unoptimized
+                className="h-full w-full object-contain"
+              />
             ) : (
               <ImageIcon className="h-5 w-5 text-muted-foreground" />
             )}
@@ -738,7 +904,9 @@ function MobileReferenceCard({
           <div className="min-w-0 flex-1">
             <h3 className="font-medium">{name}</h3>
             <p className="mt-1 text-xs text-muted-foreground">{item.slug}</p>
-            <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted-foreground">{description}</p>
+            <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted-foreground">
+              {description}
+            </p>
             <p className="mt-3 text-xs text-muted-foreground">
               {dictionary.linkedExercises}: {item.linkedExerciseCount}
             </p>
@@ -751,16 +919,136 @@ function MobileReferenceCard({
 
 export function ReviewDashboard({
   locale,
-  data,
+  snapshot,
+  initialState,
   dictionary,
-  filterState,
   filterOptions,
 }: ReviewDashboardProps) {
+  const [section, setSection] = useState<ReviewSection>(initialState.section);
+  const [page, setPage] = useState(initialState.page);
+  const [searchInput, setSearchInput] = useState(initialState.q);
+  const [appliedQuery, setAppliedQuery] = useState(initialState.q);
+  const [draftFilters, setDraftFilters] = useState<ReviewExerciseFilters>(initialState.filters);
+  const [appliedFilters, setAppliedFilters] = useState<ReviewExerciseFilters>(initialState.filters);
+  const deferredQuery = useDeferredValue(normalizeText(appliedQuery));
+
+  const data = useMemo<ReviewDashboardData>(() => {
+    const pageSize = section === "exercises" ? 40 : 60;
+
+    if (section === "exercises") {
+      const filteredItems = filterExercises(snapshot.exercises, deferredQuery, appliedFilters);
+      const paged = paginateItems(filteredItems, page, pageSize);
+
+      return {
+        section,
+        q: appliedQuery,
+        page: paged.page,
+        pageSize,
+        total: paged.total,
+        totalPages: paged.totalPages,
+        summary: snapshot.summary,
+        exercises: paged.items,
+        muscles: [],
+        equipments: [],
+        goals: [],
+        categories: [],
+      };
+    }
+
+    const referenceItems =
+      section === "muscles"
+        ? filterReferences(snapshot.muscles, deferredQuery)
+        : section === "equipments"
+          ? filterReferences(snapshot.equipments, deferredQuery)
+          : section === "goals"
+            ? filterReferences(snapshot.goals, deferredQuery)
+            : filterReferences(snapshot.categories, deferredQuery);
+    const paged = paginateItems(referenceItems, page, pageSize);
+
+    return {
+      section,
+      q: appliedQuery,
+      page: paged.page,
+      pageSize,
+      total: paged.total,
+      totalPages: paged.totalPages,
+      summary: snapshot.summary,
+      exercises: [],
+      muscles: section === "muscles" ? paged.items : [],
+      equipments: section === "equipments" ? paged.items : [],
+      goals: section === "goals" ? paged.items : [],
+      categories: section === "categories" ? paged.items : [],
+    };
+  }, [appliedFilters, appliedQuery, deferredQuery, page, section, snapshot]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const url = buildReviewUrl({
+      section,
+      q: appliedQuery,
+      page: data.page,
+      filters: appliedFilters,
+    });
+
+    window.history.replaceState(window.history.state, "", url);
+  }, [appliedFilters, appliedQuery, data.page, section]);
+
   const { start, end } = getRange(data);
+
+  function handleSectionChange(nextSection: ReviewSection) {
+    startTransition(() => {
+      setSection(nextSection);
+      setPage(1);
+    });
+  }
+
+  function handleFilterChange(name: keyof ReviewExerciseFilters, value: string) {
+    setDraftFilters((current) => ({
+      ...current,
+      [name]: value,
+    }));
+  }
+
+  function handleApplyFilters() {
+    startTransition(() => {
+      setAppliedFilters(draftFilters);
+      setPage(1);
+    });
+  }
+
+  function handleResetFilters() {
+    const nextFilters: ReviewExerciseFilters = {
+      level: "",
+      muscle: "",
+      muscleCategory: "",
+      equipment: "",
+      goal: "",
+      category: "",
+      movementType: "",
+    };
+
+    startTransition(() => {
+      setDraftFilters(nextFilters);
+      setAppliedFilters(nextFilters);
+      setPage(1);
+    });
+  }
+
+  function handleSearchSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    startTransition(() => {
+      setAppliedQuery(searchInput.trim());
+      setPage(1);
+    });
+  }
 
   return (
     <div className="flex flex-1 flex-col gap-4 md:gap-6">
-      <Stats data={data} filters={filterState} dictionary={dictionary} />
+      <Stats data={data} dictionary={dictionary} onPageChange={setPage} />
 
       <div className="px-4 lg:px-0">
         <Card className="shadow-xs">
@@ -768,25 +1056,21 @@ export function ReviewDashboard({
             <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
               <div className="max-w-3xl">
                 <CardDescription>{dictionary.sections[data.section]}</CardDescription>
-                <CardTitle className="mt-1 text-2xl font-semibold tracking-tight md:text-3xl">{dictionary.title}</CardTitle>
-                <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">{dictionary.subtitle}</p>
+                <CardTitle className="mt-1 text-2xl font-semibold tracking-tight md:text-3xl">
+                  {dictionary.title}
+                </CardTitle>
+                <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
+                  {dictionary.subtitle}
+                </p>
               </div>
 
-              <form className="flex w-full max-w-[560px] gap-2">
-                <input type="hidden" name="section" value={data.section} />
-                <input type="hidden" name="movementType" value={filterState.movementType ?? ""} />
-                <input type="hidden" name="level" value={filterState.level ?? ""} />
-                <input type="hidden" name="muscle" value={filterState.muscle ?? ""} />
-                <input type="hidden" name="muscleCategory" value={filterState.muscleCategory ?? ""} />
-                <input type="hidden" name="equipment" value={filterState.equipment ?? ""} />
-                <input type="hidden" name="goal" value={filterState.goal ?? ""} />
-                <input type="hidden" name="category" value={filterState.category ?? ""} />
+              <form onSubmit={handleSearchSubmit} className="flex w-full max-w-[560px] gap-2">
                 <div className="relative flex-1">
                   <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   <Input
                     type="search"
-                    name="q"
-                    defaultValue={data.q}
+                    value={searchInput}
+                    onChange={(event) => setSearchInput(event.target.value)}
                     placeholder={dictionary.searchPlaceholder}
                     className="h-10 pl-10"
                   />
@@ -802,17 +1086,18 @@ export function ReviewDashboard({
               section={data.section}
               sections={dictionary.sections}
               counts={{
-                exercises: data.summary.exercises.count,
-                muscles: data.summary.muscles.count,
-                equipments: data.summary.equipments.count,
-                goals: data.summary.goals.count,
-                categories: data.summary.categories.count,
+                exercises: snapshot.summary.exercises.count,
+                muscles: snapshot.summary.muscles.count,
+                equipments: snapshot.summary.equipments.count,
+                goals: snapshot.summary.goals.count,
+                categories: snapshot.summary.categories.count,
               }}
+              onSectionChange={handleSectionChange}
             />
             {data.section === "exercises" ? (
               <ReviewExerciseFilterBar
-                q={data.q}
-                filters={filterState}
+                filters={draftFilters}
+                appliedFilters={appliedFilters}
                 options={filterOptions}
                 dictionary={{
                   title: dictionary.filtersTitle,
@@ -834,6 +1119,9 @@ export function ReviewDashboard({
                   goal: dictionary.sections.goals,
                   category: dictionary.sections.categories,
                 }}
+                onFilterChange={handleFilterChange}
+                onApply={handleApplyFilters}
+                onReset={handleResetFilters}
               />
             ) : null}
           </CardContent>
@@ -843,22 +1131,23 @@ export function ReviewDashboard({
       {getSectionItems(data) ? (
         <>
           <div className="grid gap-3 px-4 lg:hidden">
-                {data.section === "exercises"
-                  ? data.exercises.map((item) => (
-                      <MobileExerciseCard
-                        key={item.id}
-                        locale={locale}
-                        item={item}
-                        dictionary={dictionary}
-                      />
-                    ))
-              : (data.section === "muscles"
-                  ? data.muscles
-                  : data.section === "equipments"
-                    ? data.equipments
-                    : data.section === "goals"
-                      ? data.goals
-                      : data.categories
+            {data.section === "exercises"
+              ? data.exercises.map((item) => (
+                  <MobileExerciseCard
+                    key={item.id}
+                    locale={locale}
+                    item={item}
+                    dictionary={dictionary}
+                  />
+                ))
+              : (
+                  data.section === "muscles"
+                    ? data.muscles
+                    : data.section === "equipments"
+                      ? data.equipments
+                      : data.section === "goals"
+                        ? data.goals
+                        : data.categories
                 ).map((item) => (
                   <MobileReferenceCard
                     key={item.id}
@@ -879,7 +1168,10 @@ export function ReviewDashboard({
                     {dictionary.showing} {start}-{end} / {data.total} {dictionary.records}
                   </CardDescription>
                 </div>
-                <Badge variant="outline" className="hidden rounded-full px-2.5 py-1 text-xs font-medium text-muted-foreground lg:inline-flex">
+                <Badge
+                  variant="outline"
+                  className="hidden rounded-full px-2.5 py-1 text-xs font-medium text-muted-foreground lg:inline-flex"
+                >
                   {dictionary.totalRecords}: {data.total}
                 </Badge>
               </CardHeader>
@@ -887,29 +1179,45 @@ export function ReviewDashboard({
                 <div className="max-h-[calc(100svh-24rem)] overflow-auto border-t">
                   {data.section === "exercises" ? (
                     <div className="divide-y">
-                        {data.exercises.map((item) => (
-                          <ExerciseTableRow key={item.id} locale={locale} item={item} dictionary={dictionary} />
-                        ))}
+                      {data.exercises.map((item) => (
+                        <ExerciseTableRow
+                          key={item.id}
+                          locale={locale}
+                          item={item}
+                          dictionary={dictionary}
+                        />
+                      ))}
                     </div>
                   ) : (
                     <Table className="min-w-[980px]">
                       <TableHeader className="[&_tr]:bg-background/95 [&_tr]:backdrop-blur supports-[backdrop-filter]:[&_tr]:bg-background/80">
                         <TableRow className="hover:bg-transparent">
-                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">{dictionary.item}</TableHead>
-                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">{dictionary.details}</TableHead>
-                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">{dictionary.category}</TableHead>
-                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">{dictionary.linkedExercises}</TableHead>
-                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">{dictionary.media}</TableHead>
+                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">
+                            {dictionary.item}
+                          </TableHead>
+                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">
+                            {dictionary.details}
+                          </TableHead>
+                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">
+                            {dictionary.category}
+                          </TableHead>
+                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">
+                            {dictionary.linkedExercises}
+                          </TableHead>
+                          <TableHead className="sticky top-0 z-20 bg-background/95 backdrop-blur">
+                            {dictionary.media}
+                          </TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {(data.section === "muscles"
-                          ? data.muscles
-                          : data.section === "equipments"
-                            ? data.equipments
-                            : data.section === "goals"
-                              ? data.goals
-                              : data.categories
+                        {(
+                          data.section === "muscles"
+                            ? data.muscles
+                            : data.section === "equipments"
+                              ? data.equipments
+                              : data.section === "goals"
+                                ? data.goals
+                                : data.categories
                         ).map((item) => (
                           <ReferenceTableRow
                             key={item.id}
@@ -925,16 +1233,14 @@ export function ReviewDashboard({
               </CardContent>
               <CardFooter className="justify-between border-t bg-muted/30">
                 <Pagination
-                  section={data.section}
-                  q={data.q}
                   page={data.page}
                   totalPages={data.totalPages}
-                pageSize={data.pageSize}
-                total={data.total}
-                filters={filterState}
-                dictionary={dictionary}
-              />
-            </CardFooter>
+                  pageSize={data.pageSize}
+                  total={data.total}
+                  dictionary={dictionary}
+                  onPageChange={setPage}
+                />
+              </CardFooter>
             </Card>
           </div>
         </>
@@ -943,7 +1249,9 @@ export function ReviewDashboard({
           <Card className="shadow-xs">
             <CardContent className="py-10 text-center">
               <h2 className="font-heading text-2xl font-semibold">{dictionary.noResultsTitle}</h2>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">{dictionary.noResultsBody}</p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                {dictionary.noResultsBody}
+              </p>
             </CardContent>
           </Card>
         </div>

@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { ReviewSection } from "@/lib/data";
 
@@ -8,21 +7,17 @@ type ReviewSectionTabsProps = {
   section: ReviewSection;
   sections: Record<ReviewSection, string>;
   counts: Record<ReviewSection, number>;
+  onSectionChange: (section: ReviewSection) => void;
 };
 
 export function ReviewSectionTabs({
   section,
   sections,
   counts,
+  onSectionChange,
 }: ReviewSectionTabsProps) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
   function onValueChange(nextSection: string) {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("section", nextSection);
-    params.delete("page");
-    router.push(`/app/review?${params.toString()}`);
+    onSectionChange(nextSection as ReviewSection);
   }
 
   return (

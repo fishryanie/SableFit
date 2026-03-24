@@ -3,7 +3,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { ReviewDashboard } from "@/components/review-dashboard";
 import { getLocalizedText } from "@/lib/localized";
 import {
-  getReviewDashboardData,
+  getReviewDashboardSnapshot,
   getShellBootstrap,
   reviewSections,
   type ReviewExerciseFilters,
@@ -52,16 +52,22 @@ export default async function ReviewPage({
     movementType: parseFilter(params?.movementType),
   };
 
-  const [t, data, bootstrap] = await Promise.all([
+  const [t, snapshot, bootstrap] = await Promise.all([
     getTranslations("reviewPage"),
-    getReviewDashboardData({ section, q, page, filters }),
+    getReviewDashboardSnapshot(),
     getShellBootstrap(),
   ]);
 
   return (
     <ReviewDashboard
       locale={locale}
-      data={data}
+      snapshot={snapshot}
+      initialState={{
+        section,
+        q,
+        page,
+        filters,
+      }}
       dictionary={{
         title: t("title"),
         subtitle: t("subtitle"),
@@ -120,7 +126,6 @@ export default async function ReviewPage({
           categories: t("sections.categories"),
         },
       }}
-      filterState={filters}
       filterOptions={{
         movementTypes: [
           { slug: "DYNAMIC", label: t("movementTypes.dynamic") },

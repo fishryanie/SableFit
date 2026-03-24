@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { MobileFlashScreen } from "@/components/mobile-flash-screen";
 import { MobileZoomLock } from "@/components/mobile-zoom-lock";
 import { PwaMobileInstall } from "@/components/pwa-mobile-install";
+import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { defaultLocale } from "@/i18n/config";
 import { Be_Vietnam_Pro, Space_Grotesk, Geist } from "next/font/google";
@@ -85,12 +86,14 @@ export default async function RootLayout({
     >
       <body suppressHydrationWarning className="min-h-full bg-background text-foreground">
         <NextIntlClientProvider messages={messages} locale={locale}>
-          <TooltipProvider>
-            <MobileZoomLock />
-            <MobileFlashScreen />
-            <PwaMobileInstall />
-            {children}
-          </TooltipProvider>
+          <ThemeProvider>
+            <TooltipProvider>
+              <MobileZoomLock />
+              <MobileFlashScreen />
+              <PwaMobileInstall />
+              {children}
+            </TooltipProvider>
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>

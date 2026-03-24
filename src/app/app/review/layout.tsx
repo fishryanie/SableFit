@@ -25,11 +25,8 @@ export default async function ReviewLayout({
         dictionary={{
           reviewTitle: settingsT("reviewTitle"),
           reviewBody: settingsT("reviewBody"),
-          auditAction: reviewT("auditAction"),
           workspaceLabel: reviewT("workspaceLabel"),
           collectionsLabel: reviewT("collectionsLabel"),
-          toolsLabel: reviewT("toolsLabel"),
-          localReviewLabel: reviewT("localReviewLabel"),
           account: reviewT("account"),
           billing: reviewT("billing"),
           notifications: reviewT("notifications"),

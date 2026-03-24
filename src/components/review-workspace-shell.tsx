@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { ReviewAppSidebar } from "@/components/review-app-sidebar";
 import { ReviewSiteHeader } from "@/components/review-site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
@@ -15,11 +15,8 @@ type ReviewWorkspaceShellProps = {
   dictionary: {
     reviewTitle: string;
     reviewBody: string;
-    auditAction: string;
     workspaceLabel: string;
     collectionsLabel: string;
-    toolsLabel: string;
-    localReviewLabel: string;
     account: string;
     billing: string;
     notifications: string;
@@ -46,7 +43,6 @@ export function ReviewWorkspaceShell({
         <ReviewWorkspaceFrame
           user={user}
           dictionary={dictionary}
-          isUiAudit={false}
           pageLabel={dictionary.sections.exercises}
         >
           {children}
@@ -65,17 +61,14 @@ function ReviewWorkspaceShellInner({
   dictionary,
   children,
 }: ReviewWorkspaceShellProps) {
-  const pathname = usePathname();
   const searchParams = useSearchParams();
   const section = (searchParams.get("section") as ReviewSection | null) ?? "exercises";
-  const isUiAudit = pathname.startsWith("/app/review/ui-audit");
-  const pageLabel = isUiAudit ? dictionary.auditAction : dictionary.sections[section];
+  const pageLabel = dictionary.sections[section];
 
   return (
     <ReviewWorkspaceFrame
       user={user}
       dictionary={dictionary}
-      isUiAudit={isUiAudit}
       pageLabel={pageLabel}
     >
       {children}
@@ -86,11 +79,9 @@ function ReviewWorkspaceShellInner({
 function ReviewWorkspaceFrame({
   user,
   dictionary,
-  isUiAudit,
   pageLabel,
   children,
 }: ReviewWorkspaceShellProps & {
-  isUiAudit: boolean;
   pageLabel: string;
 }) {
   return (
@@ -108,10 +99,8 @@ function ReviewWorkspaceFrame({
         collapsible="none"
         user={user}
         dictionary={{
-          auditAction: dictionary.auditAction,
           workspaceLabel: dictionary.workspaceLabel,
           collectionsLabel: dictionary.collectionsLabel,
-          toolsLabel: dictionary.toolsLabel,
           account: dictionary.account,
           billing: dictionary.billing,
           notifications: dictionary.notifications,
@@ -121,11 +110,7 @@ function ReviewWorkspaceFrame({
         }}
       />
       <SidebarInset className="h-full min-h-0 w-auto min-w-0 overflow-hidden">
-        <ReviewSiteHeader
-          pageLabel={pageLabel}
-          auditAction={dictionary.auditAction}
-          isUiAudit={isUiAudit}
-        />
+        <ReviewSiteHeader pageLabel={pageLabel} />
         <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
           <div className="@container/main flex min-h-0 flex-1 flex-col overflow-y-auto">
             <div className="flex flex-col gap-4 px-4 py-4 md:gap-6 md:px-5 md:py-6 lg:px-6">

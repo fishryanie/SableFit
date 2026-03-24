@@ -61,6 +61,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, userId: String(user._id) });
   } catch (error) {
     console.error("[auth/session]", error);
-    return NextResponse.json({ ok: false, message: "Could not create session." }, { status: 500 });
+    const message = error instanceof Error ? error.message : "Could not create session.";
+    return NextResponse.json({ ok: false, message }, { status: 500 });
   }
 }

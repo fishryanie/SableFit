@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { cache } from "react";
 import dayjs from "dayjs";
 import { getFallbackExerciseMedia } from "@/data/system/exercise-media";
@@ -125,6 +126,7 @@ export type ReviewExerciseItem = {
   media: ExerciseMedia;
   level: NamedReference | null;
   equipment: NamedReference[];
+  muscleCategories: NamedReference[];
   primaryMuscles: NamedReference[];
   secondaryMuscles: NamedReference[];
   goals: NamedReference[];
@@ -152,6 +154,15 @@ export type ReviewDashboardData = {
   pageSize: number;
   total: number;
   totalPages: number;
+  summary: ReviewSummary;
+  exercises: ReviewExerciseItem[];
+  muscles: ReviewReferenceItem[];
+  equipments: ReviewReferenceItem[];
+  goals: ReviewReferenceItem[];
+  categories: ReviewReferenceItem[];
+};
+
+export type ReviewDashboardSnapshot = {
   summary: ReviewSummary;
   exercises: ReviewExerciseItem[];
   muscles: ReviewReferenceItem[];
@@ -346,6 +357,7 @@ export async function getReviewDashboardData({
     const totalPages = Math.max(1, Math.ceil(total / pageSize));
     const items = await Exercise.find(query)
       .populate("equipmentIds", "slug name imageUrl")
+      .populate("muscleCategoryIds", "slug name imageUrl")
       .populate("primaryMuscleIds", "slug name imageUrl")
       .populate("secondaryMuscleIds", "slug name imageUrl")
       .populate("goalIds", "slug name")
@@ -374,6 +386,7 @@ export async function getReviewDashboardData({
         media: item.media ?? getFallbackExerciseMedia(item.slug, item.movementType ?? "DYNAMIC"),
         level: toNamedReference(item.levelId),
         equipment: compactNamedReferences((Array.isArray(item.equipmentIds) ? item.equipmentIds : []).map((value) => toNamedReference(value))),
+        muscleCategories: compactNamedReferences((Array.isArray(item.muscleCategoryIds) ? item.muscleCategoryIds : []).map((value) => toNamedReference(value))),
         primaryMuscles: compactNamedReferences((Array.isArray(item.primaryMuscleIds) ? item.primaryMuscleIds : []).map((value) => toNamedReference(value))),
         secondaryMuscles: compactNamedReferences((Array.isArray(item.secondaryMuscleIds) ? item.secondaryMuscleIds : []).map((value) => toNamedReference(value))),
         goals: compactNamedReferences((Array.isArray(item.goalIds) ? item.goalIds : []).map((value) => toNamedReference(value))),
@@ -519,7 +532,124 @@ export async function getReviewDashboardData({
   };
 }
 
-export const getShellBootstrap = cache(async () => {
+const getCachedReviewDashboardSnapshot = unstable_cache(
+  async (): Promise<ReviewDashboardSnapshot> => {
+  await ensureSystemSeed();
+  await connectToDatabase();
+
+  const [summary, usageMaps, exerciseItems, muscleItems, equipmentItems, goalItems, categoryItems] =
+    await Promise.all([
+      buildReviewSummary(),
+      buildReferenceUsageMaps(),
+      Exercise.find({ reviewStatus: "APPROVED" })
+        .populate("equipmentIds", "slug name imageUrl")
+        .populate("muscleCategoryIds", "slug name imageUrl")
+        .populate("primaryMuscleIds", "slug name imageUrl")
+        .populate("secondaryMuscleIds", "slug name imageUrl")
+        .populate("goalIds", "slug name")
+        .populate("categoryIds", "slug name")
+        .populate("levelId", "slug name")
+        .sort({ "name.en": 1 })
+        .lean(),
+      Muscle.find()
+        .populate("categoryId", "slug name")
+        .sort({ order: 1, "name.en": 1 })
+        .lean(),
+      Equipment.find().sort({ order: 1, "name.en": 1 }).lean(),
+      ExerciseGoal.find().sort({ order: 1, "name.en": 1 }).lean(),
+      ExerciseCategory.find().sort({ order: 1, "name.en": 1 }).lean(),
+    ]);
+
+  return {
+    summary,
+    exercises: exerciseItems.map((item) => ({
+      id: toId(item._id),
+      slug: item.slug,
+      name: item.name,
+      description: item.description,
+      imageUrl: item.imageUrl,
+      imageAlt: item.imageAlt,
+      media: item.media ?? getFallbackExerciseMedia(item.slug, item.movementType ?? "DYNAMIC"),
+      level: toNamedReference(item.levelId),
+      equipment: compactNamedReferences(
+        (Array.isArray(item.equipmentIds) ? item.equipmentIds : []).map((value) =>
+          toNamedReference(value),
+        ),
+      ),
+      muscleCategories: compactNamedReferences(
+        (Array.isArray(item.muscleCategoryIds) ? item.muscleCategoryIds : []).map((value) =>
+          toNamedReference(value),
+        ),
+      ),
+      primaryMuscles: compactNamedReferences(
+        (Array.isArray(item.primaryMuscleIds) ? item.primaryMuscleIds : []).map((value) =>
+          toNamedReference(value),
+        ),
+      ),
+      secondaryMuscles: compactNamedReferences(
+        (Array.isArray(item.secondaryMuscleIds) ? item.secondaryMuscleIds : []).map((value) =>
+          toNamedReference(value),
+        ),
+      ),
+      goals: compactNamedReferences(
+        (Array.isArray(item.goalIds) ? item.goalIds : []).map((value) => toNamedReference(value)),
+      ),
+      categories: compactNamedReferences(
+        (Array.isArray(item.categoryIds) ? item.categoryIds : []).map((value) =>
+          toNamedReference(value),
+        ),
+      ),
+      movementType: item.movementType ?? "DYNAMIC",
+      reviewStatus: item.reviewStatus,
+      source: item.source ?? "INTERNAL_CURATION",
+      sourceUrl: item.sourceUrl ?? "",
+    })),
+    muscles: muscleItems.map((item) => ({
+      id: toId(item._id),
+      slug: item.slug,
+      name: item.name,
+      description: item.description,
+      imageUrl: item.imageUrl,
+      linkedExerciseCount: usageMaps.muscleCounts.get(toId(item._id)) ?? 0,
+      category: toNamedReference(item.categoryId),
+    })),
+    equipments: equipmentItems.map((item) => ({
+      id: toId(item._id),
+      slug: item.slug,
+      name: item.name,
+      description: item.description,
+      imageUrl: item.imageUrl,
+      linkedExerciseCount: usageMaps.equipmentCounts.get(toId(item._id)) ?? 0,
+    })),
+    goals: goalItems.map((item) => ({
+      id: toId(item._id),
+      slug: item.slug,
+      name: item.name,
+      description: item.description,
+      linkedExerciseCount: usageMaps.goalCounts.get(toId(item._id)) ?? 0,
+    })),
+    categories: categoryItems.map((item) => ({
+      id: toId(item._id),
+      slug: item.slug,
+      name: item.name,
+      description: item.description,
+      linkedExerciseCount: usageMaps.categoryCounts.get(toId(item._id)) ?? 0,
+    })),
+  };
+  },
+  ["review-dashboard-snapshot-v1"],
+  {
+    revalidate: 60 * 60,
+    tags: ["review-dashboard-snapshot"],
+  },
+);
+
+export const getReviewDashboardSnapshot = cache(async (): Promise<ReviewDashboardSnapshot> =>
+  getCachedReviewDashboardSnapshot(),
+);
+
+const getCachedShellBootstrap = unstable_cache(
+  async () => {
   await ensureSystemSeed();
   await connectToDatabase();
 
@@ -555,7 +685,15 @@ export const getShellBootstrap = cache(async () => {
     goals: goals.map((item) => ({ id: toId(item._id), slug: item.slug, name: item.name })),
     categories: categories.map((item) => ({ id: toId(item._id), slug: item.slug, name: item.name })),
   };
-});
+  },
+  ["shell-bootstrap-v1"],
+  {
+    revalidate: 60 * 60,
+    tags: ["shell-bootstrap"],
+  },
+);
+
+export const getShellBootstrap = cache(async () => getCachedShellBootstrap());
 
 export const getPublicExerciseCatalog = cache(async (filters: ExerciseFilters = {}) => {
   await ensureSystemSeed();
