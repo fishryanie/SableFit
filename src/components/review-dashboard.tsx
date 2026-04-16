@@ -34,6 +34,7 @@ import type {
   ReviewSection,
 } from "@/lib/data";
 import { ExerciseThumbnailPreview } from "@/components/exercise-media-preview-sheet";
+import { ReviewExerciseMediaEditor } from "@/components/review-exercise-media-editor";
 import { getLocalizedText } from "@/lib/localized";
 import { cn } from "@/lib/utils";
 import type { AppLocale } from "@/types/domain";
@@ -123,6 +124,24 @@ type ReviewDashboardProps = {
     movementType: string;
     movementTypeDynamicHelp: string;
     movementTypeIsometricHelp: string;
+    editMedia: string;
+    editMediaDescription: string;
+    currentImage: string;
+    currentVideo: string;
+    currentPath: string;
+    customMedia: string;
+    defaultMedia: string;
+    sourcePathLabel: string;
+    sourcePathPlaceholder: string;
+    sourcePathHelp: string;
+    targetDirectory: string;
+    saveImage: string;
+    saveVideo: string;
+    removeImage: string;
+    removeVideo: string;
+    noVideo: string;
+    saving: string;
+    failedToSave: string;
     movementTypes: {
       dynamic: string;
       isometric: string;
@@ -548,10 +567,12 @@ function ExerciseTableRow({
   locale,
   item,
   dictionary,
+  onExerciseChange,
 }: {
   locale: AppLocale;
   item: ReviewExerciseItem;
   dictionary: ReviewDashboardProps["dictionary"];
+  onExerciseChange: (exercise: ReviewExerciseItem) => void;
 }) {
   const name = getLocalizedText(locale, item.name);
   const description = getLocalizedText(locale, item.description);
@@ -674,6 +695,34 @@ function ExerciseTableRow({
             goals={goals.text}
             categories={categories.text}
           />
+
+          <div className="mt-4 flex flex-wrap gap-2">
+            <ReviewExerciseMediaEditor
+              locale={locale}
+              exercise={item}
+              dictionary={{
+                editMedia: dictionary.editMedia,
+                editMediaDescription: dictionary.editMediaDescription,
+                currentImage: dictionary.currentImage,
+                currentVideo: dictionary.currentVideo,
+                currentPath: dictionary.currentPath,
+                customMedia: dictionary.customMedia,
+                defaultMedia: dictionary.defaultMedia,
+                sourcePathLabel: dictionary.sourcePathLabel,
+                sourcePathPlaceholder: dictionary.sourcePathPlaceholder,
+                sourcePathHelp: dictionary.sourcePathHelp,
+                targetDirectory: dictionary.targetDirectory,
+                saveImage: dictionary.saveImage,
+                saveVideo: dictionary.saveVideo,
+                removeImage: dictionary.removeImage,
+                removeVideo: dictionary.removeVideo,
+                noVideo: dictionary.noVideo,
+                saving: dictionary.saving,
+                failedToSave: dictionary.failedToSave,
+              }}
+              onExerciseChange={onExerciseChange}
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -740,10 +789,12 @@ function MobileExerciseCard({
   locale,
   item,
   dictionary,
+  onExerciseChange,
 }: {
   locale: AppLocale;
   item: ReviewExerciseItem;
   dictionary: ReviewDashboardProps["dictionary"];
+  onExerciseChange: (exercise: ReviewExerciseItem) => void;
 }) {
   const name = getLocalizedText(locale, item.name);
   const description = getLocalizedText(locale, item.description);
@@ -862,6 +913,34 @@ function MobileExerciseCard({
               goals={goals.text}
               categories={categories.text}
             />
+
+            <div className="mt-4 flex flex-wrap gap-2">
+              <ReviewExerciseMediaEditor
+                locale={locale}
+                exercise={item}
+                dictionary={{
+                  editMedia: dictionary.editMedia,
+                  editMediaDescription: dictionary.editMediaDescription,
+                  currentImage: dictionary.currentImage,
+                  currentVideo: dictionary.currentVideo,
+                  currentPath: dictionary.currentPath,
+                  customMedia: dictionary.customMedia,
+                  defaultMedia: dictionary.defaultMedia,
+                  sourcePathLabel: dictionary.sourcePathLabel,
+                  sourcePathPlaceholder: dictionary.sourcePathPlaceholder,
+                  sourcePathHelp: dictionary.sourcePathHelp,
+                  targetDirectory: dictionary.targetDirectory,
+                  saveImage: dictionary.saveImage,
+                  saveVideo: dictionary.saveVideo,
+                  removeImage: dictionary.removeImage,
+                  removeVideo: dictionary.removeVideo,
+                  noVideo: dictionary.noVideo,
+                  saving: dictionary.saving,
+                  failedToSave: dictionary.failedToSave,
+                }}
+                onExerciseChange={onExerciseChange}
+              />
+            </div>
           </div>
         </div>
       </CardContent>
@@ -924,6 +1003,7 @@ export function ReviewDashboard({
   dictionary,
   filterOptions,
 }: ReviewDashboardProps) {
+  const [snapshotState, setSnapshotState] = useState(snapshot);
   const [section, setSection] = useState<ReviewSection>(initialState.section);
   const [page, setPage] = useState(initialState.page);
   const [searchInput, setSearchInput] = useState(initialState.q);
@@ -936,7 +1016,7 @@ export function ReviewDashboard({
     const pageSize = section === "exercises" ? 40 : 60;
 
     if (section === "exercises") {
-      const filteredItems = filterExercises(snapshot.exercises, deferredQuery, appliedFilters);
+      const filteredItems = filterExercises(snapshotState.exercises, deferredQuery, appliedFilters);
       const paged = paginateItems(filteredItems, page, pageSize);
 
       return {
@@ -946,7 +1026,7 @@ export function ReviewDashboard({
         pageSize,
         total: paged.total,
         totalPages: paged.totalPages,
-        summary: snapshot.summary,
+        summary: snapshotState.summary,
         exercises: paged.items,
         muscles: [],
         equipments: [],
@@ -957,12 +1037,12 @@ export function ReviewDashboard({
 
     const referenceItems =
       section === "muscles"
-        ? filterReferences(snapshot.muscles, deferredQuery)
+        ? filterReferences(snapshotState.muscles, deferredQuery)
         : section === "equipments"
-          ? filterReferences(snapshot.equipments, deferredQuery)
+          ? filterReferences(snapshotState.equipments, deferredQuery)
           : section === "goals"
-            ? filterReferences(snapshot.goals, deferredQuery)
-            : filterReferences(snapshot.categories, deferredQuery);
+            ? filterReferences(snapshotState.goals, deferredQuery)
+            : filterReferences(snapshotState.categories, deferredQuery);
     const paged = paginateItems(referenceItems, page, pageSize);
 
     return {
@@ -972,14 +1052,14 @@ export function ReviewDashboard({
       pageSize,
       total: paged.total,
       totalPages: paged.totalPages,
-      summary: snapshot.summary,
+      summary: snapshotState.summary,
       exercises: [],
       muscles: section === "muscles" ? paged.items : [],
       equipments: section === "equipments" ? paged.items : [],
       goals: section === "goals" ? paged.items : [],
       categories: section === "categories" ? paged.items : [],
     };
-  }, [appliedFilters, appliedQuery, deferredQuery, page, section, snapshot]);
+  }, [appliedFilters, appliedQuery, deferredQuery, page, section, snapshotState]);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -1046,6 +1126,32 @@ export function ReviewDashboard({
     });
   }
 
+  function handleExerciseChange(nextExercise: ReviewExerciseItem) {
+    setSnapshotState((current) => {
+      const previousExercise = current.exercises.find((item) => item.id === nextExercise.id);
+      if (!previousExercise) {
+        return current;
+      }
+
+      const imageDelta = Number(Boolean(nextExercise.imageUrl)) - Number(Boolean(previousExercise.imageUrl));
+      const videoDelta =
+        Number(Boolean(nextExercise.media.videoUrl)) - Number(Boolean(previousExercise.media.videoUrl));
+
+      return {
+        ...current,
+        summary: {
+          ...current.summary,
+          exercises: {
+            ...current.summary.exercises,
+            withImage: current.summary.exercises.withImage + imageDelta,
+            withVideo: current.summary.exercises.withVideo + videoDelta,
+          },
+        },
+        exercises: current.exercises.map((item) => (item.id === nextExercise.id ? nextExercise : item)),
+      };
+    });
+  }
+
   return (
     <div className="flex flex-1 flex-col gap-4 md:gap-6">
       <Stats data={data} dictionary={dictionary} onPageChange={setPage} />
@@ -1086,11 +1192,11 @@ export function ReviewDashboard({
               section={data.section}
               sections={dictionary.sections}
               counts={{
-                exercises: snapshot.summary.exercises.count,
-                muscles: snapshot.summary.muscles.count,
-                equipments: snapshot.summary.equipments.count,
-                goals: snapshot.summary.goals.count,
-                categories: snapshot.summary.categories.count,
+                exercises: snapshotState.summary.exercises.count,
+                muscles: snapshotState.summary.muscles.count,
+                equipments: snapshotState.summary.equipments.count,
+                goals: snapshotState.summary.goals.count,
+                categories: snapshotState.summary.categories.count,
               }}
               onSectionChange={handleSectionChange}
             />
@@ -1138,6 +1244,7 @@ export function ReviewDashboard({
                     locale={locale}
                     item={item}
                     dictionary={dictionary}
+                    onExerciseChange={handleExerciseChange}
                   />
                 ))
               : (
@@ -1185,6 +1292,7 @@ export function ReviewDashboard({
                           locale={locale}
                           item={item}
                           dictionary={dictionary}
+                          onExerciseChange={handleExerciseChange}
                         />
                       ))}
                     </div>

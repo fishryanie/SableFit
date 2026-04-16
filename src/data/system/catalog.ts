@@ -3,6 +3,7 @@ import rawEquipment from "@/data/raw/fitate-equipment.json";
 import rawExerciseGoal from "@/data/raw/fitate-exercise-goal.json";
 import rawExercises from "@/data/raw/fitate-exercise.json";
 import rawMuscles from "@/data/raw/kinis-muscles.json";
+import { applyExerciseAssetOverrideToExercise } from "@/data/system/exercise-assets";
 import { getEquipmentImage } from "@/data/system/equipment-images";
 import { getExerciseMedia, getExerciseMediaManifest } from "@/data/system/exercise-media";
 import { getMuscleImage } from "@/data/system/muscle-images";
@@ -538,6 +539,11 @@ function buildRawExerciseSeeds() {
 
     const descriptionEn = record.description?.trim() || `${record.name} helps build controlled strength and movement confidence.`;
     const media = getExerciseMedia(slug, movementType);
+    const resolvedAssets = applyExerciseAssetOverrideToExercise({
+      slug,
+      imageUrl: media.thumbnailUrl,
+      media,
+    });
 
     bySlug.set(slug, {
       slug,
@@ -547,12 +553,12 @@ function buildRawExerciseSeeds() {
         vi: `Bài ${record.name} giúp xây nền chuyển động và kiểm soát lực tốt hơn trong tập luyện.`,
       },
       instructionSteps: buildRawInstructions(record, localizedName),
-      imageUrl: media.thumbnailUrl,
+      imageUrl: resolvedAssets.imageUrl,
       imageAlt: {
         en: `Exercise image for ${record.name}`,
         vi: `Ảnh bài tập cho ${record.name}`,
       },
-      media,
+      media: resolvedAssets.media,
       aliases: buildAliases(record.name, titleizeSlug(slug), slug.replaceAll("-", " ")),
       primaryEquipmentSlug: equipmentSlug,
       equipmentSlugs: [equipmentSlug],
@@ -584,18 +590,23 @@ function buildManualExerciseSeeds() {
     };
     const movementType = getExerciseMovementType(record.categorySlugs, record.nameEn);
     const media = getExerciseMedia(slug, movementType);
+    const resolvedAssets = applyExerciseAssetOverrideToExercise({
+      slug,
+      imageUrl: media.thumbnailUrl,
+      media,
+    });
 
     return {
       slug,
       name: localizedName,
       description: buildManualDescription(localizedName, record.equipmentSlug, record.primaryMuscles),
       instructionSteps: buildGenericSteps(localizedName, getLocalizedEquipmentName(record.equipmentSlug)),
-      imageUrl: media.thumbnailUrl,
+      imageUrl: resolvedAssets.imageUrl,
       imageAlt: {
         en: `Exercise image for ${record.nameEn}`,
         vi: `Ảnh bài tập cho ${record.nameVi}`,
       },
-      media,
+      media: resolvedAssets.media,
       aliases: buildAliases(record.nameEn, record.nameVi, titleizeSlug(slug), slug.replaceAll("-", " ")),
       primaryEquipmentSlug: record.equipmentSlug,
       equipmentSlugs: [record.equipmentSlug],

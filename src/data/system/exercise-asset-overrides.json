@@ -1,0 +1,73 @@
+{
+  "lat-pulldown": {
+    "imageUrl": "/workout/exercise/lat-pulldown/review/review-image.png",
+    "videoUrl": "/workout/exercise/lat-pulldown/review/review-video.mp4",
+    "videoPosterUrl": "/workout/exercise/lat-pulldown/review/review-image.png"
+  },
+  "pull-ups": {
+    "imageUrl": "/workout/exercise/pull-ups/review/review-image.png"
+  },
+  "landmine-press": {
+    "imageUrl": "/workout/exercise/landmine-press/review/review-image.gif"
+  },
+  "machine-shoulder-press": {
+    "imageUrl": "/workout/exercise/machine-shoulder-press/review/review-image.gif"
+  },
+  "shoulder-press": {
+    "imageUrl": "/workout/exercise/shoulder-press/review/review-image.gif"
+  },
+  "cable-lateral-raise": {
+    "videoUrl": "/workout/exercise/cable-lateral-raise/review/review-video.mp4"
+  },
+  "pec-deck-fly": {
+    "videoUrl": "/workout/exercise/pec-deck-fly/review/review-video.mp4"
+  },
+  "cable-crossovers": {
+    "videoUrl": "/workout/exercise/cable-crossovers/review/review-video.mp4"
+  },
+  "face-pull": {
+    "videoUrl": "/workout/exercise/face-pull/review/review-video.mp4"
+  },
+  "leg-extension": {
+    "videoUrl": "/workout/exercise/leg-extension/review/review-video.mp4"
+  },
+  "skull-crusher": {
+    "videoUrl": "/workout/exercise/skull-crusher/review/review-video.mp4"
+  },
+  "barbell-bench-press": {
+    "videoUrl": "/workout/exercise/barbell-bench-press/review/review-video.mp4"
+  },
+  "seated-cable-row": {
+    "videoUrl": "/workout/exercise/seated-cable-row/review/review-video.mp4"
+  },
+  "squats": {
+    "videoUrl": "/workout/exercise/squats/review/review-video.mp4"
+  },
+  "bench-dip": {
+    "videoUrl": "/workout/exercise/bench-dip/review/review-video.mp4"
+  },
+  "concentration-curl": {
+    "videoUrl": "/workout/exercise/concentration-curl/review/review-video.mp4"
+  },
+  "ez-bar-curl": {
+    "videoUrl": "/workout/exercise/ez-bar-curl/review/review-video.mp4"
+  },
+  "leg-press": {
+    "videoUrl": "/workout/exercise/leg-press/review/review-video.mp4"
+  },
+  "tricep-dips": {
+    "videoUrl": "/workout/exercise/tricep-dips/review/review-video.mp4"
+  },
+  "bicep-curls": {
+    "videoUrl": "/workout/exercise/bicep-curls/review/review-video.mp4"
+  },
+  "lunges": {
+    "videoUrl": "/workout/exercise/lunges/review/review-video.mp4"
+  },
+  "overhead-tricep-extension": {
+    "videoUrl": "/workout/exercise/overhead-tricep-extension/review/review-video.mp4"
+  },
+  "tricep-pushdown": {
+    "videoUrl": "/workout/exercise/tricep-pushdown/review/review-video.mp4"
+  }
+}

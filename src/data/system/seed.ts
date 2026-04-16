@@ -111,8 +111,6 @@ function buildSystemSeedPayload() {
   return { taxonomy, exercises, sessionDrafts, planDrafts, summary, checksum };
 }
 
-const SYSTEM_SEED_PAYLOAD = buildSystemSeedPayload();
-
 async function pruneStaleSystemDocuments(payload: ReturnType<typeof buildSystemSeedPayload>) {
   const { taxonomy, exercises, sessionDrafts, planDrafts } = payload;
 
@@ -159,7 +157,7 @@ async function pruneStaleSystemDocuments(payload: ReturnType<typeof buildSystemS
 export async function ensureSystemSeed({ force = false }: { force?: boolean } = {}) {
   await connectToDatabase();
 
-  const payload = SYSTEM_SEED_PAYLOAD;
+  const payload = buildSystemSeedPayload();
   const existingState = await SystemSeedState.findOne({ key: SYSTEM_SEED_KEY }).lean();
   if (
     !force &&
